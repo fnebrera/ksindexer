@@ -1,0 +1,93 @@
+﻿KsIndexer
+=========
+
+KsIndexer es una aplicación personal que permite guardar, indexar y buscar documentos almacenados en una base de datos embebida.
+La aplicación es perfecta para tratar documentos manuscritos procedentes de tabletas de tinta eléctronica tales como Kindle Scribe(TM) o Remarkable(TM),
+aunque puede emplearse de manera totalmente autónoma para almacenar y buscar cualquier tipo de documento.
+La integración de documentos procedentes de una tableta se realiza mediante la importación simultánea de los ficheros TXT y PDF generados por la
+tableta y recibidos por correo electrónico o por otras vías.
+KsIndexer visualiza de una manera compacta los documentos almacenados, presentando de manera simultánea los datos y metadatos alfanuméricos
+y la imagen del documento original, con lo que no perdemos información alguna, incluyendo gráficos, dibujos, etc.
+
+Marcas de contenido
+-------------------
+
+Para facilitar la indexación de documentos procedentes de tabletas de tinta electrónica sólo debemos tener cuidado de incluir en el documento
+determinadas marcas de contenido, empleando caracteres especiales que habitualmente no se emplean en notas manuscritas. Estas son las sencillas
+reglas que podemos utilizar (nótese que se trata de reglas opcionales, aunque recomendables):
+
+- La primera línea escrita del documento se considera el título del mismo.
+- La primera línea (si existe) que empiece por '@' se considera que contiene la fecha y (opcionalmente) la hora. El formato completo es del
+  tipo '@ DD/MM/YYYY HH:MM'. Si no se especifica la hora, se considera que son las 00:00. KsIndexer es capaz de interpretar fechas con formato
+  incompleto, como por ejemplo '@ 12/3/19 9:00' o '@1/4/2023'.
+- Cualquier linea que empiece por '#' se considera que contiene una o más etiquetas separadas por espacios. Las etiquetas son palabras clave que
+  permiten clasificar los documentos. Para facilitar las búsquedas, KsIndexer normaliza las etiquetas, poniéndolas en minúsculas y eliminando
+  las tildes. Por ejemplo, '#Industria Extracción' se convierte en dos etiquetas: 'industria' y 'extraccion'. Nótese que las lineas de etiquetas pueden
+  escribirse en cualquier parte del documento, lo que hace innecesario "pensar" a priori en las etiquetas que se van a emplear. La única
+  limitación, en este caso concreto, es que la '#' debe ser el primer carácter de la línea.
+- Dentro del texto, cualquier palabra que vaya precedida de '#' se considera asimismo una etiqueta. Por ejemplo, '... #Industria ...' se convierte
+  en la etiqueta 'industria', '... # Extracción ...' se convierte en la etiqueta 'extraccion', etc. La diferencia con el punto anterior es que
+  con esta nomeclatura podemos incluir etiquetas en cualquier parte del texto, no sólo al principio de una línea, pero sólo podemos incluir una
+  etiqueta a la vez, a diferencia del caso anterior en el que podemos incluir varias etiquetas en una misma línea.
+- Si estamos tomando notas en una reunión, probablemente nos interesará incluir los nombres de los asistentes y quizá tambien los de las empresas
+  a las que pertenecen. Para ello, incluir una o más líneas que comiencen con el carácter '>' seguido del nombre del asistente y (opcionalmente)
+  el nombre de la empresa entre paréntesis. Por ejemplo, '>Juan Pérez' o '> Juan Pérez (ACME)'. KsIndexer normaliza los nombres de los asistentes
+  y empresas poniéndolos en minúsculas y eliminando las tildes. Por ejemplo, '> Juan Pérez (ACME)' se convierte en el nombre 'juan perez' y
+  empresa 'acme'.
+
+Cómo procesar un documento (Kindle Scribe)
+------------------------------------------
+
+Para integrar un cuaderno o una página manuscrita procedente de Kindle Scribe en KsIndexer, debemos seguir los siguientes pasos:
+
+- En el Scribe, abrir el cuaderno que deseamos integrar en KsIndexer.
+- Abrir el menú de la parte superior derecha y pulsar el botón "Compartir". Seleccionar "Compartir la página actual" o bien "Compartir todo el cuaderno".
+- En el diálogo que aparece, seleccionar "Convertir a texto y enviar por e-mail" (si deseamos previsualizar la conversión a texto) o bien (lo
+  más habitual) "Convertir a texto para envío rápido a ....".
+- En nuestro PC, abrir el correo electrónico que recibiremos en unos instantes con los enlaces que proporciona Amazon.
+- Descargar los ficheros TXT y PDF que se han generado en cualquier directorio local, para su uso temporal (una vez importados podemos borrarlos).
+- Abrir KsIndexer y pulsar el botón "Importar". Seleccionar el fichero TXT descargado.
+- KsIndexer leerá el fichero TXT y (si existe) el PDF asociado.
+- KsIndexer nos mostrará el texto recibido, que podemos editar, si es necesario, para corregir errores de conversión.
+- Una vez satisfechos con el texto, pulsar el botón "Aceptar" para procesar el documento.
+- KsIndexer nos mostrará el documento importado incluyendo los metadatos que haya podido "entender". Si es necesario, podemos corregir el título,
+  la fecha, las etiquetas, los asistentes, e incluso el cuerpo del documento. También disponemos de una opción "Regenerar metadatos" que nos permite
+  volver a visualizar el docuemnto y corregirlo, para que sea procesado de nuevo.
+- Pulsar el botón "Guardar" para almacenar el documento en la base de datos.
+
+Uso autónomo
+------------
+
+KsIndexer puede emplearse de manera totalmente autónoma, simplemente registrando e indexando documentos de texto de manera manual. Los diferentes
+controles que presenta KsIndexer se pueden rellenar de forma manual, o bien copiando y pegando texto desde cualquier otra aplicación.
+
+Búsquedas
+---------
+
+KsIndexer soporta los siguientes tipos de búsqueda:
+
+- Por Id del documento. Se trata de una búsqueda exacta, que devuelve un único documento.
+- Por fecha. Se devuelven todos los documentos que coincidan con la fecha especificada, independientemente de la hora.
+- Búsqueda compleja, que permite definir uno o más criterios de búsqueda. Por ejemplo, podríamos buscar todos los documentos que contengan
+  la palabra 'industria' en su título, que sean de fecha igual o posterior al 01/01/2020 y que contengan la etiqueta 'militar'.
+- En las búsquedas mútiples, KsIndexer nos mostrará una lista de los documentos encontrados, con su fecha/hora y su título, permitiendo
+  seleccionar uno de ellos para ver su contenido.
+
+Exportación
+-----------
+
+KsIndexer permite exportar el documento actual a ficheros externos en diferentes formatos. Actualmente se soportan los siguientes formatos:
+
+- HTML: Se genera un fichero .html con el contenido del documento, incluyendo los metadatos.
+- TXT: Se genera un fichero .txt con el contenido del documento, incluyendo los metadatos.
+
+Imprimir
+--------
+
+KsIndexer permite imprimir el documento actual, sus metadatos e incluso la imagen original en Pdf:
+
+- Mediante el menú "Archivo/Imprimir" se imprime el documento actual en formato texto (en desarrollo).
+- Activando el visor de Pdf aparece un menú emergente que nos permite Imprimir, Guardar el Pdf, etc.
+
+(C) 2024, Faustino Nebrera
+faustino.nebrera@gmail.com

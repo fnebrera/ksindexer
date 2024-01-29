@@ -17,8 +17,6 @@ namespace KsIndexerNET
             // Verificar si hay cambios sin guardar
             if (DocChanged && !Messages.AskDocChanged())
                 return;
-            // Limpiar todos los controles y el documento asociado
-            ClearAll();
             // Mostrar dialogo para abrir archivo
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Archivos de texto (*.txt)|*.txt|Todos los archivos (*.*)|*.*";
@@ -28,8 +26,13 @@ namespace KsIndexerNET
             {
                 return;
             }
-            // Nombre del archivo, nos va a hacer falta luego
+            // Nombre del archivo
             string filename = openFileDialog.FileName;
+            ImportFromFile(filename);
+        }
+
+        private void ImportFromFile(string filename)
+        {
             // Leer el archivo
             string content = FileUtils.GetTextFromDisc(filename);
             // Mostrar el contenido en el dialogo de importacion
@@ -40,6 +43,7 @@ namespace KsIndexerNET
                 return;
             }
             dlg.Dispose();
+            ClearAll();
             // Guardamos texto importado en el documento actual
             CurrentDoc.TextoImportado = dlg.GetText();
             // Intentar leer un PDF con el mismo nombre
@@ -55,7 +59,6 @@ namespace KsIndexerNET
             {
                 pdfView.Hide();
             }
-            //pdfView.Refresh(WebBrowserRefreshOption.Completely);
             statusId.Text = "importado";
             // Regenerar los metadatos
             RegenMetadata();

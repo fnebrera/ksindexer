@@ -27,7 +27,7 @@ namespace KsIndexerNET
     public partial class Main : Form
     {
         // Constantes
-        public const string appVersion = "1.1.2";
+        public const string appVersion = "1.1.3";
         public const int maxAnnexSize = 50 * 1024 * 1024; // 50 Mb
 
         private static Document CurrentDoc = new Document();
@@ -286,6 +286,42 @@ namespace KsIndexerNET
                 e.Effect = DragDropEffects.All; // OK
             else
                 e.Effect = DragDropEffects.None; // None
+        }
+
+        private void TextInDb_DragEnter(object sender, DragEventArgs e)
+        {
+            // Solo si el documento no se ha modificado, y si en el drop viene un archivo
+            if (!DocChanged && e.Data.GetDataPresent(DataFormats.FileDrop))
+                e.Effect = DragDropEffects.All; // OK
+            else
+                e.Effect = DragDropEffects.None; // None
+        }
+
+        private void TextInDb_DragDrop(object sender, DragEventArgs e)
+        {
+            // Agregar el archivo en el clipboard
+            if (DocChanged || !e.Data.GetDataPresent(DataFormats.FileDrop))
+                return;
+            // Obtener el nombre del archivo
+            string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+            string filename = files[0];
+            if (Path.GetExtension(filename) != ".txt")
+                return;
+            ImportFromFile(filename);
+        }
+
+        private void acercaDeLaBaseDeDatosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FileInfo fi = new FileInfo(Database.GetDbPath());
+            Messages.ShowInfo("Versión de la base de datos: " + Database.GetDbVersion() +
+                "\nTamaño de la base de datos: " + (fi.Length / 1024).ToString("N0") + " KBytes");
+        }
+
+        private void compactarLaBaseDeDatosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!Messages.Confirm("El proceso de compactación de la base de datos puede tardar varios minutos.\n¿Desea continuar?"))
+                return;
+            Database.VacuumDb();
         }
     }
 }

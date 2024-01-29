@@ -8,6 +8,19 @@ La integración de documentos procedentes de una tableta se realiza mediante la 
 tableta y recibidos por correo electrónico o por otras vías.
 KsIndexer visualiza de una manera compacta los documentos almacenados, presentando de manera simultánea los datos y metadatos alfanuméricos
 y la imagen del documento original, con lo que no perdemos información alguna, incluyendo gráficos, dibujos, etc.
+Adicionalmente, KsIndexer permite agregar, como anexos, otros documentos de cualquier tipo, tales como ficheros de texto, imágenes, etc. Esta
+funcionalidad es muy útil, por ejemplo, si deseamos agregar a nuestras notas de una reunión documentos como el orden del día, presentaciones,
+correos electrónicos relacionados, etc.
+
+Instalación
+-----------
+
+Si tiene instalada una versión anterior de KsIndexer, es necesario desinstalarla antes de instalar la nueva versión. Para ello, simplemente
+entre en el cuadro de búsqueda de Windwos "Agregar o quitar programas", seleccione KsIndexer y pulse el botón "Desinstalar".
+IMPORTANTE: La desinstalación no borra la base de datos, por lo que los documentos que haya almacenado no se perderán. Cuando instale la nueva
+versión, KsIndexer detectará la base de datos existente y la actualizará a la nueva versión, si es necesario. La base de datos se encuentra
+en el directorio 'C:\KsIndexer', en un fichero llamado 'KsIndexer.db3'.
+Para instalar la nueva versión, haga doble click sobre el archivo 'KsIndexerSetup.XXX.msi' (donde XXX es la versión) y siga las instrucciones.
 
 Marcas de contenido
 -------------------
@@ -47,13 +60,19 @@ Para integrar un cuaderno o una página manuscrita procedente de Kindle Scribe e
 - En nuestro PC, abrir el correo electrónico que recibiremos en unos instantes con los enlaces que proporciona Amazon.
 - Descargar los ficheros TXT y PDF que se han generado en cualquier directorio local, para su uso temporal (una vez importados podemos borrarlos).
 - Abrir KsIndexer y pulsar el botón "Importar". Seleccionar el fichero TXT descargado.
-- KsIndexer leerá el fichero TXT y (si existe) el PDF asociado.
+- KsIndexer leerá el fichero TXT y (si existe) el PDF asociado. La lectura automática del PDF requiere que el nombre del archivo (sin extensión)
+  coincida con el del fichero TXT. Por ejemplo, si el fichero TXT se llama '2020-01-01-12:00.txt' el PDF asociado debe llamarse '2020-01-01-12:00.pdf'.
+  Si no se encuentra el PDF, simplemente se ignora esta posibilidad. Nótese que, si se desea, la imagen en PDF puede agregarse posteriormente mediante
+  la opción "Actualizar Pdf" del menú "Archivo".
 - KsIndexer nos mostrará el texto recibido, que podemos editar, si es necesario, para corregir errores de conversión.
 - Una vez satisfechos con el texto, pulsar el botón "Aceptar" para procesar el documento.
 - KsIndexer nos mostrará el documento importado incluyendo los metadatos que haya podido "entender". Si es necesario, podemos corregir el título,
   la fecha, las etiquetas, los asistentes, e incluso el cuerpo del documento. También disponemos de una opción "Regenerar metadatos" que nos permite
   volver a visualizar el docuemnto y corregirlo, para que sea procesado de nuevo.
 - Pulsar el botón "Guardar" para almacenar el documento en la base de datos.
+
+Además de con la opción del menú o el botón de la barra de herramientas, también podemos importar documentos arrastrándolos y soltándolos sobre el
+cuadro del texto de KsIndexer.
 
 Uso autónomo
 ------------

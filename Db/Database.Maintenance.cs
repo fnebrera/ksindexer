@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
+using System.Drawing.Text;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,9 +15,56 @@ namespace ksindexer.Db
         // Funciones de actualizacion de la base de datos
         //
 
-        private void UpgradeDatabase_11_12()
+        private static void UpgradeDatabase_10_11()
         {
-            Messages.ShowInfo("Se va proceder a actualizar la base de datos a la versión " + dbVersion + "\nPulse OK para continuar");
+            string sql;
+            SQLiteCommand cmd;
+            SQLiteDataReader reader;
+            try
+            {
+                // 
+                // Tabla Documents
+                //
+                // Agregar campo TitleNorm en la tabla de documentos, si no existe ya
+                if (!ColumnExists("Documentos", "TitleNorm"))
+                {
+                    sql = "ALTER TABLE Documents ADD \"TitleNorm\" TEXT";
+                    cmd = new SQLiteCommand(sql, dbConn);
+                    cmd.ExecuteNonQuery();
+                    // Actualizar el campo TitleNorm con los valores actuales de Title normalizados.
+                    sql = "SELECT Id, Title FROM Documents";
+                    cmd = new SQLiteCommand(sql, dbConn);
+                    List<string[]> docs = new List<string[]>();
+                    string[] doc;
+                    reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        doc = new string[2];
+                        doc[0] = reader.GetInt32(0).ToString();
+                        doc[1] = reader.GetString(1);
+                        docs.Add(doc);
+                    }
+                    reader.Close();
+                    foreach (string[] d in docs)
+                    {
+                        string titleNorm = FileUtils.NormalizeString(d[1]);
+                        sql = "UPDATE Documents SET TitleNorm = @titlenorm WHERE Id = @id";
+                        cmd = new SQLiteCommand(sql, dbConn);
+                        cmd.Parameters.AddWithValue("@id", Int32.Parse(d[0]));
+                        cmd.Parameters.AddWithValue("@titlenorm", titleNorm);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Error al actualizar la base de datos: " + e.Message);
+                Environment.Exit(1);
+            }
+        }
+
+        private static void UpgradeDatabase_11_12()
+        {
             string sql;
             SQLiteCommand cmd;
             try
@@ -43,77 +91,26 @@ namespace ksindexer.Db
             }
         }
 
-        // Obsoleta. La mantengo por referencia
-        private static void UpgradeDatabaseFrom_10(bool tableExists, bool recordExists)
+        private static void UpgradeDatabase_12_13()
         {
-            Messages.ShowInfo("Se va a actualizar la base de datos a la versión " + dbVersion + "\nEste proceso puede requerir algún tiempo");
             string sql;
             SQLiteCommand cmd;
-            SQLiteDataReader reader;
             try
             {
                 //
-                // Tabla DbVersion
+                // En version 1.3 se agrega el indice Doc_keyword_ByKey
                 //
-                if (!tableExists)
+                if (!IndexExists("Doc_keywords", "Doc_keywords_ByKey"))
                 {
-                    // Crear la tabla DbVersion
-                    sql = "CREATE TABLE DbVersion (version TEXT)";
+                    // Crear indice
+                    sql = "CREATE INDEX Doc_keywords_ByKey on Doc_keywords (Keyword)";
                     cmd = new SQLiteCommand(sql, dbConn);
-                    cmd.ExecuteNonQuery();
-                }
-                // Insertra o actualizar el registro de version
-                if (recordExists)
-                {
-                    // Actualizar el registro con la version actual
-                    sql = "UPDATE DbVersion set version= '" + dbVersion + "'";
-                    cmd = new SQLiteCommand(sql, dbConn);
-                    cmd.ExecuteNonQuery();
-                }
-                else
-                {
-                    // Insertar el registro con la version actual
-                    sql = "INSERT INTO DbVersion (version) VALUES ('" + dbVersion + "')";
-                    cmd = new SQLiteCommand(sql, dbConn);
-                    cmd.ExecuteNonQuery();
-                }
-                // 
-                // Tabla Documents
-                //
-                // Agregar campo TitleNorm en la tabla de documentos, si no existe ya
-                if (!ColumnExists("Documentos", "TitleNorm"))
-                {
-                    sql = "ALTER TABLE Documents ADD \"TitleNorm\" TEXT";
-                    cmd = new SQLiteCommand(sql, dbConn);
-                    cmd.ExecuteNonQuery();
-                }
-                // Actualizar el campo TitleNorm con los valores actuales de Title normalizados.
-                sql = "SELECT Id, Title FROM Documents";
-                cmd = new SQLiteCommand(sql, dbConn);
-                List<string[]> docs = new List<string[]>();
-                string[] doc;
-                reader = cmd.ExecuteReader();
-                while (reader.Read())
-                {
-                    doc = new string[2];
-                    doc[0] = reader.GetInt32(0).ToString();
-                    doc[1] = reader.GetString(1);
-                    docs.Add(doc);
-                }
-                reader.Close();
-                foreach (string[] d in docs)
-                {
-                    string titleNorm = FileUtils.NormalizeString(d[1]);
-                    sql = "UPDATE Documents SET TitleNorm = @titlenorm WHERE Id = @id";
-                    cmd = new SQLiteCommand(sql, dbConn);
-                    cmd.Parameters.AddWithValue("@id", Int32.Parse(d[0]));
-                    cmd.Parameters.AddWithValue("@titlenorm", d[1]);
                     cmd.ExecuteNonQuery();
                 }
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                MessageBox.Show("Error al actualizar la base de datos: " + e.Message);
+                Messages.ShowError("Error al actualizar la base de datos:\n" + ex.Message);
                 Environment.Exit(1);
             }
         }
@@ -122,6 +119,23 @@ namespace ksindexer.Db
         {
             bool exists = false;
             SQLiteCommand cmd = new SQLiteCommand("SELECT count(*) FROM sqlite_master WHERE type='table' AND name='" + tableName + "'", dbConn);
+            SQLiteDataReader reader = cmd.ExecuteReader();
+            if (reader.Read())
+            {
+                if (reader.GetInt32(0) > 0)
+                {
+                    exists = true;
+                }
+            }
+            reader.Close();
+            return exists;
+        }
+
+        private static bool IndexExists(string tableName, string indexName)
+        {
+            bool exists = false;
+            SQLiteCommand cmd = new SQLiteCommand("SELECT count(*) FROM sqlite_master WHERE type='index' AND tbl_name='" + 
+                tableName + "' AND name='" + indexName + "'", dbConn);
             SQLiteDataReader reader = cmd.ExecuteReader();
             if (reader.Read())
             {
@@ -148,6 +162,20 @@ namespace ksindexer.Db
             }
             reader.Close();
             return exists;
+        }
+
+        private static void UpdateDbVersion(string version)
+        {
+            string sql = "UPDATE DbVersion set version='" + version + "'";
+            SQLiteCommand cmd = new SQLiteCommand(sql, dbConn);
+            cmd.ExecuteNonQuery();
+        }
+
+        public static void VacuumDb()
+        {
+            string sql = "VACUUM";
+            SQLiteCommand cmd = new SQLiteCommand(sql, dbConn);
+            cmd.ExecuteNonQuery();
         }
     }
 }

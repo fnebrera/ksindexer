@@ -13,19 +13,36 @@ using System.Runtime.CompilerServices;
 
 namespace ksindexer.Db
 {
+    /**
+     * Clase para acceder a datos en una BD SQLite.
+     * Incluye los métodos básicos para ejecutar consultas y comandos.
+     * dicionalmente incuye métodos para actualizar la base de datos de manera automática
+     * en basea la versión anterior y la actual.
+     * 
+     * Version DB Cambios
+     * ---------- ---------------------------------------------------------------------------
+     * 1.0        Version inicial
+     * 1.1        Se agrega la tabla DbVersion con un solo campo, version, que se actualiza en cada upgrade.
+     *            Se agrega el campo 'TextNorm' a la tabla 'Documentos' para almacenar el texto normalizado.
+     * 1.2        Se agrega la tabla 'Doc_Annexes' para almacenar los anexos de los documentos, asi como el
+     *            indice 'Doc_Annexes_PK' para la clave primaria.
+     * 1.3        Se crea el indice 'Doc_Keywords_ByKey' para el campo 'Keyword' de la tabla 'Doc_Keywords',
+     *            para agilizar las búsquedas por clave.
+     */
     public partial class Database
     {
         // V1.1 FNG 2024/01/26 Se agrega la constante dbVersion para facilitar upgrades automaticos, si son necesarios.
         // Se ha creado una tabla DbVersion con un solo campo, version, que se actualiza en cada upgrade. Al iniciar la
         // aplicación se lee la versión de la BD y se compara con la versión actual. Si es menor, se ejecutan los scripts
         // de upgrade necesarios.
-        private const string dbVersion = "1.2";
+        private const string dbVersion = "1.3";
         // Formato del connString en SQLite: "Data Source=.\\KsIndexer.db3;Version=3;";
         // En desarrollo usamos la BD local
         private const string dbDevelop = ".\\KsIndexer.db3";
         // Una vez instalado, está en un directorio fijo, para evitar los problemas de
         // acceso en actualización en la carpeta Program Files
         private const string dbRelease = "C:\\KsIndexer\\KsIndexer.db3";
+        private static string dbPath = "";
         private static SQLiteConnection dbConn;
         private static Database _instance = null;
 
@@ -38,10 +55,12 @@ namespace ksindexer.Db
                 if (File.Exists(dbDevelop))
                 {
                     connString = "Data Source=" + dbDevelop + ";Version=3;";
+                    dbPath = dbDevelop;
                 }
                 else if (File.Exists(dbRelease))
                 {
                     connString = "Data Source=" + dbRelease + ";Version=3;";
+                    dbPath = dbRelease;
                 }
                 else
                 {
@@ -68,20 +87,32 @@ namespace ksindexer.Db
                 }
                 oldVersion = reader.GetString(0);
                 reader.Close();
-                // Si la version es distinta, ejecutar el script de upgrade
-                if (oldVersion != dbVersion)
+                // Si la version es antigua, ejecutar el script de upgrade
+                if (oldVersion.CompareTo(dbVersion) < 0)
                 {
-                    // Ejecutar el script que corresponda.
-                    // Agregar elseif para sucesivos cambios de version
-                    if (oldVersion == "1.1" && dbVersion == "1.2")
-                    {                
-                        UpgradeDatabase_11_12();
-                    }
-                    else
+                    Messages.ShowInfo("Se va proceder a actualizar la base de datos a la versión " + dbVersion + "\nPulse OK para continuar");
+                    // Ejecutar el o los scripts que corresponda.
+                    switch (oldVersion)
                     {
-                        MessageBox.Show("Error de instalación. No se encuentra el script de actualización de la versión " + oldVersion + " a la versión " + dbVersion + "\nElimine la BD anterior y reinstale");
-                        Environment.Exit(1);
+                        case "1.0":
+                            UpgradeDatabase_10_11();
+                            UpgradeDatabase_11_12();
+                            UpgradeDatabase_12_13();
+                            break;
+                        case "1.1":
+                            UpgradeDatabase_11_12();
+                            UpgradeDatabase_12_13();
+                            break;
+                        case "1.2":
+                            UpgradeDatabase_12_13();
+                            break;
+                        default:
+                            MessageBox.Show("Error de instalación. No se encuentra el script de actualización de la versión " + oldVersion + " a la versión " + dbVersion + "\nElimine la BD anterior y reinstale");
+                            Environment.Exit(1);
+                            break;
                     }
+                    // Actualizar la version en la tabla DbVersion
+                    UpdateDbVersion(dbVersion);
                 }
             }
             catch (Exception e)
@@ -103,6 +134,11 @@ namespace ksindexer.Db
         public static string GetDbVersion()
         {
             return dbVersion;
+        }
+
+        public static string GetDbPath()
+        {
+            return dbPath;
         }
 
         public SQLiteDataReader ExecuteQuery(string query, Dictionary<string, object> prms = null)

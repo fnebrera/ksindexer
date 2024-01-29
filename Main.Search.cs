@@ -96,6 +96,7 @@ namespace KsIndexerNET
 
         private void SearchComplex()
         {
+            // Pedir los datos de busqueda
             DlgSearchComplex dlg = new DlgSearchComplex();
             if (dlg.ShowDialog() == DialogResult.Cancel)
                 return;
@@ -109,53 +110,113 @@ namespace KsIndexerNET
             string asistente = FileUtils.NormalizeString(dlg.GetAsistente());
             string empresa = FileUtils.NormalizeString(dlg.GetEmpresa());
             dlg.Dispose();
+            // Si no han rellenado nada, salir
+            if (titulo.Length == 0 && fechaDesde.Length == 0 && fechaHasta.Length == 0 && claveraw.Length == 0 && asistente.Length == 0 && empresa.Length == 0)
+            {
+                Messages.ShowWarning("Debe introducir al menos un criterio de búsqueda");
+                return;
+            }
             // Preparar SQL
-            StringBuilder sql = new StringBuilder("SELECT DISTINCT id, date, title FROM Documents d, Doc_Keywords k, Doc_Attendants a WHERE ");
-            sql.Append("d.Id = k.DocId AND d.id = a.DocId ");
-            if (titulo.Length > 0)
-            {
-                // V 1.1 FNG 2024-01-26 : Buscar en el titulo normalizado
-                sql.Append("AND d.titlenorm LIKE '%" + titulo + "%' ");
-            }
-            if (dFechaDesde != DateTime.MinValue)
-            {
-                sql.Append("AND d.date >= '" + dFechaDesde.ToString("yyyy-MM-dd") + "' ");
-            }
-            if (dFechaHasta != DateTime.MinValue)
-            {
-                sql.Append("AND d.date <= '" + dFechaHasta.ToString("yyyy-MM-dd") + "' ");
-            }
-            if (asistente.Length > 0)
-            {
-                sql.Append("AND a.name LIKE '%" + asistente + "%' ");
-            }
-            if (empresa.Length > 0)
-            {
-                sql.Append("AND a.company LIKE '%" + empresa + "%' ");
-            }
+            StringBuilder sql = new StringBuilder("SELECT DISTINCT d.id, d.date, d.title FROM Documents d, Doc_Keywords k, Doc_Attendants a ");
+            //
+            // 1) Si existe condicion por clave, es la mas rápida, porque va por indice
+            //
             if (claveraw.Length > 0)
             {
                 string[] claves = claveraw.Split(' ');
-                if (clavesTodas)
+                if (claves.Length < 2)
                 {
-                    foreach (string clave in claves)
-                    {
-                        sql.Append("AND k.keyword = '" + FileUtils.NormalizeString(clave) + "' ");
-                    }
+                    // Solo una clave, no hace falta el OR ni el AND adicionales
+                    sql.Append("WHERE d.Id = k.DocId AND k.keyword = '" + FileUtils.NormalizeString(claves[0]) + "' AND ");
                 }
                 else
                 {
-                    sql.Append("AND (");
-                    foreach (string clave in claves)
+                    // Palabras unidas por AND o por OR?
+                    if (clavesTodas)
                     {
-                        sql.Append("k.keyword = '" + FileUtils.NormalizeString(clave) + "' OR ");
+                        // Clausulas JOIN adicionales
+                        int i = 0;
+                        foreach (string clave in claves)
+                        {
+                            i++;
+                            sql.Append("JOIN Doc_Keywords k" + i + " ON d.Id = k" + i + ".DocId ");
+                        }
+                        // Clausulas where contra los joins
+                        sql.Append("WHERE ");
+                        i = 0;
+                        foreach (string clave in claves)
+                        {
+                            i++;
+                            sql.Append("k" + i + ".keyword = '" + FileUtils.NormalizeString(clave) + "' AND ");
+                        }
                     }
-                    // Quitar el ultimo OR
-                    sql.Remove(sql.Length - 3, 3);
-                    sql.Append(") ");
+                    else
+                    {
+                        sql.Append("WHERE ");
+                        // Como tenenmos un join, el OR funciona perfectamente
+                        sql.Append("d.Id = k.DocId AND (");
+                        foreach (string clave in claves)
+                        {
+                            sql.Append("k.keyword = '" + FileUtils.NormalizeString(clave) + "' OR ");
+                        }
+                        // Quitar el ultimo OR
+                        sql.Remove(sql.Length - 3, 3);
+                        sql.Append(") AND ");
+                    }
                 }
             }
+            else
+            {
+                // No hay claves, necesitamos el where, para el resto de cláusulas
+                sql.Append("WHERE ");
+            }
+            //
+            // 2) El siguiente mas rapido es por fecha
+            //
+            if (dFechaDesde != DateTime.MinValue)
+            {
+                sql.Append("d.date >= '" + dFechaDesde.ToString("yyyy-MM-dd") + "' AND ");
+            }
+            if (dFechaHasta != DateTime.MinValue)
+            {
+                sql.Append("d.date <= '" + dFechaHasta.ToString("yyyy-MM-dd") + "' AND ");
+            }
+            //
+            // 3) El siguiente mas rapido es por titulo
+            //
+            if (titulo.Length > 0)
+            {
+                sql.Append("d.titlenorm LIKE '%" + titulo + "%' AND ");
+            }
+            //
+            // 4) Si hay asistente o empresa, hay que hacer un join con la tabla de asistentes
+            //
+            if (asistente.Length > 0 || empresa.Length > 0)
+            {
+                sql.Append("d.Id = a.DocId AND ");
+            }
+            //
+            // 4.1) Si hay asistente, agregar filtro
+            //
+            if (asistente.Length > 0)
+            {
+                sql.Append("a.name LIKE '%" + asistente + "%' AND ");
+            }
+            //
+            // 4.2) Si hay empresa, agregar filtro
+            //
+            if (empresa.Length > 0)
+            {
+                sql.Append("a.company LIKE '%" + empresa + "%' AND ");
+            }
+            // Quitar el ultimo AND 
+            sql.Remove(sql.Length - 4, 4);
+            //
+            // 5) Ordenar por fecha
+            //
             sql.Append("ORDER BY d.date");
+            // DEBUG
+            // MessageBox.Show(sql.ToString());
             // Ejecutar SQL
             List<string[]> docs = Document.GetBySql(sql.ToString());
             if (docs.Count == 0)

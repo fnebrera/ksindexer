@@ -16,8 +16,11 @@ namespace ksindexer.Db
     /**
      * Clase para acceder a datos en una BD SQLite.
      * Incluye los métodos básicos para ejecutar consultas y comandos.
-     * dicionalmente incuye métodos para actualizar la base de datos de manera automática
+     * 
+     * Adicionalmente incuye métodos para actualizar la base de datos de manera automática
      * en basea la versión anterior y la actual.
+     * 
+     * IMPORTANTE: La version de la base de datos no tiene nada que ver con la version de la aplicación.
      * 
      * Version DB Cambios
      * ---------- ---------------------------------------------------------------------------
@@ -31,7 +34,6 @@ namespace ksindexer.Db
      */
     public partial class Database
     {
-        // V1.1 FNG 2024/01/26 Se agrega la constante dbVersion para facilitar upgrades automaticos, si son necesarios.
         // Se ha creado una tabla DbVersion con un solo campo, version, que se actualiza en cada upgrade. Al iniciar la
         // aplicación se lee la versión de la BD y se compara con la versión actual. Si es menor, se ejecutan los scripts
         // de upgrade necesarios.

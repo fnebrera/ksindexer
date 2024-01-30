@@ -1,9 +1,26 @@
 ﻿/**
- * KsIndexerNET
- * Aplicacion de gestion de documentos para Kindle Scribe
- * @autor Faustino Nebrera
- * @date 2024-01-26
- * @version 1.1.2
+ * ---------
+ * KsIndexer
+ * ---------
+ * 
+ * Aplicacion de gestion de documentos para Kindle Scribe y Remarkable
+ * (C) 2024 Faustino Nebrera
+ * 
+ * Version Date       By  Notes
+ * ------- ---------- --- ----------------------------------------------------------------------------- 
+ * 1.0.0   2024-01-12 FNG Version preliminar
+ * 1.1.0   2024-01-26 FNG Se agrega la tabla DbVersion.
+ *                        Se agrega el campo TextNorm a la tabla Documents.
+ * 1.1.1   2024-01-27 FNG Pequeños cambios
+ * 1.1.2   2024-01-27 FNG Mas correcciones y pequeños cambios.
+ *                        Se ajusta la posicion de los controles al cambiar el tamaño de la ventana.
+ * 1.1.3   2024-01-29 FNG Se agrega la tabla Doc_Annexes para almacenar los anexos de los documentos.
+ *                        Se corrige un problema en la busqueda por palabras clave unidas por AND.
+ *                        Se incluye un SplitContainer para poder ajustar los tamaños de Texto y Pdf.
+ * 1.1.4   2024-01-30 FNG Se implementa la opcion Imprimir.
+ *                        Se agregan shortcuts a las entradas del menu.
+ *                        Se formatea la fecha en el evento Leave del campo DocDate.
+ *                        Se agrega un boton'Ahora' para poner la fecha actual en el campo DocDate.
  */
 
 using ksindexer;
@@ -28,7 +45,7 @@ namespace KsIndexerNET
     public partial class Main : Form
     {
         // Constantes
-        public const string appVersion = "1.1.3";
+        public const string appVersion = "1.1.4";
         public const int maxAnnexSize = 50 * 1024 * 1024; // 50 Mb
 
         private static Document CurrentDoc = new Document();

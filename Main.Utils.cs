@@ -119,7 +119,7 @@ namespace KsIndexerNET
             // Mostrar el titulo
             Title.Text = CurrentDoc.Title;
             // Mostrar la fecha
-            DocDate.Text = CurrentDoc.DocDate.ToString("dd/MM/yyyy HH:mm:ss");
+            DocDate.Text = CurrentDoc.DocDate.ToString("dd/MM/yyyy HH:mm");
             // Numero de documento en satusBar
             statusId.Text = CurrentDoc.Id.ToString();
             // Mostrar las palabras clave en el ListBox

@@ -1,13 +1,18 @@
 ﻿KsIndexer
 =========
 
-KsIndexer es una aplicación personal que permite guardar, indexar y buscar documentos almacenados en una base de datos embebida.
-La aplicación es perfecta para tratar documentos manuscritos procedentes de tabletas de tinta eléctronica tales como Kindle Scribe(TM) o Remarkable(TM),
-aunque puede emplearse de manera totalmente autónoma para almacenar y buscar cualquier tipo de documento.
+KsIndexer es una aplicación personal que permite guardar, indexar y buscar documentos almacenados en una base de datos embebida, incluyendo
+el cuerpo del documento, metadatos asociados, una imagen (opcional) del documento manuscrito y (opcionalmente) arhivos anexos.
+
+La aplicación es perfecta para tratar notas o cuadernos manuscritos importados desde de tabletas de tinta eléctronica con capacidades de
+reconocimiento de texto tales como Kindle Scribe(TM) o Remarkable(TM), aunque puede emplearse de manera totalmente autónoma para almacenar
+y buscar cualquier tipo de documento.
+
 La integración de documentos procedentes de una tableta se realiza mediante la importación simultánea de los ficheros TXT y PDF generados por la
 tableta y recibidos por correo electrónico o por otras vías.
-KsIndexer visualiza de una manera compacta los documentos almacenados, presentando de manera simultánea los datos y metadatos alfanuméricos
-y la imagen del documento original, con lo que no perdemos información alguna, incluyendo gráficos, dibujos, etc.
+
+KsIndexer visualiza de una manera compacta el documento actual, presentando de manera simultánea los datos y metadatos alfanuméricos
+y la imagen del documento manuscrito original, caso de haberla.
 Adicionalmente, KsIndexer permite agregar, como anexos, otros documentos de cualquier tipo, tales como ficheros de texto, imágenes, etc. Esta
 funcionalidad es muy útil, por ejemplo, si deseamos agregar a nuestras notas de una reunión documentos como el orden del día, presentaciones,
 correos electrónicos relacionados, etc.

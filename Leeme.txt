@@ -17,10 +17,13 @@ Instalación
 
 Si tiene instalada una versión anterior de KsIndexer, es necesario desinstalarla antes de instalar la nueva versión. Para ello, simplemente
 entre en el cuadro de búsqueda de Windwos "Agregar o quitar programas", seleccione KsIndexer y pulse el botón "Desinstalar".
+
 IMPORTANTE: La desinstalación no borra la base de datos, por lo que los documentos que haya almacenado no se perderán. Cuando instale la nueva
 versión, KsIndexer detectará la base de datos existente y la actualizará a la nueva versión, si es necesario. La base de datos se encuentra
 en el directorio 'C:\KsIndexer', en un fichero llamado 'KsIndexer.db3'.
-Para instalar la nueva versión, haga doble click sobre el archivo 'KsIndexerSetup.XXX.msi' (donde XXX es la versión) y siga las instrucciones.
+
+Para primera instalación, o bien para instalar una versión nueva, haga doble click sobre el archivo 'KsIndexerSetup.XXX.msi' (donde XXX es
+la versión) y siga las instrucciones en pantalla.
 
 Marcas de contenido
 -------------------
@@ -74,6 +77,9 @@ Para integrar un cuaderno o una página manuscrita procedente de Kindle Scribe e
 Además de con la opción del menú o el botón de la barra de herramientas, también podemos importar documentos arrastrándolos y soltándolos sobre el
 cuadro del texto de KsIndexer.
 
+NOTA: El programa de instalación de KsIndexer crea un directorio 'C:\KsIndexer\ejemplos' donde puede encontrar un par de documentos ejemplo con los
+que experimentar las diferentes funcionalidades de la aplicación, si lo desea.
+
 Uso autónomo
 ------------
 
@@ -105,7 +111,7 @@ Imprimir
 
 KsIndexer permite imprimir el documento actual, sus metadatos e incluso la imagen original en Pdf:
 
-- Mediante el menú "Archivo/Imprimir" se imprime el documento actual en formato texto (en desarrollo).
+- Mediante el menú "Archivo/Imprimir" se imprime el documento actual.
 - Activando el visor de Pdf aparece un menú emergente que nos permite Imprimir, Guardar el Pdf, etc.
 
 (C) 2024, Faustino Nebrera

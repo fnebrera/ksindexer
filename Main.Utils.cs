@@ -21,28 +21,30 @@ namespace KsIndexerNET
                 MenuSave.Enabled = toolBtnSave.Enabled = false;
                 MenuRegenMetadata.Enabled = toolBtnRegenMetadata.Enabled = false;
                 stripMenuExport.Enabled = toolBtnExportHtml.Enabled = false;
-                MenuPrint.Enabled = false;
+                MenuPrint.Enabled = btnPrint.Enabled = false;
                 MenuDelete.Enabled = toolBtnDelete.Enabled = false;
-                MenuUpdatePdf.Enabled = false;
+                MenuUpdatePdf.Enabled = btnUpdatePdf.Enabled = false;
                 btnAttAdd.Enabled = btnKeyAdd.Enabled = btnAnxAdd.Enabled = false;
             }
             else
             {
                 MenuSave.Enabled = toolBtnSave.Enabled = DocChanged;
-                MenuRegenMetadata.Enabled = toolBtnRegenMetadata.Enabled = CurrentDoc.TextoImportado.Length > 0;
+                MenuRegenMetadata.Enabled = toolBtnRegenMetadata.Enabled = CurrentDoc.ImportedText.Length > 0;
                 stripMenuExport.Enabled = toolBtnExportHtml.Enabled = true;
-                MenuPrint.Enabled = true;
+                MenuPrint.Enabled = btnPrint.Enabled = true;
                 MenuDelete.Enabled = toolBtnDelete.Enabled = CurrentDoc.Id > 0;
-                MenuUpdatePdf.Enabled = true;
+                MenuUpdatePdf.Enabled = btnUpdatePdf.Enabled = true;
                 btnAttAdd.Enabled = btnKeyAdd.Enabled = btnAnxAdd.Enabled = true;
             }
-            statusId.BackColor = DocChanged ? Color.LightCoral : Color.White;
+            statusId.BackColor = statusLabelId.BackColor = DocChanged ? Color.LightCoral : Color.White;
         }
 
         // Establecer si el documento ha cambiado y habilitar/deshabilitar los controles
         private void SetTextChanged(bool changed = true)
         {
             DocChanged = changed;
+            if (changed)
+                DocEmpty = false;
             EnableControls();
         }
 
@@ -56,7 +58,7 @@ namespace KsIndexerNET
             Keywords.Items.Clear();
             Attendants.Items.Clear();
             Annexes.Items.Clear();
-            pdfView.Hide();
+            pdfView.Navigate(new Uri("about:blank"));
             this.statusId.Text = "vacío";
             DocChanged = false;
             DocEmpty = true;
@@ -66,44 +68,44 @@ namespace KsIndexerNET
         // Regenerar los metadatos
         private void RegenMetadata()
         {
-            if (CurrentDoc.TextoImportado.Length == 0)
+            if (CurrentDoc.ImportedText.Length == 0)
             {
                 Messages.ShowError("No hay texto importado para procesar");
                 return;
             }
             // Obtener el titulo del documento
-            Title.Text = FileUtils.GetDocTitle(CurrentDoc.TextoImportado);
-            CurrentDoc.Titulo = Title.Text;
+            Title.Text = FileUtils.GetDocTitle(CurrentDoc.ImportedText);
+            CurrentDoc.Title = Title.Text;
             // Obtener la fecha del documento
-            DocDate.Text = FileUtils.GetDocDate(CurrentDoc.TextoImportado);
+            DocDate.Text = FileUtils.GetDocDate(CurrentDoc.ImportedText);
             if (DocDate.Text.Length > 0)
             {
-                CurrentDoc.Fecha = DateTime.Parse(DocDate.Text);
+                CurrentDoc.DocDate = DateTime.Parse(DocDate.Text);
             }
             // Obtener las palabras clave del documento 
-            string[] keywords = FileUtils.GetDocKeywords(CurrentDoc.TextoImportado);
+            string[] keywords = FileUtils.GetDocKeywords(CurrentDoc.ImportedText);
             // Mostrar las palabras clave en el ListBox
             Keywords.Items.Clear();
-            CurrentDoc.Claves.Clear();
+            CurrentDoc.Keywords.Clear();
             foreach (string keyword in keywords)
             {
                 Keywords.Items.Add(keyword);
-                CurrentDoc.Claves.Add(new Keyword(0, keyword));
+                CurrentDoc.Keywords.Add(new Keyword(0, keyword));
             }
             // Obtener los asistentes del documento
-            string[][] attendants = FileUtils.GetDocAttendants(CurrentDoc.TextoImportado);
+            string[][] attendants = FileUtils.GetDocAttendants(CurrentDoc.ImportedText);
             // Mostrar los asistentes en el ListView
             Attendants.Items.Clear();
-            CurrentDoc.Asistentes.Clear();
+            CurrentDoc.Attendants.Clear();
             Attendants.View = View.Details;
             foreach (string[] attendant in attendants)
             {
                 Attendants.Items.Add(new ListViewItem(attendant));
-                CurrentDoc.Asistentes.Add(new Attendant(0, attendant[0], attendant[1]));
+                CurrentDoc.Attendants.Add(new Attendant(0, attendant[0], attendant[1]));
             }
             // Mostrar el texto limpio en el control
-            TextInDb.Text = FileUtils.GetTextCleared(CurrentDoc.TextoImportado);
-            CurrentDoc.Texto = TextInDb.Text;
+            TextInDb.Text = FileUtils.GetTextCleared(CurrentDoc.ImportedText);
+            CurrentDoc.DocText = TextInDb.Text;
             // Indicar que el documento ha cambiado
             DocChanged = true;
             DocEmpty = false;
@@ -113,23 +115,23 @@ namespace KsIndexerNET
         private void FillControlsFromDoc()
         {
             // Mostrar el contenido en el TextBox
-            TextInDb.Text = CurrentDoc.Texto;
+            TextInDb.Text = CurrentDoc.DocText;
             // Mostrar el titulo
-            Title.Text = CurrentDoc.Titulo;
+            Title.Text = CurrentDoc.Title;
             // Mostrar la fecha
-            DocDate.Text = CurrentDoc.Fecha.ToString("dd/MM/yyyy HH:mm:ss");
+            DocDate.Text = CurrentDoc.DocDate.ToString("dd/MM/yyyy HH:mm:ss");
             // Numero de documento en satusBar
             statusId.Text = CurrentDoc.Id.ToString();
             // Mostrar las palabras clave en el ListBox
             Keywords.Items.Clear();
-            foreach (Keyword palabra in CurrentDoc.Claves)
+            foreach (Keyword palabra in CurrentDoc.Keywords)
             {
                 Keywords.Items.Add(palabra.Key);
             }
             // Mostrar los asistentes en el ListView
             Attendants.Items.Clear();
             Attendants.View = View.Details;
-            foreach (Attendant asistente in CurrentDoc.Asistentes)
+            foreach (Attendant asistente in CurrentDoc.Attendants)
             {
                 Attendants.Items.Add(new ListViewItem(new string[] { asistente.Name, asistente.Company ?? "" }));
             }
@@ -139,16 +141,15 @@ namespace KsIndexerNET
                 string filename = Path.GetTempFileName() + "kstmpfile.pdf";
                 File.WriteAllBytes(filename, CurrentDoc.Pdf);
                 pdfView.Navigate(filename);
-                pdfView.Show();
             }
             else
             {
-                pdfView.Hide();
+                pdfView.Navigate(new Uri("about:blank"));
             }
             // Mostrar los anexos en el ListView
             Annexes.Items.Clear();
             Annexes.View = View.Details;
-            foreach (Annex anexo in CurrentDoc.Anexos)
+            foreach (Annex anexo in CurrentDoc.Annexes)
             {
                 Annexes.Items.Add(new ListViewItem(new string[] { anexo.FileName, anexo.Size.ToString("N0") }));
             }
@@ -157,22 +158,22 @@ namespace KsIndexerNET
         private void FillDocFromControls()
         {
             // Obtener el texto del TextBox
-            CurrentDoc.Texto = TextInDb.Text;
+            CurrentDoc.DocText = TextInDb.Text;
             // Obtener el titulo
-            CurrentDoc.Titulo = Title.Text;
+            CurrentDoc.Title = Title.Text;
             // Obtener la fecha
-            CurrentDoc.Fecha = DateTime.Parse(DocDate.Text);
+            CurrentDoc.DocDate = DateTime.Parse(DocDate.Text);
             // Obtener las palabras clave del ListBox
-            CurrentDoc.Claves.Clear();
+            CurrentDoc.Keywords.Clear();
             foreach (string keyword in Keywords.Items)
             {
-                CurrentDoc.Claves.Add(new Keyword(CurrentDoc.Id, keyword));
+                CurrentDoc.Keywords.Add(new Keyword(CurrentDoc.Id, keyword));
             }
             // Obtener los asistentes del ListView
-            CurrentDoc.Asistentes.Clear();
+            CurrentDoc.Attendants.Clear();
             foreach (ListViewItem item in Attendants.Items)
             {
-                CurrentDoc.Asistentes.Add(new Attendant(CurrentDoc.Id, item.SubItems[0].Text, item.SubItems[1].Text));
+                CurrentDoc.Attendants.Add(new Attendant(CurrentDoc.Id, item.SubItems[0].Text, item.SubItems[1].Text));
             }
             /*
              * IMPORTANTE: La lista de anexos tiene un tratamiento especial, porque no cargamos todos los anexos
@@ -192,7 +193,7 @@ namespace KsIndexerNET
             }
             // Verificar que no existe ya
             string name = Path.GetFileName(filename);
-            foreach (Annex anexo in CurrentDoc.Anexos)
+            foreach (Annex anexo in CurrentDoc.Annexes)
             {
                 if (anexo.FileName == name)
                 {
@@ -221,7 +222,7 @@ namespace KsIndexerNET
             // Importante: el nuevo anexo se guarda con DocId = 0, para que al salvar el documento se guarde
             // en la BD. Si se guarda con el DocId actual, se perdería al salir sin salvar.
             //
-            CurrentDoc.Anexos.Add(new Annex(0, name, size, contenido));
+            CurrentDoc.Annexes.Add(new Annex(0, name, size, contenido));
             SetTextChanged();
         }
     }

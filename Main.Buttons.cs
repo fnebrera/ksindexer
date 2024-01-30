@@ -31,7 +31,7 @@ namespace KsIndexerNET
                 if (Keywords.Items.Contains(clvnorm))
                     continue;
                 Keywords.Items.Add(clvnorm);
-                CurrentDoc.Claves.Add(new Keyword(CurrentDoc.Id, clvnorm));
+                CurrentDoc.Keywords.Add(new Keyword(CurrentDoc.Id, clvnorm));
                 SetTextChanged();
             }
         }
@@ -49,7 +49,7 @@ namespace KsIndexerNET
             if (clave.Trim().Length == 0)
                 return;
             Keywords.Items[pos] = clave;
-            CurrentDoc.Claves[pos] = new Keyword(CurrentDoc.Id, clave);
+            CurrentDoc.Keywords[pos] = new Keyword(CurrentDoc.Id, clave);
             SetTextChanged();
         }
 
@@ -59,7 +59,7 @@ namespace KsIndexerNET
                 return;
             string keyword = Keywords.SelectedItem.ToString();
             Keywords.Items.RemoveAt(Keywords.SelectedIndex);
-            CurrentDoc.BorrarClave(keyword);
+            CurrentDoc.DeleteKeyword(keyword);
             SetTextChanged();
         }
 
@@ -81,7 +81,7 @@ namespace KsIndexerNET
                     return;
             }
             Attendants.Items.Add(new ListViewItem(new string[] { nombre, empresa }));
-            CurrentDoc.Asistentes.Add(new Attendant(CurrentDoc.Id, nombre, empresa));
+            CurrentDoc.Attendants.Add(new Attendant(CurrentDoc.Id, nombre, empresa));
             SetTextChanged();
         }
 
@@ -103,7 +103,7 @@ namespace KsIndexerNET
             nombre = FileUtils.NormalizeString(nombre);
             empresa = FileUtils.NormalizeString(empresa);
             Attendants.Items[pos] = new ListViewItem(new string[] { nombre, empresa });
-            CurrentDoc.Asistentes[pos] = new Attendant(CurrentDoc.Id, nombre, empresa);
+            CurrentDoc.Attendants[pos] = new Attendant(CurrentDoc.Id, nombre, empresa);
             SetTextChanged();
         }
 
@@ -113,7 +113,7 @@ namespace KsIndexerNET
                 return;
             string nombre = Attendants.SelectedItems[0].SubItems[0].Text;
             Attendants.Items.RemoveAt(Attendants.SelectedIndices[0]);
-            CurrentDoc.BorrarAsistente(nombre);
+            CurrentDoc.DeleteAttendant(nombre);
             SetTextChanged();
         }
 
@@ -136,7 +136,7 @@ namespace KsIndexerNET
                 return;
             string name = Annexes.SelectedItems[0].SubItems[0].Text;
             Annexes.Items.RemoveAt(Annexes.SelectedIndices[0]);
-            CurrentDoc.BorrarAnexo(name);
+            CurrentDoc.DeleteAnnex(name);
             SetTextChanged();
         }
 

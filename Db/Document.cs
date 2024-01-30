@@ -21,14 +21,14 @@ namespace ksindexer.Db
         public const string SQL_DOC_SELECT_BY_DATE = "SELECT id, date, title FROM Documents WHERE date(date) = @sdate ORDER BY date";
 
         public int Id { get; set; } = 0;
-        public string Titulo { get; set; } = "";
-        public DateTime Fecha { get; set; } = DateTime.MinValue;
-        public string Texto { get; set; } = "";
-        public string TextoImportado { get; set; } = "";
+        public string Title { get; set; } = "";
+        public DateTime DocDate { get; set; } = DateTime.MinValue;
+        public string DocText { get; set; } = "";
+        public string ImportedText { get; set; } = "";
         public byte[] Pdf { get; set; } = new byte[0];
-        public List<Keyword> Claves { get; set; } = new List<Keyword>();
-        public List<Attendant> Asistentes { get; set; } = new List<Attendant>();
-        public List<Annex> Anexos { get; set; } = new List<Annex>();
+        public List<Keyword> Keywords { get; set; } = new List<Keyword>();
+        public List<Attendant> Attendants { get; set; } = new List<Attendant>();
+        public List<Annex> Annexes { get; set; } = new List<Annex>();
 
         // Constructor vacío
         public Document()
@@ -37,80 +37,80 @@ namespace ksindexer.Db
 
         // Constructor en base a datos existentes
         public Document(int id,
-            string titulo,
-            DateTime fecha,
-            string texto,
+            string title,
+            DateTime docdate,
+            string text,
             byte[] pdf, 
-            List<Keyword> claves,
-            List<Attendant> asistentes,
-            List<Annex> anexos)
+            List<Keyword> keywords,
+            List<Attendant> attendants,
+            List<Annex> annexes)
         {
             Id = id;
-            Titulo = titulo;
-            Fecha = fecha;
-            Texto = texto;
+            Title = title;
+            DocDate = docdate;
+            DocText = text;
             Pdf = pdf;
-            Claves = claves;
-            Asistentes = asistentes;
-            Anexos = anexos;
+            Keywords = keywords;
+            Attendants = attendants;
+            Annexes = annexes;
         }
 
         public void Clear()
         {
             Id = 0;
-            Titulo = "";
-            Fecha = DateTime.MinValue;
-            Texto = "";
-            TextoImportado = "";
+            Title = "";
+            DocDate = DateTime.MinValue;
+            DocText = "";
+            ImportedText = "";
             Pdf = new byte[0];
-            Claves = new List<Keyword>();
-            Asistentes = new List<Attendant>();
-            Anexos = new List<Annex>();
+            Keywords = new List<Keyword>();
+            Attendants = new List<Attendant>();
+            Annexes = new List<Annex>();
         }
 
-        public void BorrarClave(string clave)
+        public void DeleteKeyword(string clave)
         {
-            for (int i = 0; i < Claves.Count; i++)
+            for (int i = 0; i < Keywords.Count; i++)
             {
-                if (Claves[i].Key == clave)
+                if (Keywords[i].Key == clave)
                 {
-                    Claves.RemoveAt(i);
+                    Keywords.RemoveAt(i);
                     break;
                 }
             }
         }
 
-        public void BorrarAsistente(string asistente)
+        public void DeleteAttendant(string attendant)
         {
-            for (int i = 0; i < Asistentes.Count; i++)
+            for (int i = 0; i < Attendants.Count; i++)
             {
-                if (Asistentes[i].Name == asistente)
+                if (Attendants[i].Name == attendant)
                 {
-                    Asistentes.RemoveAt(i);
+                    Attendants.RemoveAt(i);
                     break;
                 }
             }
         }
 
-        public void BorrarAnexo(string filename)
+        public void DeleteAnnex(string filename)
         {
-            for (int i = 0; i < Anexos.Count; i++)
+            for (int i = 0; i < Annexes.Count; i++)
             {
-                if (Anexos[i].FileName == filename)
+                if (Annexes[i].FileName == filename)
                 {
-                    Annex anexo = Anexos[i];
+                    Annex anexo = Annexes[i];
                     // Si tiene id de documento, borrarlo de la base de datos
                     if (anexo.DocId > 0 && anexo.FileName.Length > 0)
                     {
                         anexo.Delete();
                     }
-                    Anexos.RemoveAt(i);
+                    Annexes.RemoveAt(i);
                     break;
                 }
             }
         }
 
-        public static bool Exists(int id)
+        public static bool ExistsById(int id)
         {
             Database db = Database.GetInstance();
             Dictionary<string, object> prms = new Dictionary<string, object>();
@@ -137,16 +137,16 @@ namespace ksindexer.Db
         {
             Database db = Database.GetInstance();
             // V 1.1 FNG 2024-01-26 : Normalizar el título
-            string titleNorm = FileUtils.NormalizeString(Titulo);
+            string titleNorm = FileUtils.NormalizeString(Title);
             if (Id > 0)
             {
                 // Actualizar en la tabla Documents
                 Dictionary<string, object> prms = new Dictionary<string, object>
                 {
                     { "@id", Id },
-                    { "@title", Titulo },
-                    { "@date", Fecha },
-                    { "@text", Texto },
+                    { "@title", Title },
+                    { "@date", DocDate },
+                    { "@text", DocText },
                     { "@pdf", Pdf },
                     { "@titlenorm", titleNorm }
                 };
@@ -160,9 +160,9 @@ namespace ksindexer.Db
                 // Insertar en la tabla Documents
                 Dictionary<string, object> prms = new Dictionary<string, object>() 
                 {
-                    { "@title", Titulo },
-                    { "@date", Fecha },
-                    { "@text", Texto },
+                    { "@title", Title },
+                    { "@date", DocDate },
+                    { "@text", DocText },
                     { "@pdf", Pdf },
                     { "@titlenorm", titleNorm }
                 };
@@ -180,7 +180,7 @@ namespace ksindexer.Db
             // Insertar en la tabla Doc_keywords, eliminando previamante las claves existentes
             if (!Keyword.Delete(Id))
                 return false;
-            foreach (Keyword palabra in Claves)
+            foreach (Keyword palabra in Keywords)
             {
                 palabra.DocId = Id;
                 if (!palabra.Insert())
@@ -189,14 +189,14 @@ namespace ksindexer.Db
             // Insertar en la tabla Doc_attendants, eliminando previamante los asistentes existentes
             if (!Attendant.Delete(Id))
                 return false;
-            foreach (Attendant asistente in Asistentes)
+            foreach (Attendant asistente in Attendants)
             {
                 asistente.DocId = Id;
                 if (!asistente.Insert())
                     return false;
             }
             // Insertar en la tabla Doc_attachments los que no tengan id de documento
-            foreach (Annex anexo in Anexos)
+            foreach (Annex anexo in Annexes)
             {
                 if (anexo.DocId < 1)
                 {
@@ -221,13 +221,13 @@ namespace ksindexer.Db
             Document doc = new Document()
             {
                 Id = id,
-                Titulo = rdr.GetString(0),
-                Fecha = rdr.GetDateTime(1),
-                Texto = rdr.GetString(2),
+                Title = rdr.GetString(0),
+                DocDate = rdr.GetDateTime(1),
+                DocText = rdr.GetString(2),
                 Pdf = (byte[])rdr.GetValue(3),
-                Claves = Keyword.GetByDocId(id),
-                Asistentes = Attendant.GetByDocId(id),
-                Anexos = Annex.GetByDocId(id)
+                Keywords = Keyword.GetByDocId(id),
+                Attendants = Attendant.GetByDocId(id),
+                Annexes = Annex.GetByDocId(id)
             };
             return doc;
         }
@@ -250,7 +250,7 @@ namespace ksindexer.Db
             return docs;
         }
 
-        // Devuelve una lista de documento en base a un SQL predefinido
+        // Devuelve una lista de documentos en base a un SQL predefinido
         public static List<string[]> GetBySql(string sql)
         {
             List<string[]> docs = new List<string[]>();
@@ -287,7 +287,7 @@ namespace ksindexer.Db
         {
             Annex anexo = null;
             // Buscar el anexo por nombre
-            foreach (Annex an in Anexos)
+            foreach (Annex an in Annexes)
             {
                 if (an.FileName == filename)
                 {

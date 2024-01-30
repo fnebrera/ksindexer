@@ -45,7 +45,7 @@ namespace KsIndexerNET
             dlg.Dispose();
             ClearAll();
             // Guardamos texto importado en el documento actual
-            CurrentDoc.TextoImportado = dlg.GetText();
+            CurrentDoc.ImportedText = dlg.GetText();
             // Intentar leer un PDF con el mismo nombre
             string pdfname = Path.ChangeExtension(filename, "pdf");
             CurrentDoc.Pdf = FileUtils.GetBinaryFromDisc(pdfname);
@@ -53,11 +53,10 @@ namespace KsIndexerNET
             if (CurrentDoc.Pdf.Length > 0)
             {
                 pdfView.Navigate(pdfname);
-                pdfView.Show();
             }
             else
             {
-                pdfView.Hide();
+                pdfView.Navigate(new Uri("about:blank"));
             }
             statusId.Text = "importado";
             // Regenerar los metadatos
@@ -81,8 +80,10 @@ namespace KsIndexerNET
                 Messages.ShowError("La fecha/hora no tiene un formato válido");
                 return;
             }
+            // Es nuevo ?
+            bool isNew = CurrentDoc.Id == 0;
             // Si es nuevo, verificar que no exista ya un documento con la misma fecha/hora
-            if (CurrentDoc.Id == 0 && Document.ExistsSimilar(Title.Text, fecha))
+            if (isNew && Document.ExistsSimilar(Title.Text, fecha))
             {
                 if (!Messages.Confirm("Ya existe un documento con el mismo titulo y fecha/hora\n¿Está seguro de guardar el actual?"))
                     return;
@@ -97,7 +98,8 @@ namespace KsIndexerNET
             }
             // Mostrar id en el status bar
             statusId.Text = CurrentDoc.Id.ToString();
-            Messages.ShowInfo("Documento guardado con id: " + CurrentDoc.Id);
+            if(isNew)
+                Messages.ShowInfo("Documento guardado con id: " + CurrentDoc.Id);
             DocChanged = false;
             EnableControls();
         }
@@ -121,6 +123,12 @@ namespace KsIndexerNET
 
         private void DoMenuUpdatePdf()
         {
+            // Si ya tenemos Pdf, pedir confirmación
+            if (CurrentDoc.Pdf.Length > 0)
+            {
+                if (!Messages.Confirm("Ya existe un PDF para este documento\n¿Está seguro de actualizarlo?"))
+                    return;
+            }
             // Mostrar dialogo para abrir archivo
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Archivos Pdf (*.pdf)|*.pdf|Todos los archivos (*.*)|*.*";
@@ -138,11 +146,10 @@ namespace KsIndexerNET
             if (CurrentDoc.Pdf.Length > 0)
             {
                 pdfView.Navigate(filename);
-                pdfView.Show();
             }
             else
             {
-                pdfView.Hide();
+                pdfView.Navigate(new Uri("about:blank"));
             }
             //pdfView.Refresh(WebBrowserRefreshOption.Completely);
             SetTextChanged();
@@ -151,20 +158,20 @@ namespace KsIndexerNET
         private void DoMenuRegenMetadata()
         {
             // Verificar si es posible hacerlo
-            if (CurrentDoc.TextoImportado.Length == 0)
+            if (CurrentDoc.ImportedText.Length == 0)
             {
                 Messages.ShowError("No hay texto importado para procesar");
                 return;
             }
             // Mostrar el contenido en el dialogo de importacion
             DlgImport dlg = new DlgImport();
-            dlg.SetText(CurrentDoc.TextoImportado);
+            dlg.SetText(CurrentDoc.ImportedText);
             if (dlg.ShowDialog() == DialogResult.Cancel)
             {
                 return;
             }
             // Guardamos texto importado en el documento actual
-            CurrentDoc.TextoImportado = dlg.GetText();
+            CurrentDoc.ImportedText = dlg.GetText();
             dlg.Dispose();
             // Regenerar los metadatos
             DocChanged = true;

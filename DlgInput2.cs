@@ -49,5 +49,10 @@ namespace KsIndexerNET
             this.Close();
             this.Dispose();
         }
+
+        private void DlgInput2_Load(object sender, EventArgs e)
+        {
+            LangUtils.TranslateForm(this);
+        }
     }
 }

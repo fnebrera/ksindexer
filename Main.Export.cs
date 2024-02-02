@@ -37,7 +37,7 @@ namespace KsIndexerNET
             }
             catch (Exception ex)
             {
-                Messages.ShowError("Error guardando el documento: " + ex.Message);
+                Messages.ShowError(Texts.ERROR_SAVE_DOC + ": " + ex.Message);
             }
         }
 
@@ -60,7 +60,7 @@ namespace KsIndexerNET
             StringBuilder html = new StringBuilder();
             html.AppendLine(CurrentDoc.Title);
             // Fecha
-            string fecha = CurrentDoc.DocDate.ToString("dd/MM/yyyy HH:mm");
+            string fecha = LangUtils.FormatDateTime(CurrentDoc.DocDate);
             html.AppendLine("@ " + fecha);
             // Palabras clave
             if (CurrentDoc.Keywords.Count > 0)
@@ -95,7 +95,7 @@ namespace KsIndexerNET
             }
             catch (Exception ex)
             {
-                Messages.ShowError("Error guardando el documento: " + ex.Message);
+                Messages.ShowError(Texts.ERROR_SAVE_DOC + ": " + ex.Message);
             }
         }
 
@@ -114,7 +114,7 @@ namespace KsIndexerNET
             }
             catch (Exception ex)
             {
-                Messages.ShowError("Error guardando el archivo temporal: " + ex.Message);
+                Messages.ShowError(Texts.ERROR_SAVE_TEMP_FILE + ": " + ex.Message);
                 return;
             }
             // Imprimimos el archivo
@@ -162,7 +162,7 @@ namespace KsIndexerNET
             // Titulo
             html.AppendLine("<h1>" + CurrentDoc.Title + "</h1>");
             // Fecha y (opcionalmente) hora
-            string fecha = CurrentDoc.DocDate.ToString("dd/MM/yyyy");
+            string fecha = LangUtils.FormatDate(CurrentDoc.DocDate);
             string hora = CurrentDoc.DocDate.ToString("HH:mm");
             if (hora == "00:00")
                 html.AppendLine("<h3>" + fecha + "</h3>");
@@ -179,9 +179,9 @@ namespace KsIndexerNET
             if (CurrentDoc.Attendants.Count > 0)
             {
                 html.AppendLine("<table class='tb'>");
-                html.AppendLine("<caption style='font-size: 16;font-weight: bold;'>Asistentes</caption>");
+                html.AppendLine("<caption style='font-size: 16;font-weight: bold;'>" + Texts.ATTENDANTS + "</caption>");
                 html.AppendLine("<thead>");
-                html.AppendLine("<tr><th>Nombre</th><th>Empresa</th></tr>");
+                html.AppendLine("<tr><th>" + Texts.NAME + "</th><th>" + Texts.COMPANY + " </th></tr>");
                 html.AppendLine("</thead>");
                 html.AppendLine("<tbody>");
                 foreach (Attendant a in CurrentDoc.Attendants)
@@ -195,9 +195,9 @@ namespace KsIndexerNET
             if (CurrentDoc.Annexes.Count > 0)
             {
                 html.AppendLine("<table class='tb'>");
-                html.AppendLine("<caption style='font-size: 16;font-weight: bold;'>Anexos</caption>");
+                html.AppendLine("<caption style='font-size: 16;font-weight: bold;'>" + Texts.ANNEXES + " </caption>");
                 html.AppendLine("<thead>");
-                html.AppendLine("<tr><th>Nombre</th><th>Tamaño KB</th></tr>");
+                html.AppendLine("<tr><th>" + Texts.NAME + " </th><th>" + Texts.SIZE + " KB</th></tr>");
                 html.AppendLine("</thead>");
                 html.AppendLine("<tbody>");
                 foreach (Annex a in CurrentDoc.Annexes)

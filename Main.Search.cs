@@ -26,22 +26,22 @@ namespace KsIndexerNET
 
         private void SearchByDate()
         {
-            DlgInput1 dlg = new DlgInput1("Introduzca la fecha como DD/MM/YYYY");
+            DlgInput1 dlg = new DlgInput1(Texts.ENTER_DATE);
             if (dlg.ShowDialog() == DialogResult.Cancel)
                 return;
             string fecha = dlg.GetText1();
             dlg.Dispose();
-            DateTime dfecha;
-            if (fecha.Trim().Length == 0 || !DateTime.TryParse(fecha, out dfecha))
+            DateTime dfecha = LangUtils.ParseDateOnly(fecha);
+            if (fecha.Trim().Length == 0 || dfecha == DateTime.MinValue)
             {
-                Messages.ShowError("Debe introducir una fecha válida");
+                Messages.ShowError(Texts.WRONG_DATE_FORMAT);
                 return;
             }
             // Buscar en BD
             List<string[]> docs = Document.GetByDate(dfecha);
             if (docs.Count == 0)
             {
-                Messages.ShowWarning("No se han encontrado documentos esa fecha");
+                Messages.ShowWarning(Texts.NO_DOCUMENT_FOUND);
                 return;
             }
             // Mostrar la lista de los encontrados y seleccionar uno
@@ -53,7 +53,7 @@ namespace KsIndexerNET
             Document doc = Document.Load(selectedId);
             if (doc == null)
             {
-                Messages.ShowError("Error accediendo al documento con id: " + selectedId);
+                Messages.ShowError(Texts.ERROR_RETRIEVING_DOC_WITH_ID + ": " + selectedId);
                 return;
             }
             CurrentDoc = doc;
@@ -69,7 +69,7 @@ namespace KsIndexerNET
             if (DocChanged && !Messages.AskDocChanged())
                 return;
             // Pedir el id del documento a buscar
-            DlgInput1 dlg = new DlgInput1("Introduzca el id del documento a buscar");
+            DlgInput1 dlg = new DlgInput1(Texts.ENTER_ID_TO_SEARCH);
             if (dlg.ShowDialog() == DialogResult.Cancel)
                 return;
             string id = dlg.GetText1();
@@ -77,14 +77,14 @@ namespace KsIndexerNET
             int nid;
             if (id.Length == 0 || !Int32.TryParse(id, out nid) || nid < 1)
             {
-                Messages.ShowError("Debe introducir un id numérico mayor que cero");
+                Messages.ShowError(Texts.WRONG_ID_ENTERED);
                 return;
             }
             ClearAll();
             Document doc = Document.Load(nid);
             if (doc == null)
             {
-                Messages.ShowError("No se ha encontrado el documento con id: " + nid);
+                Messages.ShowError(Texts.DOC_ID_NOT_FOUND + ": " + nid);
                 return;
             }
             CurrentDoc = doc;
@@ -103,8 +103,8 @@ namespace KsIndexerNET
             string titulo = FileUtils.NormalizeString(dlg.GetTitulo());
             string fechaDesde = dlg.GetFechaDesde().Trim();
             string fechaHasta = dlg.GetFechaHasta().Trim();
-            DateTime dFechaDesde = DateTime.TryParse(fechaDesde, out dFechaDesde) ? dFechaDesde : DateTime.MinValue;
-            DateTime dFechaHasta = DateTime.TryParse(fechaHasta, out dFechaHasta) ? dFechaHasta : DateTime.MinValue;
+            DateTime dFechaDesde = LangUtils.ParseDateTime(fechaDesde);
+            DateTime dFechaHasta = LangUtils.ParseDateTime(fechaHasta);
             string claveraw = dlg.GetClaves().Trim();
             bool clavesTodas = dlg.GetClavesTodas();
             string asistente = FileUtils.NormalizeString(dlg.GetAsistente());
@@ -113,7 +113,7 @@ namespace KsIndexerNET
             // Si no han rellenado nada, salir
             if (titulo.Length == 0 && fechaDesde.Length == 0 && fechaHasta.Length == 0 && claveraw.Length == 0 && asistente.Length == 0 && empresa.Length == 0)
             {
-                Messages.ShowWarning("Debe introducir al menos un criterio de búsqueda");
+                Messages.ShowWarning(Texts.SOME_CRITERIA_REQUIRED);
                 return;
             }
             // Preparar SQL
@@ -179,7 +179,7 @@ namespace KsIndexerNET
             }
             if (dFechaHasta != DateTime.MinValue)
             {
-                sql.Append("d.date <= '" + dFechaHasta.ToString("yyyy-MM-dd") + "' AND ");
+                sql.Append("d.date <= '" + dFechaHasta.ToString("yyyy-MM-dd") + " 23:59' AND ");
             }
             //
             // 3) El siguiente mas rapido es por titulo
@@ -215,13 +215,11 @@ namespace KsIndexerNET
             // 5) Ordenar por fecha
             //
             sql.Append("ORDER BY d.date");
-            // DEBUG
-            // MessageBox.Show(sql.ToString());
             // Ejecutar SQL
             List<string[]> docs = Document.GetBySql(sql.ToString());
             if (docs.Count == 0)
             {
-                Messages.ShowWarning("No se han encontrado documentos con esas condiciones");
+                Messages.ShowWarning(Texts.NO_DOCUMENT_FOUND);
                 return;
             }
             // Mostrar la lista de los encontrados y seleccionar uno
@@ -233,7 +231,7 @@ namespace KsIndexerNET
             Document doc = Document.Load(selectedId);
             if (doc == null)
             {
-                Messages.ShowError("Error accediendo al documento con id: " + selectedId);
+                Messages.ShowError(Texts.ERROR_RETRIEVING_DOC_WITH_ID + ": " + selectedId);
                 return;
             }
             CurrentDoc = doc;

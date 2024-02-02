@@ -67,6 +67,7 @@
             // 
             // btnCancel
             // 
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancel.Location = new System.Drawing.Point(441, 186);
             this.btnCancel.Name = "btnCancel";
@@ -99,6 +100,7 @@
             this.AcceptButton = this.btnAccept;
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(570, 245);
             this.ControlBox = false;
             this.Controls.Add(this.txt2);
@@ -110,6 +112,7 @@
             this.Name = "DlgInput2";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Entrar datos";
+            this.Load += new System.EventHandler(this.DlgInput2_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

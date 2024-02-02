@@ -28,32 +28,32 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblTitle = new System.Windows.Forms.Label();
             this.txtTitle = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.lblDateFrom = new System.Windows.Forms.Label();
+            this.lblDateTo = new System.Windows.Forms.Label();
             this.txtDateFrom = new System.Windows.Forms.TextBox();
             this.txtDateTo = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
+            this.lblKeywords = new System.Windows.Forms.Label();
             this.txtKeys = new System.Windows.Forms.TextBox();
             this.comboAndOr = new System.Windows.Forms.ComboBox();
             this.txtAssistant = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
+            this.lblAttName = new System.Windows.Forms.Label();
             this.txtCompany = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
+            this.lblAttCompany = new System.Windows.Forms.Label();
             this.btnAccept = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // label1
+            // lblTitle
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(12, 19);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(213, 27);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Que el título contenga";
+            this.lblTitle.AutoSize = true;
+            this.lblTitle.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitle.Location = new System.Drawing.Point(12, 19);
+            this.lblTitle.Name = "lblTitle";
+            this.lblTitle.Size = new System.Drawing.Size(213, 27);
+            this.lblTitle.TabIndex = 0;
+            this.lblTitle.Text = "Que el título contenga";
             // 
             // txtTitle
             // 
@@ -63,25 +63,25 @@
             this.txtTitle.Size = new System.Drawing.Size(668, 34);
             this.txtTitle.TabIndex = 1;
             // 
-            // label2
+            // lblDateFrom
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(12, 103);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(123, 27);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Desde fecha";
+            this.lblDateFrom.AutoSize = true;
+            this.lblDateFrom.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDateFrom.Location = new System.Drawing.Point(12, 103);
+            this.lblDateFrom.Name = "lblDateFrom";
+            this.lblDateFrom.Size = new System.Drawing.Size(123, 27);
+            this.lblDateFrom.TabIndex = 2;
+            this.lblDateFrom.Text = "Desde fecha";
             // 
-            // label3
+            // lblDateTo
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(485, 112);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(118, 27);
-            this.label3.TabIndex = 3;
-            this.label3.Text = "Hasta fecha";
+            this.lblDateTo.AutoSize = true;
+            this.lblDateTo.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDateTo.Location = new System.Drawing.Point(485, 112);
+            this.lblDateTo.Name = "lblDateTo";
+            this.lblDateTo.Size = new System.Drawing.Size(118, 27);
+            this.lblDateTo.TabIndex = 3;
+            this.lblDateTo.Text = "Hasta fecha";
             // 
             // txtDateFrom
             // 
@@ -101,15 +101,15 @@
             this.txtDateTo.TabIndex = 5;
             this.txtDateTo.Leave += new System.EventHandler(this.txtDateTo_Leave);
             // 
-            // label4
+            // lblKeywords
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(12, 192);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(342, 27);
-            this.label4.TabIndex = 6;
-            this.label4.Text = "Palabras clave (separar por blancos)";
+            this.lblKeywords.AutoSize = true;
+            this.lblKeywords.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblKeywords.Location = new System.Drawing.Point(12, 192);
+            this.lblKeywords.Name = "lblKeywords";
+            this.lblKeywords.Size = new System.Drawing.Size(342, 27);
+            this.lblKeywords.TabIndex = 6;
+            this.lblKeywords.Text = "Palabras clave (separar por blancos)";
             // 
             // txtKeys
             // 
@@ -139,15 +139,15 @@
             this.txtAssistant.Size = new System.Drawing.Size(668, 34);
             this.txtAssistant.TabIndex = 10;
             // 
-            // label5
+            // lblAttName
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(12, 282);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(382, 27);
-            this.label5.TabIndex = 9;
-            this.label5.Text = "Que el nombre de un asistente contenga";
+            this.lblAttName.AutoSize = true;
+            this.lblAttName.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAttName.Location = new System.Drawing.Point(12, 282);
+            this.lblAttName.Name = "lblAttName";
+            this.lblAttName.Size = new System.Drawing.Size(382, 27);
+            this.lblAttName.TabIndex = 9;
+            this.lblAttName.Text = "Que el nombre de un asistente contenga";
             // 
             // txtCompany
             // 
@@ -157,15 +157,15 @@
             this.txtCompany.Size = new System.Drawing.Size(668, 34);
             this.txtCompany.TabIndex = 12;
             // 
-            // label6
+            // lblAttCompany
             // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(12, 370);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(389, 27);
-            this.label6.TabIndex = 11;
-            this.label6.Text = "Que la empresa de un asistente contenga";
+            this.lblAttCompany.AutoSize = true;
+            this.lblAttCompany.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAttCompany.Location = new System.Drawing.Point(12, 370);
+            this.lblAttCompany.Name = "lblAttCompany";
+            this.lblAttCompany.Size = new System.Drawing.Size(389, 27);
+            this.lblAttCompany.TabIndex = 11;
+            this.lblAttCompany.Text = "Que la empresa de un asistente contenga";
             // 
             // btnAccept
             // 
@@ -191,26 +191,30 @@
             // 
             // DlgSearchComplex
             // 
+            this.AcceptButton = this.btnAccept;
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(1101, 538);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnAccept);
             this.Controls.Add(this.txtCompany);
-            this.Controls.Add(this.label6);
+            this.Controls.Add(this.lblAttCompany);
             this.Controls.Add(this.txtAssistant);
-            this.Controls.Add(this.label5);
+            this.Controls.Add(this.lblAttName);
             this.Controls.Add(this.comboAndOr);
             this.Controls.Add(this.txtKeys);
-            this.Controls.Add(this.label4);
+            this.Controls.Add(this.lblKeywords);
             this.Controls.Add(this.txtDateTo);
             this.Controls.Add(this.txtDateFrom);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.lblDateTo);
+            this.Controls.Add(this.lblDateFrom);
             this.Controls.Add(this.txtTitle);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblTitle);
             this.Name = "DlgSearchComplex";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Buscar documentos";
+            this.Load += new System.EventHandler(this.DlgSearchComplex_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -218,19 +222,19 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.TextBox txtTitle;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lblDateFrom;
+        private System.Windows.Forms.Label lblDateTo;
         private System.Windows.Forms.TextBox txtDateFrom;
         private System.Windows.Forms.TextBox txtDateTo;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lblKeywords;
         private System.Windows.Forms.TextBox txtKeys;
         private System.Windows.Forms.ComboBox comboAndOr;
         private System.Windows.Forms.TextBox txtAssistant;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label lblAttName;
         private System.Windows.Forms.TextBox txtCompany;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label lblAttCompany;
         private System.Windows.Forms.Button btnAccept;
         private System.Windows.Forms.Button btnCancel;
     }

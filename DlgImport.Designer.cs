@@ -36,10 +36,9 @@
             // btnAccept
             // 
             this.btnAccept.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAccept.Location = new System.Drawing.Point(372, 428);
-            this.btnAccept.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnAccept.Location = new System.Drawing.Point(558, 658);
             this.btnAccept.Name = "btnAccept";
-            this.btnAccept.Size = new System.Drawing.Size(86, 27);
+            this.btnAccept.Size = new System.Drawing.Size(129, 42);
             this.btnAccept.TabIndex = 0;
             this.btnAccept.Text = "Aceptar";
             this.btnAccept.UseVisualStyleBackColor = true;
@@ -47,39 +46,39 @@
             // 
             // btnCancel
             // 
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancel.Location = new System.Drawing.Point(461, 428);
-            this.btnCancel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnCancel.Location = new System.Drawing.Point(692, 658);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(86, 27);
+            this.btnCancel.Size = new System.Drawing.Size(129, 42);
             this.btnCancel.TabIndex = 1;
             this.btnCancel.Text = "Cancelar";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
-            // Texto
+            // DocText
             // 
-            this.DocText.Font = new System.Drawing.Font("Courier New", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DocText.Location = new System.Drawing.Point(9, 8);
-            this.DocText.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.DocText.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DocText.Location = new System.Drawing.Point(14, 12);
             this.DocText.Multiline = true;
-            this.DocText.Name = "Texto";
-            this.DocText.Size = new System.Drawing.Size(906, 417);
+            this.DocText.Name = "DocText";
+            this.DocText.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.DocText.Size = new System.Drawing.Size(1357, 639);
             this.DocText.TabIndex = 2;
             // 
-            // DlgImportar
+            // DlgImport
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AcceptButton = this.btnAccept;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(921, 462);
-            this.ControlBox = false;
+            this.CancelButton = this.btnCancel;
+            this.ClientSize = new System.Drawing.Size(1382, 711);
             this.Controls.Add(this.DocText);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnAccept);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.Name = "DlgImportar";
+            this.Name = "DlgImport";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.DocText.Text = "Texto a importar";
+            this.Text = "Texto a Importar";
             this.Load += new System.EventHandler(this.DlgImportar_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KsIndexerNET;
+using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
 using System.Drawing.Text;
@@ -58,7 +59,7 @@ namespace ksindexer.Db
             }
             catch (Exception e)
             {
-                MessageBox.Show("Error al actualizar la base de datos: " + e.Message);
+                Messages.ShowError(Texts.ERROR_UPDATE_DB + ": " + e.Message);
                 Environment.Exit(1);
             }
         }
@@ -86,7 +87,7 @@ namespace ksindexer.Db
             }
             catch (Exception ex)
             {
-                Messages.ShowError("Error al actualizar la base de datos:\n" + ex.Message);
+                Messages.ShowError(Texts.ERROR_UPDATE_DB + ":\n" + ex.Message);
                 Environment.Exit(1);
             }
         }
@@ -110,7 +111,7 @@ namespace ksindexer.Db
             }
             catch (Exception ex)
             {
-                Messages.ShowError("Error al actualizar la base de datos:\n" + ex.Message);
+                Messages.ShowError(Texts.ERROR_UPDATE_DB + ":\n" + ex.Message);
                 Environment.Exit(1);
             }
         }

@@ -29,6 +29,8 @@ namespace KsIndexerNET
 
         private void DlgImportar_Load(object sender, EventArgs e)
         {
+            // Traducir formulario
+            LangUtils.TranslateForm(this);
             // Quitar posible seleccion
             DocText.Select(0, 0);
         }

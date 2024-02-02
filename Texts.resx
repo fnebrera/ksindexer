@@ -1,0 +1,299 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ABOUT1" xml:space="preserve">
+    <value>KsIndexer V</value>
+    <comment>Primera parte del about</comment>
+  </data>
+  <data name="ABOUT2" xml:space="preserve">
+    <value>Indexador de documentos para Kindle Scribe</value>
+    <comment>Segunda parte del about</comment>
+  </data>
+  <data name="ANNEXES" xml:space="preserve">
+    <value>Anexos</value>
+  </data>
+  <data name="ANNEX_ALREADY_EXISTS" xml:space="preserve">
+    <value>Ya existe un anexo con ese nombre</value>
+  </data>
+  <data name="ATTENDANTS" xml:space="preserve">
+    <value>Asistentes</value>
+  </data>
+  <data name="COMPACT_DATABASE" xml:space="preserve">
+    <value>El proceso de compactación de la base de datos puede tardar varios minutos</value>
+  </data>
+  <data name="COMPANY" xml:space="preserve">
+    <value>Empresa</value>
+  </data>
+  <data name="CONFIRM_DELETE_DOC" xml:space="preserve">
+    <value>¿Está seguro de eliminar el documento actual?</value>
+  </data>
+  <data name="CONFIRM_DELETE_DOC1" xml:space="preserve">
+    <value>Todos los datos se perderán</value>
+  </data>
+  <data name="CONFIRM_EXIT_APP" xml:space="preserve">
+    <value>¿Está seguro de salir de la Aplicación?</value>
+  </data>
+  <data name="CONFIRM_PDF_ALREADY_EXISTS" xml:space="preserve">
+    <value>Ya existe un PDF para este documento</value>
+  </data>
+  <data name="CONFIRM_PDF_ALREADY_EXISTS1" xml:space="preserve">
+    <value>¿Está seguro de actualizarlo?</value>
+  </data>
+  <data name="COULD_NOT_LOAD_FILE" xml:space="preserve">
+    <value>Error interno. No se pudo cargar el archivo</value>
+  </data>
+  <data name="DB_INFO1" xml:space="preserve">
+    <value>Versión de la base de datos: </value>
+  </data>
+  <data name="DB_INFO2" xml:space="preserve">
+    <value>Tamaño de la base de datos: </value>
+  </data>
+  <data name="DLG_CONFIRM" xml:space="preserve">
+    <value>Confirmar</value>
+  </data>
+  <data name="DLG_ERROR" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="DLG_INFO" xml:space="preserve">
+    <value>Información</value>
+  </data>
+  <data name="DLG_WARN" xml:space="preserve">
+    <value>Aviso</value>
+  </data>
+  <data name="DOC_HAS CHANGED" xml:space="preserve">
+    <value>El documento actual ha cambiado</value>
+  </data>
+  <data name="DOC_ID_NOT_FOUND" xml:space="preserve">
+    <value>No existe un documento con Id</value>
+  </data>
+  <data name="DOC_SAVED_WITH_ID" xml:space="preserve">
+    <value>Documento guardado con Id</value>
+  </data>
+  <data name="ENTER_ATT_COMPANY" xml:space="preserve">
+    <value>Empresa (opcional)</value>
+  </data>
+  <data name="ENTER_ATT_NAME" xml:space="preserve">
+    <value>Nombre del asistente</value>
+  </data>
+  <data name="ENTER_DATE" xml:space="preserve">
+    <value>Introduzca la fecha</value>
+  </data>
+  <data name="ENTER_ID_TO_SEARCH" xml:space="preserve">
+    <value>Entre el Id del documento a buscar</value>
+  </data>
+  <data name="ENTER_KEYWORDS" xml:space="preserve">
+    <value>Introduzca etiquetas separadas por blancos</value>
+  </data>
+  <data name="ENTER_NEW_VALUE" xml:space="preserve">
+    <value>Introduzca nuevo valor</value>
+  </data>
+  <data name="ERROR_ACCES_DATABASE" xml:space="preserve">
+    <value>Error accediendo a la base de datos</value>
+  </data>
+  <data name="ERROR_DB_NOT_FOUND" xml:space="preserve">
+    <value>No se encuentra la base de datos. Reinstale la aplicación</value>
+  </data>
+  <data name="ERROR_DELETE_DOC" xml:space="preserve">
+    <value>Se ha prodcido un error al eliminar el documento</value>
+  </data>
+  <data name="ERROR_LOADING_ANNEX" xml:space="preserve">
+    <value>No se ha podido cargar el archivo anexo</value>
+  </data>
+  <data name="ERROR_READ_FILE" xml:space="preserve">
+    <value>Error leyendo el archivo</value>
+  </data>
+  <data name="ERROR_RETRIEVING_DOC_WITH_ID" xml:space="preserve">
+    <value>Se ha producido un error al acceder al documento con Id</value>
+  </data>
+  <data name="ERROR_SAVE_DOC" xml:space="preserve">
+    <value>Error guardando el documento</value>
+  </data>
+  <data name="ERROR_SAVE_TEMP_FILE" xml:space="preserve">
+    <value>Error guardando el archivo temporal</value>
+  </data>
+  <data name="ERROR_UPDATE_DB" xml:space="preserve">
+    <value>Error al actualizar la base de datos</value>
+  </data>
+  <data name="ERROR_WRITE_TEMP" xml:space="preserve">
+    <value>Error creando el archivo temporal</value>
+  </data>
+  <data name="ERROR_WRONG_DB" xml:space="preserve">
+    <value>Error de instalación. No se encuentra la tabla DbVersion o no tiene un contenido válido</value>
+  </data>
+  <data name="ERROR_WRONG_DB1" xml:space="preserve">
+    <value>Elimine la BD anterior y reinstale</value>
+  </data>
+  <data name="FILTER_ALL_FILES" xml:space="preserve">
+    <value>Todos los archivos (*.*)|*.*</value>
+  </data>
+  <data name="FOLDER_NOT_ALLOWED" xml:space="preserve">
+    <value>No se puede cargar un directorio</value>
+  </data>
+  <data name="menuExportHtml" xml:space="preserve">
+    <value>como HTML</value>
+  </data>
+  <data name="menuExportTxt" xml:space="preserve">
+    <value>como TXT</value>
+  </data>
+  <data name="NAME" xml:space="preserve">
+    <value>Nombre</value>
+  </data>
+  <data name="NO_DOCUMENT_FOUND" xml:space="preserve">
+    <value>No se han encontrado documentos con esos criterios</value>
+  </data>
+  <data name="NO_DOC_SELECTED" xml:space="preserve">
+    <value>No hay nungún documento seleccionado</value>
+  </data>
+  <data name="NO_TEXT_TO_PROCESS" xml:space="preserve">
+    <value>No hay texto importado para procesar</value>
+  </data>
+  <data name="OK_TO_PROCEED" xml:space="preserve">
+    <value>¿Está seguro de continuar?</value>
+  </data>
+  <data name="PROCEED_WITHOUT_SAVE" xml:space="preserve">
+    <value>¿Continuar sin guardar?</value>
+  </data>
+  <data name="SIMILAR_DOC_EXISTS" xml:space="preserve">
+    <value>Ya existe un documento con el mismo titulo y fecha/hora</value>
+  </data>
+  <data name="SIZE" xml:space="preserve">
+    <value>Tamaño</value>
+  </data>
+  <data name="SOME_CRITERIA_REQUIRED" xml:space="preserve">
+    <value>Debe introducir al menos un criterio de búsqueda</value>
+  </data>
+  <data name="TITLE_AND_DATE_REQUIRED" xml:space="preserve">
+    <value>El documento debe tener al menos un titulo y una fecha/hora</value>
+  </data>
+  <data name="UPDATE_DATABASE" xml:space="preserve">
+    <value>Se va proceder a actualizar la base de datos a la versión</value>
+  </data>
+  <data name="UPDATE_DATABASE1" xml:space="preserve">
+    <value>Pulse OK para continuar</value>
+  </data>
+  <data name="WRONG_ANNEX_SIZE" xml:space="preserve">
+    <value>El tamaño del archivo excede el límite de</value>
+  </data>
+  <data name="WRONG_DATE_FORMAT" xml:space="preserve">
+    <value>La fecha/hora no tiene un formato válido</value>
+  </data>
+  <data name="WRONG_ID_ENTERED" xml:space="preserve">
+    <value>El Id debe ser un número entero mayor que cero</value>
+  </data>
+</root>

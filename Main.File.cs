@@ -2,9 +2,11 @@
 using ksindexer.Db;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -19,7 +21,7 @@ namespace KsIndexerNET
                 return;
             // Mostrar dialogo para abrir archivo
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Archivos de texto (*.txt)|*.txt|Todos los archivos (*.*)|*.*";
+            openFileDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
             openFileDialog.FilterIndex = 1;
             openFileDialog.RestoreDirectory = true;
             if (openFileDialog.ShowDialog() != DialogResult.OK)
@@ -71,13 +73,13 @@ namespace KsIndexerNET
             // Al menos necesitamos titulo y fecha
             if (Title.Text.Length == 0 || DocDate.Text.Length == 0)
             {
-                Messages.ShowError("El documento debe tener al menos un titulo y una fecha/hora");
+                Messages.ShowError(Texts.TITLE_AND_DATE_REQUIRED);
                 return;
             }
-            DateTime fecha;
-            if (!DateTime.TryParse(DocDate.Text, out fecha))
+            DateTime fecha = LangUtils.ParseDateTime(DocDate.Text);
+            if (fecha == DateTime.MinValue)
             {
-                Messages.ShowError("La fecha/hora no tiene un formato válido");
+                Messages.ShowError(Texts.WRONG_DATE_FORMAT);
                 return;
             }
             // Es nuevo ?
@@ -85,7 +87,7 @@ namespace KsIndexerNET
             // Si es nuevo, verificar que no exista ya un documento con la misma fecha/hora
             if (isNew && Document.ExistsSimilar(Title.Text, fecha))
             {
-                if (!Messages.Confirm("Ya existe un documento con el mismo titulo y fecha/hora\n¿Está seguro de guardar el actual?"))
+                if (!Messages.Confirm(Texts.SIMILAR_DOC_EXISTS + "\n" + Texts.OK_TO_PROCEED))
                     return;
             }
             // Actualizar el documento con los valores de los controles
@@ -93,13 +95,13 @@ namespace KsIndexerNET
             // Guardar documento actual en la BD
             if (!CurrentDoc.Save())
             {
-                Messages.ShowError("Se ha producido un error al guardar el documento");
+                Messages.ShowError(Texts.ERROR_SAVE_DOC);
                 return;
             }
             // Mostrar id en el status bar
             statusId.Text = CurrentDoc.Id.ToString();
             if(isNew)
-                Messages.ShowInfo("Documento guardado con id: " + CurrentDoc.Id);
+                Messages.ShowInfo(Texts.DOC_SAVED_WITH_ID + ": " + CurrentDoc.Id);
             DocChanged = false;
             EnableControls();
         }
@@ -108,14 +110,14 @@ namespace KsIndexerNET
         {
             if (CurrentDoc.Id == 0)
             {
-                Messages.ShowError("No hay documento seleccionado");
+                Messages.ShowError(Texts.NO_DOC_SELECTED);
                 return;
             }
-            if (!Messages.Confirm("¿Está seguro de eliminar el documento actual?\nTodos los datos se perderán"))
+            if (!Messages.Confirm(Texts.CONFIRM_DELETE_DOC + "\n" + Texts.CONFIRM_DELETE_DOC1))
                 return;
             if (!Document.Delete(CurrentDoc.Id))
             {
-                Messages.ShowError("Se ha prodcido un error al eliminar el documento");
+                Messages.ShowError(Texts.ERROR_DELETE_DOC);
                 return;
             }
             ClearAll();
@@ -126,12 +128,12 @@ namespace KsIndexerNET
             // Si ya tenemos Pdf, pedir confirmación
             if (CurrentDoc.Pdf.Length > 0)
             {
-                if (!Messages.Confirm("Ya existe un PDF para este documento\n¿Está seguro de actualizarlo?"))
+                if (!Messages.Confirm(Texts.CONFIRM_PDF_ALREADY_EXISTS + "\n" + Texts.CONFIRM_PDF_ALREADY_EXISTS1))
                     return;
             }
             // Mostrar dialogo para abrir archivo
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Archivos Pdf (*.pdf)|*.pdf|Todos los archivos (*.*)|*.*";
+            openFileDialog.Filter = "Pdf files (*.pdf)|*.pdf|All files (*.*)|*.*";
             openFileDialog.FilterIndex = 1;
             openFileDialog.RestoreDirectory = true;
             if (openFileDialog.ShowDialog() != DialogResult.OK)
@@ -160,7 +162,7 @@ namespace KsIndexerNET
             // Verificar si es posible hacerlo
             if (CurrentDoc.ImportedText.Length == 0)
             {
-                Messages.ShowError("No hay texto importado para procesar");
+                Messages.ShowError(Texts.NO_TEXT_TO_PROCESS);
                 return;
             }
             // Mostrar el contenido en el dialogo de importacion
@@ -176,6 +178,39 @@ namespace KsIndexerNET
             // Regenerar los metadatos
             DocChanged = true;
             RegenMetadata();
+        }
+
+        private void DoMenuSettings()
+        {
+            DlgSettings dlg = new DlgSettings();
+            dlg.SetCulture(Thread.CurrentThread.CurrentUICulture.Name);
+            dlg.SetDateFormat(CurrentDateFormat);
+            if (dlg.ShowDialog() == DialogResult.Cancel)
+                return;
+            bool save = false;
+            // Cambiar el idioma
+            string culture = dlg.GetCulture();
+            if (culture != Thread.CurrentThread.CurrentUICulture.Name)
+            {
+                save = true;
+                Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(culture);
+                LangUtils.TranslateForm(this);
+            }
+            string dateformat = dlg.GetDateFormat();
+            string datetimeformat = dateformat + " HH:mm";
+            if (dateformat != CurrentDateFormat)
+            {
+                save = true;
+                DocDate.Text = LangUtils.ConvertDateFormat(DocDate.Text, CurrentDateTimeFormat , datetimeformat);
+                CurrentDateFormat = dateformat;
+                CurrentDateTimeFormat = datetimeformat;
+            }
+            if (save)
+            {
+                Properties.Settings.Default.Culture = culture;
+                Properties.Settings.Default.DateFormat = dateformat;
+                Properties.Settings.Default.Save();
+            }
         }
     }
 }

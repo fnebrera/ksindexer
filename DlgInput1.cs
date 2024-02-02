@@ -39,5 +39,11 @@ namespace KsIndexerNET
             this.Close();
             this.Dispose();
         }
+
+        private void DlgInput1_Load(object sender, EventArgs e)
+        {
+            // Traducir el formulario
+            LangUtils.TranslateForm(this);
+        }
     }
 }

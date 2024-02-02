@@ -15,7 +15,7 @@ namespace KsIndexerNET
     {
         private void BtnKeyAdd()
         {
-            DlgInput1 dlg = new DlgInput1("Introduzca palabras clave separadas por blancos");
+            DlgInput1 dlg = new DlgInput1(Texts.ENTER_KEYWORDS);
             if (dlg.ShowDialog() == DialogResult.Cancel)
                 return;
             string clave = dlg.GetText1();
@@ -41,7 +41,7 @@ namespace KsIndexerNET
             int pos = Keywords.SelectedIndex;
             if (pos < 0)
                 return;
-            DlgInput1 dlg = new DlgInput1("Introduzca nuevo valor", Keywords.Items[pos].ToString());
+            DlgInput1 dlg = new DlgInput1(Texts.ENTER_NEW_VALUE, Keywords.Items[pos].ToString());
             if (dlg.ShowDialog() == DialogResult.Cancel)
                 return;
             string clave = FileUtils.NormalizeString(dlg.GetText1());
@@ -65,7 +65,7 @@ namespace KsIndexerNET
 
         private void BtnAttAdd()
         {
-            DlgInput2 dlg = new DlgInput2("Nombre del asistente", "Empresa (opcional)");
+            DlgInput2 dlg = new DlgInput2(Texts.ENTER_ATT_NAME, Texts.ENTER_ATT_COMPANY);
             if (dlg.ShowDialog() == DialogResult.Cancel)
                 return;
             string nombre = dlg.GetText1();
@@ -92,7 +92,7 @@ namespace KsIndexerNET
             int pos = Attendants.SelectedIndices[0];
             string nombre = Attendants.SelectedItems[0].SubItems[0].Text;
             string empresa = Attendants.SelectedItems[0].SubItems[1].Text;
-            DlgInput2 dlg = new DlgInput2("Nombre del asistente", "Empresa (opcional)", nombre, empresa);
+            DlgInput2 dlg = new DlgInput2(Texts.ENTER_ATT_NAME, Texts.ENTER_ATT_COMPANY, nombre, empresa);
             if (dlg.ShowDialog() == DialogResult.Cancel)
                 return;
             nombre = dlg.GetText1();
@@ -120,7 +120,7 @@ namespace KsIndexerNET
         private void BtnAnxAdd()
         {
             OpenFileDialog dlg = new OpenFileDialog();
-            dlg.Filter = "Todos los archivos (*.*)|*.*";
+            dlg.Filter = Texts.FILTER_ALL_FILES;
             dlg.FilterIndex = 1;
             dlg.RestoreDirectory = true;
             if (dlg.ShowDialog() == DialogResult.Cancel)
@@ -148,7 +148,7 @@ namespace KsIndexerNET
             byte[] contenido = CurrentDoc.GetAnnexContent(name);
             if (contenido == null)
             {
-                Messages.ShowError("Error interno. No se pudo cargar el archivo " + name);
+                Messages.ShowError(Texts.COULD_NOT_LOAD_FILE + " " + name);
                 return;
             }
             // Salvar a un temporal y mostrar

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ksindexer;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -20,14 +21,6 @@ namespace KsIndexerNET
                 return;
             foreach (string[] item in lista)
             {
-                /*
-                ListViewItem lItem = new ListViewItem();
-                for (int i = 0; i < 2; i++)
-                {
-                    lItem.SubItems.Add(itm[i]);
-                }
-                DocList.Items.Add(lItem);
-                */
                 ListViewItem lItem = new ListViewItem(item);
                 DocList.Items.Add(lItem);
             }
@@ -44,7 +37,7 @@ namespace KsIndexerNET
         {
             if (DocList.SelectedItems.Count == 0)
             {
-                MessageBox.Show("Debe seleccionar un documento", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Messages.ShowError(LangUtils.TranslateTxt(this, "MUST_SELECT_DOC"));
                 return;
             }
             this.DialogResult = DialogResult.OK;
@@ -61,6 +54,11 @@ namespace KsIndexerNET
         private void DocList_SelectedIndexChanged(object sender, EventArgs e)
         {
             btnSelect.Enabled = DocList.SelectedItems.Count > 0;
+        }
+
+        private void DlgSelectDoc_Load(object sender, EventArgs e)
+        {
+            LangUtils.TranslateForm(this);
         }
     }
 }

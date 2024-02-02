@@ -20,20 +20,20 @@ namespace KsIndexerNET
             {
                 MenuSave.Enabled = toolBtnSave.Enabled = false;
                 MenuRegenMetadata.Enabled = toolBtnRegenMetadata.Enabled = false;
-                stripMenuExport.Enabled = toolBtnExportHtml.Enabled = false;
-                MenuPrint.Enabled = btnPrint.Enabled = false;
+                MenuExport.Enabled = toolBtnExportHtml.Enabled = false;
+                MenuPrint.Enabled = toolBtnPrint.Enabled = false;
                 MenuDelete.Enabled = toolBtnDelete.Enabled = false;
-                MenuUpdatePdf.Enabled = btnUpdatePdf.Enabled = false;
+                MenuUpdatePdf.Enabled = toolBtnUpdatePdf.Enabled = false;
                 btnAttAdd.Enabled = btnKeyAdd.Enabled = btnAnxAdd.Enabled = false;
             }
             else
             {
                 MenuSave.Enabled = toolBtnSave.Enabled = DocChanged;
                 MenuRegenMetadata.Enabled = toolBtnRegenMetadata.Enabled = CurrentDoc.ImportedText.Length > 0;
-                stripMenuExport.Enabled = toolBtnExportHtml.Enabled = true;
-                MenuPrint.Enabled = btnPrint.Enabled = true;
+                MenuExport.Enabled = toolBtnExportHtml.Enabled = true;
+                MenuPrint.Enabled = toolBtnPrint.Enabled = true;
                 MenuDelete.Enabled = toolBtnDelete.Enabled = CurrentDoc.Id > 0;
-                MenuUpdatePdf.Enabled = btnUpdatePdf.Enabled = true;
+                MenuUpdatePdf.Enabled = toolBtnUpdatePdf.Enabled = true;
                 btnAttAdd.Enabled = btnKeyAdd.Enabled = btnAnxAdd.Enabled = true;
             }
             statusId.BackColor = statusLabelId.BackColor = DocChanged ? Color.LightCoral : Color.White;
@@ -70,7 +70,7 @@ namespace KsIndexerNET
         {
             if (CurrentDoc.ImportedText.Length == 0)
             {
-                Messages.ShowError("No hay texto importado para procesar");
+                Messages.ShowError(Texts.NO_TEXT_TO_PROCESS);
                 return;
             }
             // Obtener el titulo del documento
@@ -119,7 +119,7 @@ namespace KsIndexerNET
             // Mostrar el titulo
             Title.Text = CurrentDoc.Title;
             // Mostrar la fecha
-            DocDate.Text = CurrentDoc.DocDate.ToString("dd/MM/yyyy HH:mm");
+            DocDate.Text = LangUtils.FormatDateTime(CurrentDoc.DocDate);
             // Numero de documento en satusBar
             statusId.Text = CurrentDoc.Id.ToString();
             // Mostrar las palabras clave en el ListBox
@@ -188,7 +188,7 @@ namespace KsIndexerNET
             FileInfo fi = new FileInfo(filename);
             if (fi.Attributes.HasFlag(FileAttributes.Directory))
             {
-                Messages.ShowError("No se puede agregar un directorio");
+                Messages.ShowError(Texts.FOLDER_NOT_ALLOWED);
                 return;
             }
             // Verificar que no existe ya
@@ -197,7 +197,7 @@ namespace KsIndexerNET
             {
                 if (anexo.FileName == name)
                 {
-                    Messages.ShowError("Ya existe un anexo con ese nombre");
+                    Messages.ShowError(Texts.ANNEX_ALREADY_EXISTS);
                     return;
                 }
             }
@@ -205,7 +205,7 @@ namespace KsIndexerNET
             if (fi.Length > maxAnnexSize)
             {
                 int mb = (int)(maxAnnexSize / 1024 / 1024);
-                Messages.ShowError("No se permite añadir archivos con un tamaño mayor de " + mb.ToString() + "MB");
+                Messages.ShowError(Texts.WRONG_ANNEX_SIZE + " " + mb.ToString() + " MB");
                 return;
             }
             // Cargar el archivo
@@ -213,7 +213,7 @@ namespace KsIndexerNET
             int size = contenido.Length;
             if (size == 0)
             {
-                Messages.ShowError("No se ha podido cargar el archivo");
+                Messages.ShowError(Texts.ERROR_LOADING_ANNEX);
                 return;
             }
             // Agregar a la lista

@@ -10,6 +10,7 @@ using System.Data;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar;
 using System.Runtime.CompilerServices;
+using KsIndexerNET;
 
 namespace ksindexer.Db
 {
@@ -66,7 +67,7 @@ namespace ksindexer.Db
                 }
                 else
                 {
-                    MessageBox.Show("No se encuentra la base de datos. Verifique instalación");
+                    Messages.ShowError(Texts.ERROR_DB_NOT_FOUND);
                     Environment.Exit(1);
                 }
                 dbConn = new SQLiteConnection(connString);
@@ -76,7 +77,7 @@ namespace ksindexer.Db
                 // Verificamos que exista la tabla DbVersion. Si no existe, es un error de instalación
                 if (!TableExists("DbVersion"))
                 {
-                    MessageBox.Show("Error de instalación. No se encuentra la tabla DbVersion\nElimine la BD anterior y reinstale");
+                    Messages.ShowError(Texts.ERROR_WRONG_DB + "\n" + Texts.ERROR_WRONG_DB1);
                     Environment.Exit(1);
                 }
                 // Si existe, leer la version
@@ -84,7 +85,7 @@ namespace ksindexer.Db
                 reader = cmd.ExecuteReader();
                 if (!reader.Read())
                 {
-                    MessageBox.Show("Error de instalación. La tabla DbVersion no tiene un contenido válido\nElimine la BD anterior y reinstale");
+                    Messages.ShowError(Texts.ERROR_WRONG_DB + "\n" + Texts.ERROR_WRONG_DB1);
                     Environment.Exit(1);
                 }
                 oldVersion = reader.GetString(0);
@@ -92,7 +93,7 @@ namespace ksindexer.Db
                 // Si la version es antigua, ejecutar el script de upgrade
                 if (oldVersion.CompareTo(dbVersion) < 0)
                 {
-                    Messages.ShowInfo("Se va proceder a actualizar la base de datos a la versión " + dbVersion + "\nPulse OK para continuar");
+                    Messages.ShowInfo(Texts.UPDATE_DATABASE + " " + dbVersion + "\n" + Texts.UPDATE_DATABASE1);
                     // Ejecutar el o los scripts que corresponda.
                     switch (oldVersion)
                     {
@@ -109,7 +110,8 @@ namespace ksindexer.Db
                             UpgradeDatabase_12_13();
                             break;
                         default:
-                            MessageBox.Show("Error de instalación. No se encuentra el script de actualización de la versión " + oldVersion + " a la versión " + dbVersion + "\nElimine la BD anterior y reinstale");
+                            Messages.ShowError("Internal error. No sccript to update from DB version " +
+                                oldVersion + " to version " + dbVersion + "\nRemove previous database and reinstall");
                             Environment.Exit(1);
                             break;
                     }
@@ -119,7 +121,8 @@ namespace ksindexer.Db
             }
             catch (Exception e)
             {
-                MessageBox.Show("Error accessing Database: " + e.Message);
+                Messages.ShowError("SQLite error accessing database: " + e.Message +
+                    "\nPlease contact support team");
                 Environment.Exit(1);
             }
         }
@@ -159,7 +162,7 @@ namespace ksindexer.Db
             }
             catch (Exception e)
             {
-                MessageBox.Show("Error accediendo a la Base de Datos: " + e.Message);
+                Messages.ShowError(Texts.ERROR_ACCES_DATABASE + ": " + e.Message);
                 Environment.Exit(1);
             }
             return null;
@@ -181,7 +184,7 @@ namespace ksindexer.Db
             }
             catch (Exception e)
             {
-                MessageBox.Show("Error accediendo a la Base de Datos: " + e.Message);
+                Messages.ShowError(Texts.ERROR_ACCES_DATABASE + ": " + e.Message);
                 Environment.Exit(1);
             }
             return -1;

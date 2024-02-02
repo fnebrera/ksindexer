@@ -91,7 +91,14 @@
     <Compile Include="DlgSelectDoc.Designer.cs">
       <DependentUpon>DlgSelectDoc.cs</DependentUpon>
     </Compile>
+    <Compile Include="DlgSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DlgSettings.Designer.cs">
+      <DependentUpon>DlgSettings.cs</DependentUpon>
+    </Compile>
     <Compile Include="FileUtils.cs" />
+    <Compile Include="LangUtils.cs" />
     <Compile Include="Main.Buttons.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -117,13 +124,41 @@
     <Compile Include="PdfUtils.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Content Include="KsIndexer.ico" />
+    <Compile Include="Texts.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Texts.resx</DependentUpon>
+    </Compile>
     <Content Include="KsIndexer2.ico" />
     <Content Include="Leeme.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <EmbeddedResource Include="DlgImport.en-US.resx">
+      <DependentUpon>DlgImport.cs</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DlgImport.es-ES.resx">
+      <DependentUpon>DlgImport.cs</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="DlgImport.resx">
       <DependentUpon>DlgImport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DlgInput1.en-US.resx">
+      <DependentUpon>DlgInput1.cs</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DlgInput1.es-ES.resx">
+      <DependentUpon>DlgInput1.cs</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DlgInput2.en-US.resx">
+      <DependentUpon>DlgInput2.cs</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DlgInput2.es-ES.resx">
+      <DependentUpon>DlgInput2.cs</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="DlgInput2.resx">
       <DependentUpon>DlgInput2.cs</DependentUpon>
@@ -131,11 +166,38 @@
     <EmbeddedResource Include="DlgInput1.resx">
       <DependentUpon>DlgInput1.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="DlgSearchComplex.en-US.resx">
+      <DependentUpon>DlgSearchComplex.cs</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DlgSearchComplex.es-ES.resx">
+      <DependentUpon>DlgSearchComplex.cs</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="DlgSearchComplex.resx">
       <DependentUpon>DlgSearchComplex.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="DlgSelectDoc.en-US.resx">
+      <DependentUpon>DlgSelectDoc.cs</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DlgSelectDoc.es-ES.resx">
+      <DependentUpon>DlgSelectDoc.cs</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="DlgSelectDoc.resx">
       <DependentUpon>DlgSelectDoc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DlgSettings.resx">
+      <DependentUpon>DlgSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main.en-US.resx">
+      <DependentUpon>Main.cs</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main.es-ES.resx">
+      <DependentUpon>Main.cs</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
@@ -152,6 +214,11 @@
     <Content Include="KsIndexer.db3">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <EmbeddedResource Include="Texts.en-US.resx" />
+    <EmbeddedResource Include="Texts.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Texts.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

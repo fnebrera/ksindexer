@@ -32,26 +32,27 @@ namespace KsIndexerNET
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.archivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuFile = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuNew = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuImport = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuSave = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuRegenMetadata = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuUpdatePdf = new System.Windows.Forms.ToolStripMenuItem();
-            this.stripMenuExport = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuExport = new System.Windows.Forms.ToolStripMenuItem();
             this.menuExportHtml = new System.Windows.Forms.ToolStripMenuItem();
             this.menuExportTxt = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuPrint = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuDelete = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuSalir = new System.Windows.Forms.ToolStripMenuItem();
-            this.buscarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuSettings = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuExit = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuSearch = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuSearchById = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuSearchByDate = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuSearchComplex = new System.Windows.Forms.ToolStripMenuItem();
-            this.ayudaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuLeeme = new System.Windows.Forms.ToolStripMenuItem();
-            this.acercaDeLaBaseDeDatosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.compactarLaBaseDeDatosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuHelp = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuHelpUsage = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuHelpDbInfo = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuHelpCompactDb = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.statusLabelId = new System.Windows.Forms.ToolStripStatusLabel();
@@ -62,7 +63,7 @@ namespace KsIndexerNET
             this.Title = new System.Windows.Forms.TextBox();
             this.lblDate = new System.Windows.Forms.Label();
             this.DocDate = new System.Windows.Forms.TextBox();
-            this.lblAttendats = new System.Windows.Forms.Label();
+            this.lblAttendants = new System.Windows.Forms.Label();
             this.Attendants = new System.Windows.Forms.ListView();
             this.AttName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.AttCompany = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -78,14 +79,14 @@ namespace KsIndexerNET
             this.toolBtnNew = new System.Windows.Forms.ToolStripButton();
             this.toolBtnImport = new System.Windows.Forms.ToolStripButton();
             this.toolBtnRegenMetadata = new System.Windows.Forms.ToolStripButton();
-            this.btnUpdatePdf = new System.Windows.Forms.ToolStripButton();
+            this.toolBtnUpdatePdf = new System.Windows.Forms.ToolStripButton();
             this.toolBtnSave = new System.Windows.Forms.ToolStripButton();
             this.toolBtnDelete = new System.Windows.Forms.ToolStripButton();
             this.toolBtnSearchId = new System.Windows.Forms.ToolStripButton();
             this.toolBtnSearchDate = new System.Windows.Forms.ToolStripButton();
             this.toolBtnSearchComplex = new System.Windows.Forms.ToolStripButton();
             this.toolBtnExportHtml = new System.Windows.Forms.ToolStripButton();
-            this.btnPrint = new System.Windows.Forms.ToolStripButton();
+            this.toolBtnPrint = new System.Windows.Forms.ToolStripButton();
             this.btnAnxView = new System.Windows.Forms.Button();
             this.btnAnxDelete = new System.Windows.Forms.Button();
             this.btnAnxAdd = new System.Windows.Forms.Button();
@@ -110,30 +111,32 @@ namespace KsIndexerNET
             this.menuStrip1.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.archivoToolStripMenuItem,
-            this.buscarToolStripMenuItem,
-            this.ayudaToolStripMenuItem});
+            this.menuFile,
+            this.menuSearch,
+            this.menuHelp});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1860, 36);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(10, 3, 0, 3);
+            this.menuStrip1.Size = new System.Drawing.Size(2066, 38);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
-            // archivoToolStripMenuItem
+            // menuFile
             // 
-            this.archivoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.MenuNew,
             this.MenuImport,
             this.MenuSave,
             this.MenuRegenMetadata,
             this.MenuUpdatePdf,
-            this.stripMenuExport,
+            this.MenuExport,
             this.MenuPrint,
             this.MenuDelete,
-            this.MenuSalir});
-            this.archivoToolStripMenuItem.Name = "archivoToolStripMenuItem";
-            this.archivoToolStripMenuItem.Size = new System.Drawing.Size(98, 32);
-            this.archivoToolStripMenuItem.Text = "&Archivo";
+            this.menuSettings,
+            this.MenuExit});
+            this.menuFile.Name = "menuFile";
+            this.menuFile.Size = new System.Drawing.Size(98, 32);
+            this.menuFile.Text = "&Archivo";
             // 
             // MenuNew
             // 
@@ -173,26 +176,26 @@ namespace KsIndexerNET
             this.MenuUpdatePdf.Text = "&Actualizar Pdf";
             this.MenuUpdatePdf.Click += new System.EventHandler(this.MenuUpdatePdf_Click);
             // 
-            // stripMenuExport
+            // MenuExport
             // 
-            this.stripMenuExport.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MenuExport.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuExportHtml,
             this.menuExportTxt});
-            this.stripMenuExport.Name = "stripMenuExport";
-            this.stripMenuExport.Size = new System.Drawing.Size(314, 36);
-            this.stripMenuExport.Text = "E&xportar";
+            this.MenuExport.Name = "MenuExport";
+            this.MenuExport.Size = new System.Drawing.Size(314, 36);
+            this.MenuExport.Text = "E&xportar";
             // 
             // menuExportHtml
             // 
             this.menuExportHtml.Name = "menuExportHtml";
-            this.menuExportHtml.Size = new System.Drawing.Size(270, 36);
+            this.menuExportHtml.Size = new System.Drawing.Size(228, 36);
             this.menuExportHtml.Text = "Como &HTML";
             this.menuExportHtml.Click += new System.EventHandler(this.menuExportHtml_Click);
             // 
             // menuExportTxt
             // 
             this.menuExportTxt.Name = "menuExportTxt";
-            this.menuExportTxt.Size = new System.Drawing.Size(270, 36);
+            this.menuExportTxt.Size = new System.Drawing.Size(228, 36);
             this.menuExportTxt.Text = "Como &TXT";
             this.menuExportTxt.Click += new System.EventHandler(this.MenuExportTxt_Click);
             // 
@@ -210,22 +213,29 @@ namespace KsIndexerNET
             this.MenuDelete.Text = "&Eliminar";
             this.MenuDelete.Click += new System.EventHandler(this.MenuDelete_Click);
             // 
-            // MenuSalir
+            // menuSettings
             // 
-            this.MenuSalir.Name = "MenuSalir";
-            this.MenuSalir.Size = new System.Drawing.Size(314, 36);
-            this.MenuSalir.Text = "&Salir";
-            this.MenuSalir.Click += new System.EventHandler(this.MenuExit_Click);
+            this.menuSettings.Name = "menuSettings";
+            this.menuSettings.Size = new System.Drawing.Size(314, 36);
+            this.menuSettings.Text = "Configuración..";
+            this.menuSettings.Click += new System.EventHandler(this.menuSettings_Click);
             // 
-            // buscarToolStripMenuItem
+            // MenuExit
             // 
-            this.buscarToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MenuExit.Name = "MenuExit";
+            this.MenuExit.Size = new System.Drawing.Size(314, 36);
+            this.MenuExit.Text = "&Salir";
+            this.MenuExit.Click += new System.EventHandler(this.MenuExit_Click);
+            // 
+            // menuSearch
+            // 
+            this.menuSearch.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.MenuSearchById,
             this.MenuSearchByDate,
             this.MenuSearchComplex});
-            this.buscarToolStripMenuItem.Name = "buscarToolStripMenuItem";
-            this.buscarToolStripMenuItem.Size = new System.Drawing.Size(91, 32);
-            this.buscarToolStripMenuItem.Text = "&Buscar";
+            this.menuSearch.Name = "menuSearch";
+            this.menuSearch.Size = new System.Drawing.Size(91, 32);
+            this.menuSearch.Text = "&Buscar";
             // 
             // MenuSearchById
             // 
@@ -250,37 +260,37 @@ namespace KsIndexerNET
             this.MenuSearchComplex.Text = "&Busqueda compleja";
             this.MenuSearchComplex.Click += new System.EventHandler(this.MenuSearchComplex_Click);
             // 
-            // ayudaToolStripMenuItem
+            // menuHelp
             // 
-            this.ayudaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.MenuLeeme,
-            this.acercaDeLaBaseDeDatosToolStripMenuItem,
-            this.compactarLaBaseDeDatosToolStripMenuItem,
+            this.menuHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MenuHelpUsage,
+            this.MenuHelpDbInfo,
+            this.MenuHelpCompactDb,
             this.MenuAbout});
-            this.ayudaToolStripMenuItem.Name = "ayudaToolStripMenuItem";
-            this.ayudaToolStripMenuItem.Size = new System.Drawing.Size(86, 32);
-            this.ayudaToolStripMenuItem.Text = "A&yuda";
+            this.menuHelp.Name = "menuHelp";
+            this.menuHelp.Size = new System.Drawing.Size(86, 32);
+            this.menuHelp.Text = "A&yuda";
             // 
-            // MenuLeeme
+            // MenuHelpUsage
             // 
-            this.MenuLeeme.Name = "MenuLeeme";
-            this.MenuLeeme.Size = new System.Drawing.Size(412, 36);
-            this.MenuLeeme.Text = "&Uso de KsIndexer";
-            this.MenuLeeme.Click += new System.EventHandler(this.MenuReadme_Click);
+            this.MenuHelpUsage.Name = "MenuHelpUsage";
+            this.MenuHelpUsage.Size = new System.Drawing.Size(412, 36);
+            this.MenuHelpUsage.Text = "&Uso de KsIndexer";
+            this.MenuHelpUsage.Click += new System.EventHandler(this.MenuReadme_Click);
             // 
-            // acercaDeLaBaseDeDatosToolStripMenuItem
+            // MenuHelpDbInfo
             // 
-            this.acercaDeLaBaseDeDatosToolStripMenuItem.Name = "acercaDeLaBaseDeDatosToolStripMenuItem";
-            this.acercaDeLaBaseDeDatosToolStripMenuItem.Size = new System.Drawing.Size(412, 36);
-            this.acercaDeLaBaseDeDatosToolStripMenuItem.Text = "Información de la &Base de Datos";
-            this.acercaDeLaBaseDeDatosToolStripMenuItem.Click += new System.EventHandler(this.acercaDeLaBaseDeDatosToolStripMenuItem_Click);
+            this.MenuHelpDbInfo.Name = "MenuHelpDbInfo";
+            this.MenuHelpDbInfo.Size = new System.Drawing.Size(412, 36);
+            this.MenuHelpDbInfo.Text = "Información de la &Base de Datos";
+            this.MenuHelpDbInfo.Click += new System.EventHandler(this.acercaDeLaBaseDeDatosToolStripMenuItem_Click);
             // 
-            // compactarLaBaseDeDatosToolStripMenuItem
+            // MenuHelpCompactDb
             // 
-            this.compactarLaBaseDeDatosToolStripMenuItem.Name = "compactarLaBaseDeDatosToolStripMenuItem";
-            this.compactarLaBaseDeDatosToolStripMenuItem.Size = new System.Drawing.Size(412, 36);
-            this.compactarLaBaseDeDatosToolStripMenuItem.Text = "&Compactar la Base de Datos";
-            this.compactarLaBaseDeDatosToolStripMenuItem.Click += new System.EventHandler(this.compactarLaBaseDeDatosToolStripMenuItem_Click);
+            this.MenuHelpCompactDb.Name = "MenuHelpCompactDb";
+            this.MenuHelpCompactDb.Size = new System.Drawing.Size(412, 36);
+            this.MenuHelpCompactDb.Text = "&Compactar la Base de Datos";
+            this.MenuHelpCompactDb.Click += new System.EventHandler(this.compactarLaBaseDeDatosToolStripMenuItem_Click);
             // 
             // MenuAbout
             // 
@@ -297,8 +307,8 @@ namespace KsIndexerNET
             this.statusId});
             this.statusStrip1.Location = new System.Drawing.Point(0, 1089);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Padding = new System.Windows.Forms.Padding(2, 0, 14, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(1860, 32);
+            this.statusStrip1.Padding = new System.Windows.Forms.Padding(2, 0, 16, 0);
+            this.statusStrip1.Size = new System.Drawing.Size(2066, 32);
             this.statusStrip1.TabIndex = 1;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -320,12 +330,13 @@ namespace KsIndexerNET
             this.TextInDb.AllowDrop = true;
             this.TextInDb.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.TextInDb.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.TextInDb.Font = new System.Drawing.Font("Courier New", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TextInDb.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TextInDb.Location = new System.Drawing.Point(0, 0);
+            this.TextInDb.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.TextInDb.Multiline = true;
             this.TextInDb.Name = "TextInDb";
             this.TextInDb.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.TextInDb.Size = new System.Drawing.Size(599, 320);
+            this.TextInDb.Size = new System.Drawing.Size(666, 320);
             this.TextInDb.TabIndex = 1;
             this.TextInDb.TextChanged += new System.EventHandler(this.TextInDb_TextChanged);
             this.TextInDb.DragDrop += new System.Windows.Forms.DragEventHandler(this.TextInDb_DragDrop);
@@ -337,9 +348,10 @@ namespace KsIndexerNET
             this.pdfView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pdfView.IsWebBrowserContextMenuEnabled = false;
             this.pdfView.Location = new System.Drawing.Point(0, 0);
-            this.pdfView.MinimumSize = new System.Drawing.Size(20, 20);
+            this.pdfView.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.pdfView.MinimumSize = new System.Drawing.Size(22, 20);
             this.pdfView.Name = "pdfView";
-            this.pdfView.Size = new System.Drawing.Size(599, 691);
+            this.pdfView.Size = new System.Drawing.Size(666, 691);
             this.pdfView.TabIndex = 2;
             this.pdfView.TabStop = false;
             this.pdfView.WebBrowserShortcutsEnabled = false;
@@ -348,7 +360,8 @@ namespace KsIndexerNET
             // 
             this.lblTitle.AutoSize = true;
             this.lblTitle.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTitle.Location = new System.Drawing.Point(1140, 87);
+            this.lblTitle.Location = new System.Drawing.Point(1266, 66);
+            this.lblTitle.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(65, 28);
             this.lblTitle.TabIndex = 3;
@@ -357,9 +370,10 @@ namespace KsIndexerNET
             // Title
             // 
             this.Title.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Title.Location = new System.Drawing.Point(1144, 114);
+            this.Title.Location = new System.Drawing.Point(1271, 93);
+            this.Title.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Title.Name = "Title";
-            this.Title.Size = new System.Drawing.Size(694, 35);
+            this.Title.Size = new System.Drawing.Size(770, 35);
             this.Title.TabIndex = 3;
             this.Title.TextChanged += new System.EventHandler(this.Title_TextChanged);
             // 
@@ -367,7 +381,8 @@ namespace KsIndexerNET
             // 
             this.lblDate.AutoSize = true;
             this.lblDate.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDate.Location = new System.Drawing.Point(1144, 155);
+            this.lblDate.Location = new System.Drawing.Point(1271, 134);
+            this.lblDate.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblDate.Name = "lblDate";
             this.lblDate.Size = new System.Drawing.Size(130, 28);
             this.lblDate.TabIndex = 5;
@@ -376,22 +391,24 @@ namespace KsIndexerNET
             // DocDate
             // 
             this.DocDate.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DocDate.Location = new System.Drawing.Point(1144, 181);
+            this.DocDate.Location = new System.Drawing.Point(1271, 160);
+            this.DocDate.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.DocDate.Name = "DocDate";
-            this.DocDate.Size = new System.Drawing.Size(233, 35);
+            this.DocDate.Size = new System.Drawing.Size(260, 35);
             this.DocDate.TabIndex = 4;
             this.DocDate.TextChanged += new System.EventHandler(this.DocDate_TextChanged);
             this.DocDate.Leave += new System.EventHandler(this.DocDate_Leave);
             // 
-            // lblAttendats
+            // lblAttendants
             // 
-            this.lblAttendats.AutoSize = true;
-            this.lblAttendats.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAttendats.Location = new System.Drawing.Point(1144, 235);
-            this.lblAttendats.Name = "lblAttendats";
-            this.lblAttendats.Size = new System.Drawing.Size(107, 28);
-            this.lblAttendats.TabIndex = 7;
-            this.lblAttendats.Text = "Asistentes";
+            this.lblAttendants.AutoSize = true;
+            this.lblAttendants.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAttendants.Location = new System.Drawing.Point(1271, 235);
+            this.lblAttendants.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblAttendants.Name = "lblAttendants";
+            this.lblAttendants.Size = new System.Drawing.Size(107, 28);
+            this.lblAttendants.TabIndex = 7;
+            this.lblAttendants.Text = "Asistentes";
             // 
             // Attendants
             // 
@@ -405,10 +422,11 @@ namespace KsIndexerNET
             this.Attendants.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.Attendants.HideSelection = false;
             this.Attendants.HoverSelection = true;
-            this.Attendants.Location = new System.Drawing.Point(1144, 262);
+            this.Attendants.Location = new System.Drawing.Point(1271, 262);
+            this.Attendants.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Attendants.MultiSelect = false;
             this.Attendants.Name = "Attendants";
-            this.Attendants.Size = new System.Drawing.Size(694, 178);
+            this.Attendants.Size = new System.Drawing.Size(770, 178);
             this.Attendants.TabIndex = 6;
             this.Attendants.UseCompatibleStateImageBehavior = false;
             this.Attendants.View = System.Windows.Forms.View.Details;
@@ -428,7 +446,8 @@ namespace KsIndexerNET
             // 
             this.lblKeywords.AutoSize = true;
             this.lblKeywords.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblKeywords.Location = new System.Drawing.Point(1144, 499);
+            this.lblKeywords.Location = new System.Drawing.Point(1271, 499);
+            this.lblKeywords.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblKeywords.Name = "lblKeywords";
             this.lblKeywords.Size = new System.Drawing.Size(143, 28);
             this.lblKeywords.TabIndex = 9;
@@ -439,18 +458,20 @@ namespace KsIndexerNET
             this.Keywords.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Keywords.FormattingEnabled = true;
             this.Keywords.ItemHeight = 28;
-            this.Keywords.Location = new System.Drawing.Point(1148, 526);
+            this.Keywords.Location = new System.Drawing.Point(1276, 526);
+            this.Keywords.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Keywords.Name = "Keywords";
-            this.Keywords.Size = new System.Drawing.Size(690, 172);
+            this.Keywords.Size = new System.Drawing.Size(766, 172);
             this.Keywords.TabIndex = 10;
             this.Keywords.SelectedIndexChanged += new System.EventHandler(this.Keywords_SelectedIndexChanged);
             // 
             // btnAttAdd
             // 
             this.btnAttAdd.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAttAdd.Location = new System.Drawing.Point(1480, 446);
+            this.btnAttAdd.Location = new System.Drawing.Point(1644, 446);
+            this.btnAttAdd.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnAttAdd.Name = "btnAttAdd";
-            this.btnAttAdd.Size = new System.Drawing.Size(114, 45);
+            this.btnAttAdd.Size = new System.Drawing.Size(126, 45);
             this.btnAttAdd.TabIndex = 7;
             this.btnAttAdd.Text = "Agregar";
             this.btnAttAdd.UseVisualStyleBackColor = true;
@@ -460,9 +481,10 @@ namespace KsIndexerNET
             // 
             this.btnAttDelete.Enabled = false;
             this.btnAttDelete.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAttDelete.Location = new System.Drawing.Point(1600, 446);
+            this.btnAttDelete.Location = new System.Drawing.Point(1778, 446);
+            this.btnAttDelete.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnAttDelete.Name = "btnAttDelete";
-            this.btnAttDelete.Size = new System.Drawing.Size(114, 45);
+            this.btnAttDelete.Size = new System.Drawing.Size(126, 45);
             this.btnAttDelete.TabIndex = 8;
             this.btnAttDelete.Text = "Eliminar";
             this.btnAttDelete.UseVisualStyleBackColor = true;
@@ -472,9 +494,10 @@ namespace KsIndexerNET
             // 
             this.btnKeyDelete.Enabled = false;
             this.btnKeyDelete.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnKeyDelete.Location = new System.Drawing.Point(1604, 704);
+            this.btnKeyDelete.Location = new System.Drawing.Point(1782, 703);
+            this.btnKeyDelete.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnKeyDelete.Name = "btnKeyDelete";
-            this.btnKeyDelete.Size = new System.Drawing.Size(114, 45);
+            this.btnKeyDelete.Size = new System.Drawing.Size(126, 45);
             this.btnKeyDelete.TabIndex = 12;
             this.btnKeyDelete.Text = "Eliminar";
             this.btnKeyDelete.UseVisualStyleBackColor = true;
@@ -483,9 +506,10 @@ namespace KsIndexerNET
             // btnKeyAdd
             // 
             this.btnKeyAdd.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnKeyAdd.Location = new System.Drawing.Point(1480, 704);
+            this.btnKeyAdd.Location = new System.Drawing.Point(1644, 703);
+            this.btnKeyAdd.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnKeyAdd.Name = "btnKeyAdd";
-            this.btnKeyAdd.Size = new System.Drawing.Size(114, 45);
+            this.btnKeyAdd.Size = new System.Drawing.Size(126, 45);
             this.btnKeyAdd.TabIndex = 11;
             this.btnKeyAdd.Text = "Agregar";
             this.btnKeyAdd.UseVisualStyleBackColor = true;
@@ -495,9 +519,10 @@ namespace KsIndexerNET
             // 
             this.btnKeyEdit.Enabled = false;
             this.btnKeyEdit.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnKeyEdit.Location = new System.Drawing.Point(1724, 704);
+            this.btnKeyEdit.Location = new System.Drawing.Point(1916, 703);
+            this.btnKeyEdit.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnKeyEdit.Name = "btnKeyEdit";
-            this.btnKeyEdit.Size = new System.Drawing.Size(114, 45);
+            this.btnKeyEdit.Size = new System.Drawing.Size(126, 45);
             this.btnKeyEdit.TabIndex = 13;
             this.btnKeyEdit.Text = "Modificar";
             this.btnKeyEdit.UseVisualStyleBackColor = true;
@@ -507,9 +532,10 @@ namespace KsIndexerNET
             // 
             this.btnAttEdit.Enabled = false;
             this.btnAttEdit.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAttEdit.Location = new System.Drawing.Point(1724, 446);
+            this.btnAttEdit.Location = new System.Drawing.Point(1916, 446);
+            this.btnAttEdit.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnAttEdit.Name = "btnAttEdit";
-            this.btnAttEdit.Size = new System.Drawing.Size(114, 45);
+            this.btnAttEdit.Size = new System.Drawing.Size(126, 45);
             this.btnAttEdit.TabIndex = 9;
             this.btnAttEdit.Text = "Modificar";
             this.btnAttEdit.UseVisualStyleBackColor = true;
@@ -522,17 +548,17 @@ namespace KsIndexerNET
             this.toolBtnNew,
             this.toolBtnImport,
             this.toolBtnRegenMetadata,
-            this.btnUpdatePdf,
+            this.toolBtnUpdatePdf,
             this.toolBtnSave,
             this.toolBtnDelete,
             this.toolBtnSearchId,
             this.toolBtnSearchDate,
             this.toolBtnSearchComplex,
             this.toolBtnExportHtml,
-            this.btnPrint});
-            this.toolStripMain.Location = new System.Drawing.Point(0, 36);
+            this.toolBtnPrint});
+            this.toolStripMain.Location = new System.Drawing.Point(0, 38);
             this.toolStripMain.Name = "toolStripMain";
-            this.toolStripMain.Size = new System.Drawing.Size(1860, 33);
+            this.toolStripMain.Size = new System.Drawing.Size(2066, 33);
             this.toolStripMain.TabIndex = 14;
             this.toolStripMain.Text = "toolStrip1";
             // 
@@ -566,15 +592,15 @@ namespace KsIndexerNET
             this.toolBtnRegenMetadata.Text = "Regenerar metadatos";
             this.toolBtnRegenMetadata.Click += new System.EventHandler(this.MenuRegenMetadata_Click);
             // 
-            // btnUpdatePdf
+            // toolBtnUpdatePdf
             // 
-            this.btnUpdatePdf.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnUpdatePdf.Image = ((System.Drawing.Image)(resources.GetObject("btnUpdatePdf.Image")));
-            this.btnUpdatePdf.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnUpdatePdf.Name = "btnUpdatePdf";
-            this.btnUpdatePdf.Size = new System.Drawing.Size(34, 28);
-            this.btnUpdatePdf.Text = "Actualizar Pdf";
-            this.btnUpdatePdf.Click += new System.EventHandler(this.btnUpdatePdf_Click);
+            this.toolBtnUpdatePdf.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolBtnUpdatePdf.Image = ((System.Drawing.Image)(resources.GetObject("toolBtnUpdatePdf.Image")));
+            this.toolBtnUpdatePdf.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolBtnUpdatePdf.Name = "toolBtnUpdatePdf";
+            this.toolBtnUpdatePdf.Size = new System.Drawing.Size(34, 28);
+            this.toolBtnUpdatePdf.Text = "Actualizar Pdf";
+            this.toolBtnUpdatePdf.Click += new System.EventHandler(this.btnUpdatePdf_Click);
             // 
             // toolBtnSave
             // 
@@ -636,23 +662,24 @@ namespace KsIndexerNET
             this.toolBtnExportHtml.Text = "Exportar como HTML";
             this.toolBtnExportHtml.Click += new System.EventHandler(this.menuExportHtml_Click);
             // 
-            // btnPrint
+            // toolBtnPrint
             // 
-            this.btnPrint.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnPrint.Image = ((System.Drawing.Image)(resources.GetObject("btnPrint.Image")));
-            this.btnPrint.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnPrint.Name = "btnPrint";
-            this.btnPrint.Size = new System.Drawing.Size(34, 28);
-            this.btnPrint.Text = "Imprimir";
-            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
+            this.toolBtnPrint.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolBtnPrint.Image = ((System.Drawing.Image)(resources.GetObject("toolBtnPrint.Image")));
+            this.toolBtnPrint.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolBtnPrint.Name = "toolBtnPrint";
+            this.toolBtnPrint.Size = new System.Drawing.Size(34, 28);
+            this.toolBtnPrint.Text = "Imprimir";
+            this.toolBtnPrint.Click += new System.EventHandler(this.btnPrint_Click);
             // 
             // btnAnxView
             // 
             this.btnAnxView.Enabled = false;
             this.btnAnxView.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAnxView.Location = new System.Drawing.Point(1737, 965);
+            this.btnAnxView.Location = new System.Drawing.Point(1930, 965);
+            this.btnAnxView.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnAnxView.Name = "btnAnxView";
-            this.btnAnxView.Size = new System.Drawing.Size(114, 45);
+            this.btnAnxView.Size = new System.Drawing.Size(126, 45);
             this.btnAnxView.TabIndex = 17;
             this.btnAnxView.Text = "Abrir..";
             this.btnAnxView.UseVisualStyleBackColor = true;
@@ -662,9 +689,10 @@ namespace KsIndexerNET
             // 
             this.btnAnxDelete.Enabled = false;
             this.btnAnxDelete.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAnxDelete.Location = new System.Drawing.Point(1613, 965);
+            this.btnAnxDelete.Location = new System.Drawing.Point(1792, 965);
+            this.btnAnxDelete.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnAnxDelete.Name = "btnAnxDelete";
-            this.btnAnxDelete.Size = new System.Drawing.Size(114, 45);
+            this.btnAnxDelete.Size = new System.Drawing.Size(126, 45);
             this.btnAnxDelete.TabIndex = 16;
             this.btnAnxDelete.Text = "Eliminar";
             this.btnAnxDelete.UseVisualStyleBackColor = true;
@@ -673,9 +701,10 @@ namespace KsIndexerNET
             // btnAnxAdd
             // 
             this.btnAnxAdd.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAnxAdd.Location = new System.Drawing.Point(1493, 965);
+            this.btnAnxAdd.Location = new System.Drawing.Point(1659, 965);
+            this.btnAnxAdd.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnAnxAdd.Name = "btnAnxAdd";
-            this.btnAnxAdd.Size = new System.Drawing.Size(114, 45);
+            this.btnAnxAdd.Size = new System.Drawing.Size(126, 45);
             this.btnAnxAdd.TabIndex = 15;
             this.btnAnxAdd.Text = "Agregar";
             this.btnAnxAdd.UseVisualStyleBackColor = true;
@@ -694,10 +723,11 @@ namespace KsIndexerNET
             this.Annexes.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.Annexes.HideSelection = false;
             this.Annexes.HoverSelection = true;
-            this.Annexes.Location = new System.Drawing.Point(1144, 785);
+            this.Annexes.Location = new System.Drawing.Point(1271, 785);
+            this.Annexes.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Annexes.MultiSelect = false;
             this.Annexes.Name = "Annexes";
-            this.Annexes.Size = new System.Drawing.Size(694, 174);
+            this.Annexes.Size = new System.Drawing.Size(770, 174);
             this.Annexes.TabIndex = 14;
             this.Annexes.UseCompatibleStateImageBehavior = false;
             this.Annexes.View = System.Windows.Forms.View.Details;
@@ -720,7 +750,8 @@ namespace KsIndexerNET
             // 
             this.lblAnnexes.AutoSize = true;
             this.lblAnnexes.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAnnexes.Location = new System.Drawing.Point(1144, 758);
+            this.lblAnnexes.Location = new System.Drawing.Point(1271, 758);
+            this.lblAnnexes.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblAnnexes.Name = "lblAnnexes";
             this.lblAnnexes.Size = new System.Drawing.Size(177, 28);
             this.lblAnnexes.TabIndex = 18;
@@ -731,6 +762,7 @@ namespace KsIndexerNET
             this.splitLeftPane.BackColor = System.Drawing.Color.LightGray;
             this.splitLeftPane.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.splitLeftPane.Location = new System.Drawing.Point(0, 69);
+            this.splitLeftPane.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.splitLeftPane.Name = "splitLeftPane";
             this.splitLeftPane.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -741,7 +773,7 @@ namespace KsIndexerNET
             // splitLeftPane.Panel2
             // 
             this.splitLeftPane.Panel2.Controls.Add(this.pdfView);
-            this.splitLeftPane.Size = new System.Drawing.Size(601, 1020);
+            this.splitLeftPane.Size = new System.Drawing.Size(668, 1020);
             this.splitLeftPane.SplitterDistance = 322;
             this.splitLeftPane.SplitterWidth = 5;
             this.splitLeftPane.TabIndex = 0;
@@ -750,9 +782,10 @@ namespace KsIndexerNET
             // btnDateNow
             // 
             this.btnDateNow.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDateNow.Location = new System.Drawing.Point(1397, 181);
+            this.btnDateNow.Location = new System.Drawing.Point(1552, 160);
+            this.btnDateNow.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnDateNow.Name = "btnDateNow";
-            this.btnDateNow.Size = new System.Drawing.Size(105, 35);
+            this.btnDateNow.Size = new System.Drawing.Size(116, 35);
             this.btnDateNow.TabIndex = 5;
             this.btnDateNow.Text = "Ahora";
             this.btnDateNow.UseVisualStyleBackColor = true;
@@ -760,9 +793,9 @@ namespace KsIndexerNET
             // 
             // Main
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1860, 1121);
+            this.ClientSize = new System.Drawing.Size(2066, 1121);
             this.Controls.Add(this.btnDateNow);
             this.Controls.Add(this.splitLeftPane);
             this.Controls.Add(this.btnAnxView);
@@ -780,15 +813,17 @@ namespace KsIndexerNET
             this.Controls.Add(this.Keywords);
             this.Controls.Add(this.lblKeywords);
             this.Controls.Add(this.Attendants);
-            this.Controls.Add(this.lblAttendats);
+            this.Controls.Add(this.lblAttendants);
             this.Controls.Add(this.DocDate);
             this.Controls.Add(this.lblDate);
             this.Controls.Add(this.Title);
             this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
+            this.Font = new System.Drawing.Font("MS Reference Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
+            this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Name = "Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "KsIndexer";
@@ -815,19 +850,19 @@ namespace KsIndexerNET
         #endregion
 
         private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem archivoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem menuFile;
         private System.Windows.Forms.ToolStripMenuItem MenuNew;
         private System.Windows.Forms.ToolStripMenuItem MenuImport;
         private System.Windows.Forms.ToolStripMenuItem MenuSave;
         private System.Windows.Forms.ToolStripMenuItem MenuRegenMetadata;
-        private System.Windows.Forms.ToolStripMenuItem stripMenuExport;
+        private System.Windows.Forms.ToolStripMenuItem MenuExport;
         private System.Windows.Forms.ToolStripMenuItem MenuPrint;
-        private System.Windows.Forms.ToolStripMenuItem MenuSalir;
-        private System.Windows.Forms.ToolStripMenuItem buscarToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem MenuExit;
+        private System.Windows.Forms.ToolStripMenuItem menuSearch;
         private System.Windows.Forms.ToolStripMenuItem MenuSearchById;
         private System.Windows.Forms.ToolStripMenuItem MenuSearchByDate;
         private System.Windows.Forms.ToolStripMenuItem MenuSearchComplex;
-        private System.Windows.Forms.ToolStripMenuItem ayudaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem menuHelp;
         private System.Windows.Forms.ToolStripMenuItem MenuAbout;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel statusLabelId;
@@ -837,7 +872,7 @@ namespace KsIndexerNET
         private System.Windows.Forms.TextBox Title;
         private System.Windows.Forms.Label lblDate;
         private System.Windows.Forms.TextBox DocDate;
-        private System.Windows.Forms.Label lblAttendats;
+        private System.Windows.Forms.Label lblAttendants;
         private System.Windows.Forms.ListView Attendants;
         private System.Windows.Forms.ColumnHeader AttName;
         private System.Windows.Forms.ColumnHeader AttCompany;
@@ -862,7 +897,7 @@ namespace KsIndexerNET
         private System.Windows.Forms.ToolStripButton toolBtnExportHtml;
         private System.Windows.Forms.ToolStripMenuItem MenuDelete;
         private System.Windows.Forms.ToolStripButton toolBtnDelete;
-        private System.Windows.Forms.ToolStripMenuItem MenuLeeme;
+        private System.Windows.Forms.ToolStripMenuItem MenuHelpUsage;
         private System.Windows.Forms.ToolStripMenuItem menuExportTxt;
         private System.Windows.Forms.Button btnAnxView;
         private System.Windows.Forms.Button btnAnxDelete;
@@ -872,12 +907,13 @@ namespace KsIndexerNET
         private System.Windows.Forms.ColumnHeader AnxSize;
         private System.Windows.Forms.Label lblAnnexes;
         private System.Windows.Forms.ToolStripMenuItem MenuUpdatePdf;
-        private System.Windows.Forms.ToolStripMenuItem acercaDeLaBaseDeDatosToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem compactarLaBaseDeDatosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem MenuHelpDbInfo;
+        private System.Windows.Forms.ToolStripMenuItem MenuHelpCompactDb;
         private SplitContainer splitLeftPane;
-        private ToolStripButton btnUpdatePdf;
-        private ToolStripButton btnPrint;
+        private ToolStripButton toolBtnUpdatePdf;
+        private ToolStripButton toolBtnPrint;
         private Button btnDateNow;
+        private ToolStripMenuItem menuSettings;
     }
 }
 

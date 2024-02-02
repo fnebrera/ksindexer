@@ -21,6 +21,9 @@
  *                        Se agregan shortcuts a las entradas del menu.
  *                        Se formatea la fecha en el evento Leave del campo DocDate.
  *                        Se agrega un boton'Ahora' para poner la fecha actual en el campo DocDate.
+ * 1.1.5   2024-02-01 FNG Se convierte en multidioma, empleando archivos .resx. En esta version se soporta
+ *                        español e inglés.
+ *                        Se implementan settings para el idioma y el formato de fechas.
  */
 
 using ksindexer;
@@ -32,10 +35,12 @@ using System.Data;
 using System.Diagnostics;
 using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
@@ -45,8 +50,15 @@ namespace KsIndexerNET
     public partial class Main : Form
     {
         // Constantes
-        public const string appVersion = "1.1.4";
+        public const string appVersion = "1.1.5";
         public const int maxAnnexSize = 50 * 1024 * 1024; // 50 Mb
+
+        // Formatos de fecha, de acuerdo a los deseos del usuario
+        // Formato para formatear fecha, p.e. dd/MM/yyyy
+        public static string CurrentDateFormat { get; set; }
+        // Formato minimo para input, p.e. d/M/yy
+        // Formato para formatear fecha y hora, p.e. dd/MM/yyyy HH:mm
+        public static string CurrentDateTimeFormat { get; set; }
 
         private static Document CurrentDoc = new Document();
         private static bool DocChanged = false;
@@ -57,6 +69,12 @@ namespace KsIndexerNET
             InitializeComponent();
             // Open and test the database connection. If it fails, it will show an error message and exit
             _ = Database.GetInstance();
+            // Cargar setting actuales
+            // CultureInfo nos sirve para traducir los textos de los controles y los mensajes
+            Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(Properties.Settings.Default.Culture);
+            // De manera separada, cargamos los formatos de fecha, que no necesariamente son iguales que el CultureInfo
+            CurrentDateFormat = Properties.Settings.Default.DateFormat;
+            CurrentDateTimeFormat = CurrentDateFormat + " HH:mm";
         }
 
         //
@@ -119,7 +137,8 @@ namespace KsIndexerNET
         private void MenuAbout_Click(object sender, EventArgs e)
         {
             // Mostrar un dialogo con informacion de la aplicacion
-            Messages.ShowInfo("KsIndexer v" + appVersion + "\nIndexador de documentos para Kindle Scribe\n(C) 2024 Faustino Nebrera");
+            //Messages.ShowInfo("KsIndexer v" + appVersion + "\nIndexador de documentos para Kindle Scribe\n(C) 2024 Faustino Nebrera");
+            Messages.ShowInfo(Texts.ABOUT1 + appVersion + "\n" + Texts.ABOUT2 + "\n(C) 2024 Faustino Nebrera");
         }
 
         private void btnKeyAdd_Click(object sender, EventArgs e)
@@ -176,12 +195,21 @@ namespace KsIndexerNET
             int btn2Left = btn3Left - btnKeyEdit.Width - 10;
             int btn1Left = btn2Left - btnKeyAdd.Width - 10;
             Title.Left = lblTitle.Left = lblDate.Left = DocDate.Left = 
-                lblAttendats.Left = Attendants.Left = 
+                lblAttendants.Left = Attendants.Left = 
                 lblKeywords.Left = Keywords.Left = 
                 lblAnnexes.Left = Annexes.Left = titleLeft;
+            // Controles de la derecha excepto listas
+            lblTitle.Top = menuStrip1.Height + toolStripMain.Height + 5;
+            Title.Top = lblTitle.Bottom + 5;
+            lblDate.Top = Title.Bottom + 5;
+            DocDate.Top = btnDateNow.Top = lblDate.Bottom + 5;
             // Boton Ahora
             btnDateNow.Left = DocDate.Right + 10;
             btnDateNow.Height = DocDate.Height;
+            // Todos los botones, de 35 pixeles de alto
+            btnAttAdd.Height = btnAttEdit.Height = btnAttDelete.Height = 
+                btnKeyAdd.Height = btnKeyEdit.Height = btnKeyDelete.Height = 
+                btnAnxAdd.Height = btnAnxView.Height = btnAnxDelete.Height = 35;
             // Botones de asistentes, keywords y anexos
             btnAttAdd.Left = btnKeyAdd.Left = btnAnxAdd.Left = btn1Left;
             btnAttDelete.Left = btnKeyDelete.Left = btnAnxDelete.Left = btn2Left;
@@ -194,9 +222,9 @@ namespace KsIndexerNET
             // Ajustamos verticalmente las tres listas y sus botones a 1/3 de lo disponible cada una
             freeHeight = (this.ClientSize.Height - DocDate.Bottom - statusStrip1.Height) / 3;
             // Attendants
-            lblAttendats.Top = DocDate.Bottom + 5;
-            Attendants.Top = lblAttendats.Bottom + 5;
-            Attendants.Height = freeHeight - lblAttendats.Height - btnAttAdd.Size.Height - 15;
+            lblAttendants.Top = DocDate.Bottom + 5;
+            Attendants.Top = lblAttendants.Bottom + 5;
+            Attendants.Height = freeHeight - lblAttendants.Height - btnAttAdd.Size.Height - 15;
             btnAttAdd.Top = btnAttEdit.Top = btnAttDelete.Top = Attendants.Bottom + 5;
             // Keywords
             lblKeywords.Top = btnAttAdd.Bottom + 5;
@@ -212,6 +240,7 @@ namespace KsIndexerNET
 
         private void Main_Load(object sender, EventArgs e)
         {
+            LangUtils.TranslateForm(this);
             DocChanged = false;
             DocEmpty = true;
             EnableControls();
@@ -246,13 +275,14 @@ namespace KsIndexerNET
         {
             if (DocDate.Text.Length == 0)
                 return;
-            if (DateTime.TryParse(DocDate.Text, out DateTime dt))
+            DateTime dt = LangUtils.ParseDateTime(DocDate.Text);
+            if (dt != DateTime.MinValue)
             {
-                DocDate.Text = dt.ToString("dd/MM/yyyy HH:mm");
+                DocDate.Text = LangUtils.FormatDateTime(dt);
             }
             else
             {
-                Messages.ShowError("La fecha/hora no tiene un formato válido");
+                Messages.ShowError(Texts.WRONG_DATE_FORMAT);
                 DocDate.SelectAll();
                 DocDate.Focus();
                 return;
@@ -354,13 +384,13 @@ namespace KsIndexerNET
         private void acercaDeLaBaseDeDatosToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FileInfo fi = new FileInfo(Database.GetDbPath());
-            Messages.ShowInfo("Versión de la base de datos: " + Database.GetDbVersion() +
-                "\nTamaño de la base de datos: " + (fi.Length / 1024).ToString("N0") + " KBytes");
+            Messages.ShowInfo(Texts.DB_INFO1 + Database.GetDbVersion() +
+                "\n" + Texts.DB_INFO2 + (fi.Length / 1024).ToString("N0") + " KBytes");
         }
 
         private void compactarLaBaseDeDatosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (!Messages.Confirm("El proceso de compactación de la base de datos puede tardar varios minutos.\n¿Desea continuar?"))
+            if (!Messages.Confirm(Texts.COMPACT_DATABASE + "\n" + Texts.OK_TO_PROCEED))
                 return;
             Database.VacuumDb();
         }
@@ -383,7 +413,12 @@ namespace KsIndexerNET
 
         private void btnDateNow_Click(object sender, EventArgs e)
         {
-            DocDate.Text = DateTime.Now.ToString("dd/MM/yyyy HH:mm");
+            DocDate.Text = LangUtils.FormatDateTime(DateTime.Now);
+        }
+
+        private void menuSettings_Click(object sender, EventArgs e)
+        {
+            DoMenuSettings();
         }
     }
 }

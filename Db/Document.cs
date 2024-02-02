@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KsIndexerNET;
+using System;
 using System.CodeDom;
 using System.Collections.Generic;
 using System.Data.SQLite;
@@ -245,7 +246,8 @@ namespace ksindexer.Db
             SQLiteDataReader rdr = db.ExecuteQuery(SQL_DOC_SELECT_BY_DATE, prms);
             while (rdr.Read())
             {
-                docs.Add(new string[] { rdr.GetInt32(0).ToString(), rdr.GetDateTime(1).ToString("dd/MM/yyy HH:mm"), rdr.GetString(2) });
+                //docs.Add(new string[] { rdr.GetInt32(0).ToString(), rdr.GetDateTime(1).ToString("dd/MM/yyy HH:mm"), rdr.GetString(2) });
+                docs.Add(new string[] { rdr.GetInt32(0).ToString(), LangUtils.FormatDateTime(rdr.GetDateTime(1)), rdr.GetString(2) });
             }
             return docs;
         }
@@ -258,7 +260,8 @@ namespace ksindexer.Db
             SQLiteDataReader rdr = db.ExecuteQuery(sql);
             while (rdr.Read())
             {
-                docs.Add(new string[] { rdr.GetInt32(0).ToString(), rdr.GetDateTime(1).ToString("dd/MM/yyy HH:mm"), rdr.GetString(2) });
+                //docs.Add(new string[] { rdr.GetInt32(0).ToString(), rdr.GetDateTime(1).ToString("dd/MM/yyy HH:mm"), rdr.GetString(2) });
+                docs.Add(new string[] { rdr.GetInt32(0).ToString(), LangUtils.FormatDateTime(rdr.GetDateTime(1)), rdr.GetString(2) });
             }
             return docs;
         }
@@ -297,7 +300,7 @@ namespace ksindexer.Db
             }
             if (anexo == null)
             {
-                Messages.ShowError("Se ha producido un error interno al acceder al archivo " + filename);
+                Messages.ShowError(Texts.ERROR_READ_FILE + " " + filename);
                 return null;
             }
             // Si ya tiene contenido, lo devolvemos

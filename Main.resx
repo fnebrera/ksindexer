@@ -153,7 +153,7 @@
         8ApfPjTnnj/Fqf3eSWHTAAAAAElFTkSuQmCC
 </value>
   </data>
-  <data name="btnUpdatePdf.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="toolBtnUpdatePdf.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
         YQUAAAAJcEhZcwAAFiUAABYlAUlSJPAAAACrSURBVEhL3ZTRCYAwDEQ7rXO4hPO4hPtoTzwJh0fU1h8f
@@ -223,7 +223,7 @@
         vBWmlnXOv6Ki+AJYw9VhVFjbCAAAAABJRU5ErkJggg==
 </value>
   </data>
-  <data name="btnPrint.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="toolBtnPrint.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
         YQUAAAAJcEhZcwAAFiUAABYlAUlSJPAAAACVSURBVEhL7Y3BCYAwDEU7mAdxA0+iO3h1CtcSXMFp9AeJ

@@ -50,7 +50,7 @@
             this.DocList.MultiSelect = false;
             this.DocList.Name = "DocList";
             this.DocList.Size = new System.Drawing.Size(936, 217);
-            this.DocList.TabIndex = 0;
+            this.DocList.TabIndex = 1;
             this.DocList.UseCompatibleStateImageBehavior = false;
             this.DocList.SelectedIndexChanged += new System.EventHandler(this.DocList_SelectedIndexChanged);
             // 
@@ -75,26 +75,29 @@
             this.btnSelect.Location = new System.Drawing.Point(672, 248);
             this.btnSelect.Name = "btnSelect";
             this.btnSelect.Size = new System.Drawing.Size(136, 42);
-            this.btnSelect.TabIndex = 1;
+            this.btnSelect.TabIndex = 2;
             this.btnSelect.Text = "Seleccionar";
             this.btnSelect.UseVisualStyleBackColor = true;
             this.btnSelect.Click += new System.EventHandler(this.btnSelect_Click);
             // 
             // btnCancel
             // 
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancel.Location = new System.Drawing.Point(815, 248);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(136, 42);
-            this.btnCancel.TabIndex = 2;
+            this.btnCancel.TabIndex = 3;
             this.btnCancel.Text = "Cancelar";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // DlgSelectDoc
             // 
+            this.AcceptButton = this.btnSelect;
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(970, 302);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSelect);
@@ -102,6 +105,7 @@
             this.Name = "DlgSelectDoc";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Seleccionar documento";
+            this.Load += new System.EventHandler(this.DlgSelectDoc_Load);
             this.ResumeLayout(false);
 
         }

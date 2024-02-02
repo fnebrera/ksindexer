@@ -63,7 +63,8 @@ namespace KsIndexerNET
                 txtAssistant.Text.Trim().Length == 0 &&
                 txtCompany.Text.Trim().Length == 0)
             {
-                Messages.ShowWarning("Debe introducir al menos un criterio de búsqueda");
+                //Messages.ShowWarning("Debe introducir al menos un criterio de búsqueda");
+                Messages.ShowWarning(LangUtils.TranslateTxt(this, "NO_CRITERIA"));
                 return;
             }
             this.DialogResult = DialogResult.OK;
@@ -79,10 +80,10 @@ namespace KsIndexerNET
 
         private void txtDateFrom_Leave(object sender, EventArgs e)
         {
-            DateTime dt;
-            if (txtDateFrom.Text.Length > 0 && !DateTime.TryParse(txtDateFrom.Text, out dt))
+            DateTime dt = LangUtils.ParseDateTime(txtDateFrom.Text);
+            if (txtDateFrom.Text.Length > 0 && dt == DateTime.MinValue)
             {
-                Messages.ShowError("La fecha desde no tiene un formato válido");
+                Messages.ShowError(Texts.WRONG_DATE_FORMAT);
                 txtDateFrom.SelectAll();
                 txtDateFrom.Focus();
                 return;
@@ -91,14 +92,19 @@ namespace KsIndexerNET
 
         private void txtDateTo_Leave(object sender, EventArgs e)
         {
-            DateTime dt;
-            if (txtDateTo.Text.Length > 0 && !DateTime.TryParse(txtDateTo.Text, out dt))
+            DateTime dt = LangUtils.ParseDateTime(txtDateTo.Text);
+            if (txtDateTo.Text.Length > 0 && dt == DateTime.MinValue)
             {
-                Messages.ShowError("La fecha hasta no tiene un formato válido");
+                Messages.ShowError(Texts.WRONG_DATE_FORMAT);
                 txtDateTo.SelectAll();
                 txtDateTo.Focus();
                 return;
             }
+        }
+
+        private void DlgSearchComplex_Load(object sender, EventArgs e)
+        {
+            LangUtils.TranslateForm(this);
         }
     }
 }

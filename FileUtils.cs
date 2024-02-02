@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KsIndexerNET;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,7 +24,7 @@ namespace ksindexer
             }
             catch (Exception e)
             {
-                MessageBox.Show("Error al leer el archivo: " + e.Message, "Error");
+                Messages.ShowError(Texts.ERROR_READ_FILE + ": " + e.Message);
             }
             return content;
         }
@@ -51,7 +52,7 @@ namespace ksindexer
             }
             catch (Exception e)
             {
-                MessageBox.Show("Error al escribir el Pdf a un temporal: " + e.Message, "Error");
+                Messages.ShowError(Texts.ERROR_WRITE_TEMP + ": " + e.Message);
             }
         }
 
@@ -81,15 +82,10 @@ namespace ksindexer
                 {
                     // A veces se escapan puntos al escribir. Los quitamos, y tambien los blancos antes y despues
                     string sfecha = linea.Substring(1).Replace('.', ' ').Trim();
-                    try
-                    {
-                        DateTime fecha = DateTime.Parse(sfecha);
-                        return fecha.ToString("dd/MM/yyyy HH:mm:ss");
-                    }
-                    catch (Exception)
-                    {
-                        continue;
-                    }   
+                    DateTime fecha = LangUtils.ParseDateTime(sfecha);
+                    if (fecha == DateTime.MinValue)
+                        return "";
+                    return LangUtils.FormatDateTime(fecha);
                 }
             }
             return "";

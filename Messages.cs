@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KsIndexerNET;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,37 +12,37 @@ namespace ksindexer
     {
         public static void ShowError(string message)
         {
-            MessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show(message, Texts.DLG_ERROR, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         public static void ShowWarning(string message)
         {
-            MessageBox.Show(message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            MessageBox.Show(message, Texts.DLG_WARN, MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
         public static void ShowInfo(string message)
         {
-            MessageBox.Show(message, "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show(message, Texts.DLG_INFO, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         public static bool AskDocChanged(string addtext = "")
         {
-            string message = "El documento actual ha cambiado";
+            string message = Texts.DOC_HAS_CHANGED;
             if (addtext != "")
             {
                 message += "\n" + addtext;
             }
             else
             {
-                message += "\n¿Desea continuar sin guardar?";
+                message += "\n" + Texts.PROCEED_WITHOUT_SAVE;
             }
-            DialogResult result = MessageBox.Show(message, "Pregunta", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult result = MessageBox.Show(message, Texts.DLG_CONFIRM, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             return result == DialogResult.Yes;
         }
 
         public static bool Confirm(string message)
         {
-            DialogResult result = MessageBox.Show(message, "Pregunta", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult result = MessageBox.Show(message, Texts.DLG_CONFIRM, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             return result == DialogResult.Yes;
         }
 
@@ -51,7 +52,7 @@ namespace ksindexer
             if (changed)
                 salir = Messages.AskDocChanged();
             else
-                salir = Messages.Confirm("¿Está seguro de salir de la Aplicación?");
+                salir = Messages.Confirm(Texts.CONFIRM_EXIT_APP);
             return salir;
         }
     }

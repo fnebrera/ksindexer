@@ -151,7 +151,8 @@ namespace KsIndexerNET
                                 }
                                 break;
                             case "ComboBox":
-                                // Las entradas del combobox son simplemente strings
+                                // Las entradas del combobox son simplemente strings. En resuctos usamos
+                                // el nombre del combobox mas el indice de la entrada
                                 ComboBox cb = (ComboBox)control;
                                 for (int i = 0; i < cb.Items.Count; i++)
                                 {
@@ -161,7 +162,7 @@ namespace KsIndexerNET
                                 }
                                 break;
                             default:
-                                // El resto de controles tienen un texto asociado
+                                // El resto de controles que usamos en este momento tienen un texto asociado
                                 string text = resxSet.GetString(control.Name);
                                 if (text != null)
                                     control.Text = text;

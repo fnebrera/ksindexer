@@ -245,12 +245,6 @@
   <data name="FOLDER_NOT_ALLOWED" xml:space="preserve">
     <value>No se puede cargar un directorio</value>
   </data>
-  <data name="menuExportHtml" xml:space="preserve">
-    <value>como HTML</value>
-  </data>
-  <data name="menuExportTxt" xml:space="preserve">
-    <value>como TXT</value>
-  </data>
   <data name="NAME" xml:space="preserve">
     <value>Nombre</value>
   </data>

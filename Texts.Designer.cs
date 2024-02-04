@@ -439,24 +439,6 @@ namespace KsIndexerNET {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a como HTML.
-        /// </summary>
-        internal static string menuExportHtml {
-            get {
-                return ResourceManager.GetString("menuExportHtml", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a como TXT.
-        /// </summary>
-        internal static string menuExportTxt {
-            get {
-                return ResourceManager.GetString("menuExportTxt", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Busca una cadena traducida similar a Nombre.
         /// </summary>
         internal static string NAME {

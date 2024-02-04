@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Threading.Tasks;
-using ksindexer;
-using ksindexer.Db;
+using KsIndexerNET;
+using KsIndexerNET.Db;
 using System.Reflection;
 using System.Drawing.Printing;
 

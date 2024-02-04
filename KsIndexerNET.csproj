@@ -61,44 +61,44 @@
     <Compile Include="Db\Database.Maintenance.cs" />
     <Compile Include="Db\Document.cs" />
     <Compile Include="Db\Keyword.cs" />
-    <Compile Include="DlgImport.cs">
+    <Compile Include="dialogs\DlgImport.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DlgImport.Designer.cs">
+    <Compile Include="dialogs\DlgImport.Designer.cs">
       <DependentUpon>DlgImport.cs</DependentUpon>
     </Compile>
-    <Compile Include="DlgInput2.cs">
+    <Compile Include="dialogs\DlgInput2.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DlgInput2.Designer.cs">
+    <Compile Include="dialogs\DlgInput2.Designer.cs">
       <DependentUpon>DlgInput2.cs</DependentUpon>
     </Compile>
-    <Compile Include="DlgInput1.cs">
+    <Compile Include="dialogs\DlgInput1.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DlgInput1.Designer.cs">
+    <Compile Include="dialogs\DlgInput1.Designer.cs">
       <DependentUpon>DlgInput1.cs</DependentUpon>
     </Compile>
-    <Compile Include="DlgSearchComplex.cs">
+    <Compile Include="dialogs\DlgSearchComplex.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DlgSearchComplex.Designer.cs">
+    <Compile Include="dialogs\DlgSearchComplex.Designer.cs">
       <DependentUpon>DlgSearchComplex.cs</DependentUpon>
     </Compile>
-    <Compile Include="DlgSelectDoc.cs">
+    <Compile Include="dialogs\DlgSelectDoc.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DlgSelectDoc.Designer.cs">
+    <Compile Include="dialogs\DlgSelectDoc.Designer.cs">
       <DependentUpon>DlgSelectDoc.cs</DependentUpon>
     </Compile>
-    <Compile Include="DlgSettings.cs">
+    <Compile Include="dialogs\DlgSettings.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DlgSettings.Designer.cs">
+    <Compile Include="dialogs\DlgSettings.Designer.cs">
       <DependentUpon>DlgSettings.cs</DependentUpon>
     </Compile>
-    <Compile Include="FileUtils.cs" />
-    <Compile Include="LangUtils.cs" />
+    <Compile Include="utils\FileUtils.cs" />
+    <Compile Include="utils\LangUtils.cs" />
     <Compile Include="Main.Buttons.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -120,8 +120,8 @@
     <Compile Include="Main.Utils.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Messages.cs" />
-    <Compile Include="PdfUtils.cs" />
+    <Compile Include="utils\Messages.cs" />
+    <Compile Include="utils\PdfUtils.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Texts.Designer.cs">
@@ -133,71 +133,45 @@
     <Content Include="Leeme.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <EmbeddedResource Include="DlgImport.en-US.resx">
+    <EmbeddedResource Include="dialogs\DlgImport.en-US.resx">
       <DependentUpon>DlgImport.cs</DependentUpon>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="DlgImport.es-ES.resx">
-      <DependentUpon>DlgImport.cs</DependentUpon>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DlgImport.resx">
+    <EmbeddedResource Include="dialogs\DlgImport.resx">
       <DependentUpon>DlgImport.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DlgInput1.en-US.resx">
+    <EmbeddedResource Include="dialogs\DlgInput1.en-US.resx">
       <DependentUpon>DlgInput1.cs</DependentUpon>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="DlgInput1.es-ES.resx">
-      <DependentUpon>DlgInput1.cs</DependentUpon>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DlgInput2.en-US.resx">
+    <EmbeddedResource Include="dialogs\DlgInput2.en-US.resx">
       <DependentUpon>DlgInput2.cs</DependentUpon>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="DlgInput2.es-ES.resx">
-      <DependentUpon>DlgInput2.cs</DependentUpon>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DlgInput2.resx">
+    <EmbeddedResource Include="dialogs\DlgInput2.resx">
       <DependentUpon>DlgInput2.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DlgInput1.resx">
+    <EmbeddedResource Include="dialogs\DlgInput1.resx">
       <DependentUpon>DlgInput1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DlgSearchComplex.en-US.resx">
-      <DependentUpon>DlgSearchComplex.cs</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DlgSearchComplex.es-ES.resx">
-      <DependentUpon>DlgSearchComplex.cs</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DlgSearchComplex.resx">
+    <EmbeddedResource Include="dialogs\DlgSearchComplex.en-US.resx">
       <DependentUpon>DlgSearchComplex.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DlgSelectDoc.en-US.resx">
+    <EmbeddedResource Include="dialogs\DlgSearchComplex.resx">
+      <DependentUpon>DlgSearchComplex.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dialogs\DlgSelectDoc.en-US.resx">
       <DependentUpon>DlgSelectDoc.cs</DependentUpon>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="DlgSelectDoc.es-ES.resx">
-      <DependentUpon>DlgSelectDoc.cs</DependentUpon>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DlgSelectDoc.resx">
+    <EmbeddedResource Include="dialogs\DlgSelectDoc.resx">
       <DependentUpon>DlgSelectDoc.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DlgSettings.resx">
+    <EmbeddedResource Include="dialogs\DlgSettings.resx">
       <DependentUpon>DlgSettings.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Main.en-US.resx">
       <DependentUpon>Main.cs</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Main.es-ES.resx">
-      <DependentUpon>Main.cs</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
@@ -219,6 +193,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Texts.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="help\KsIndexer.chm">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

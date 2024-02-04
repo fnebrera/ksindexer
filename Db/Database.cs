@@ -12,7 +12,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar;
 using System.Runtime.CompilerServices;
 using KsIndexerNET;
 
-namespace ksindexer.Db
+namespace KsIndexerNET.Db
 {
     /**
      * Clase para acceder a datos en una BD SQLite.

@@ -1,5 +1,5 @@
-﻿using ksindexer.Db;
-using ksindexer;
+﻿using KsIndexerNET.Db;
+using KsIndexerNET;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -202,10 +202,9 @@ namespace KsIndexerNET
                 }
             }
             // Verificar que no exceda el tamaño maximo
-            if (fi.Length > maxAnnexSize)
+            if (fi.Length > MaxAnnexSize * 1024 * 1024)
             {
-                int mb = (int)(maxAnnexSize / 1024 / 1024);
-                Messages.ShowError(Texts.WRONG_ANNEX_SIZE + " " + mb.ToString() + " MB");
+                Messages.ShowError(Texts.WRONG_ANNEX_SIZE + " " + MaxAnnexSize.ToString() + " MB");
                 return;
             }
             // Cargar el archivo

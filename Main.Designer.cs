@@ -116,8 +116,8 @@ namespace KsIndexerNET
             this.menuHelp});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Padding = new System.Windows.Forms.Padding(10, 3, 0, 3);
-            this.menuStrip1.Size = new System.Drawing.Size(2066, 38);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(12, 4, 0, 4);
+            this.menuStrip1.Size = new System.Drawing.Size(2479, 40);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -305,10 +305,10 @@ namespace KsIndexerNET
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.statusLabelId,
             this.statusId});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 1089);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 1538);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Padding = new System.Windows.Forms.Padding(2, 0, 16, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(2066, 32);
+            this.statusStrip1.Padding = new System.Windows.Forms.Padding(3, 0, 19, 0);
+            this.statusStrip1.Size = new System.Drawing.Size(2479, 32);
             this.statusStrip1.TabIndex = 1;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -332,11 +332,11 @@ namespace KsIndexerNET
             this.TextInDb.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TextInDb.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TextInDb.Location = new System.Drawing.Point(0, 0);
-            this.TextInDb.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.TextInDb.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.TextInDb.Multiline = true;
             this.TextInDb.Name = "TextInDb";
             this.TextInDb.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.TextInDb.Size = new System.Drawing.Size(666, 320);
+            this.TextInDb.Size = new System.Drawing.Size(799, 464);
             this.TextInDb.TabIndex = 1;
             this.TextInDb.TextChanged += new System.EventHandler(this.TextInDb_TextChanged);
             this.TextInDb.DragDrop += new System.Windows.Forms.DragEventHandler(this.TextInDb_DragDrop);
@@ -348,10 +348,10 @@ namespace KsIndexerNET
             this.pdfView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pdfView.IsWebBrowserContextMenuEnabled = false;
             this.pdfView.Location = new System.Drawing.Point(0, 0);
-            this.pdfView.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.pdfView.MinimumSize = new System.Drawing.Size(22, 20);
+            this.pdfView.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.pdfView.MinimumSize = new System.Drawing.Size(27, 29);
             this.pdfView.Name = "pdfView";
-            this.pdfView.Size = new System.Drawing.Size(666, 691);
+            this.pdfView.Size = new System.Drawing.Size(799, 1004);
             this.pdfView.TabIndex = 2;
             this.pdfView.TabStop = false;
             this.pdfView.WebBrowserShortcutsEnabled = false;
@@ -360,8 +360,8 @@ namespace KsIndexerNET
             // 
             this.lblTitle.AutoSize = true;
             this.lblTitle.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTitle.Location = new System.Drawing.Point(1266, 66);
-            this.lblTitle.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblTitle.Location = new System.Drawing.Point(1519, 96);
+            this.lblTitle.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(65, 28);
             this.lblTitle.TabIndex = 3;
@@ -369,11 +369,11 @@ namespace KsIndexerNET
             // 
             // Title
             // 
-            this.Title.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Title.Location = new System.Drawing.Point(1271, 93);
-            this.Title.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.Title.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Title.Location = new System.Drawing.Point(1525, 135);
+            this.Title.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.Title.Name = "Title";
-            this.Title.Size = new System.Drawing.Size(770, 35);
+            this.Title.Size = new System.Drawing.Size(923, 37);
             this.Title.TabIndex = 3;
             this.Title.TextChanged += new System.EventHandler(this.Title_TextChanged);
             // 
@@ -381,8 +381,8 @@ namespace KsIndexerNET
             // 
             this.lblDate.AutoSize = true;
             this.lblDate.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDate.Location = new System.Drawing.Point(1271, 134);
-            this.lblDate.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblDate.Location = new System.Drawing.Point(1525, 194);
+            this.lblDate.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.lblDate.Name = "lblDate";
             this.lblDate.Size = new System.Drawing.Size(130, 28);
             this.lblDate.TabIndex = 5;
@@ -390,11 +390,11 @@ namespace KsIndexerNET
             // 
             // DocDate
             // 
-            this.DocDate.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DocDate.Location = new System.Drawing.Point(1271, 160);
-            this.DocDate.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.DocDate.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DocDate.Location = new System.Drawing.Point(1525, 232);
+            this.DocDate.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.DocDate.Name = "DocDate";
-            this.DocDate.Size = new System.Drawing.Size(260, 35);
+            this.DocDate.Size = new System.Drawing.Size(311, 37);
             this.DocDate.TabIndex = 4;
             this.DocDate.TextChanged += new System.EventHandler(this.DocDate_TextChanged);
             this.DocDate.Leave += new System.EventHandler(this.DocDate_Leave);
@@ -403,8 +403,8 @@ namespace KsIndexerNET
             // 
             this.lblAttendants.AutoSize = true;
             this.lblAttendants.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAttendants.Location = new System.Drawing.Point(1271, 235);
-            this.lblAttendants.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblAttendants.Location = new System.Drawing.Point(1525, 341);
+            this.lblAttendants.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.lblAttendants.Name = "lblAttendants";
             this.lblAttendants.Size = new System.Drawing.Size(107, 28);
             this.lblAttendants.TabIndex = 7;
@@ -416,17 +416,17 @@ namespace KsIndexerNET
             this.Attendants.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.AttName,
             this.AttCompany});
-            this.Attendants.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Attendants.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Attendants.FullRowSelect = true;
             this.Attendants.GridLines = true;
             this.Attendants.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.Attendants.HideSelection = false;
             this.Attendants.HoverSelection = true;
-            this.Attendants.Location = new System.Drawing.Point(1271, 262);
-            this.Attendants.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.Attendants.Location = new System.Drawing.Point(1525, 380);
+            this.Attendants.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.Attendants.MultiSelect = false;
             this.Attendants.Name = "Attendants";
-            this.Attendants.Size = new System.Drawing.Size(770, 178);
+            this.Attendants.Size = new System.Drawing.Size(923, 256);
             this.Attendants.TabIndex = 6;
             this.Attendants.UseCompatibleStateImageBehavior = false;
             this.Attendants.View = System.Windows.Forms.View.Details;
@@ -435,7 +435,7 @@ namespace KsIndexerNET
             // AttName
             // 
             this.AttName.Text = "Nombre";
-            this.AttName.Width = 250;
+            this.AttName.Width = 240;
             // 
             // AttCompany
             // 
@@ -446,8 +446,8 @@ namespace KsIndexerNET
             // 
             this.lblKeywords.AutoSize = true;
             this.lblKeywords.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblKeywords.Location = new System.Drawing.Point(1271, 499);
-            this.lblKeywords.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblKeywords.Location = new System.Drawing.Point(1525, 724);
+            this.lblKeywords.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.lblKeywords.Name = "lblKeywords";
             this.lblKeywords.Size = new System.Drawing.Size(143, 28);
             this.lblKeywords.TabIndex = 9;
@@ -455,23 +455,23 @@ namespace KsIndexerNET
             // 
             // Keywords
             // 
-            this.Keywords.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Keywords.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Keywords.FormattingEnabled = true;
-            this.Keywords.ItemHeight = 28;
-            this.Keywords.Location = new System.Drawing.Point(1276, 526);
-            this.Keywords.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.Keywords.ItemHeight = 29;
+            this.Keywords.Location = new System.Drawing.Point(1531, 763);
+            this.Keywords.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.Keywords.Name = "Keywords";
-            this.Keywords.Size = new System.Drawing.Size(766, 172);
+            this.Keywords.Size = new System.Drawing.Size(919, 265);
             this.Keywords.TabIndex = 10;
             this.Keywords.SelectedIndexChanged += new System.EventHandler(this.Keywords_SelectedIndexChanged);
             // 
             // btnAttAdd
             // 
             this.btnAttAdd.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAttAdd.Location = new System.Drawing.Point(1644, 446);
-            this.btnAttAdd.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.btnAttAdd.Location = new System.Drawing.Point(1973, 647);
+            this.btnAttAdd.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.btnAttAdd.Name = "btnAttAdd";
-            this.btnAttAdd.Size = new System.Drawing.Size(126, 45);
+            this.btnAttAdd.Size = new System.Drawing.Size(151, 65);
             this.btnAttAdd.TabIndex = 7;
             this.btnAttAdd.Text = "Agregar";
             this.btnAttAdd.UseVisualStyleBackColor = true;
@@ -481,10 +481,10 @@ namespace KsIndexerNET
             // 
             this.btnAttDelete.Enabled = false;
             this.btnAttDelete.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAttDelete.Location = new System.Drawing.Point(1778, 446);
-            this.btnAttDelete.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.btnAttDelete.Location = new System.Drawing.Point(2133, 647);
+            this.btnAttDelete.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.btnAttDelete.Name = "btnAttDelete";
-            this.btnAttDelete.Size = new System.Drawing.Size(126, 45);
+            this.btnAttDelete.Size = new System.Drawing.Size(151, 65);
             this.btnAttDelete.TabIndex = 8;
             this.btnAttDelete.Text = "Eliminar";
             this.btnAttDelete.UseVisualStyleBackColor = true;
@@ -494,10 +494,10 @@ namespace KsIndexerNET
             // 
             this.btnKeyDelete.Enabled = false;
             this.btnKeyDelete.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnKeyDelete.Location = new System.Drawing.Point(1782, 703);
-            this.btnKeyDelete.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.btnKeyDelete.Location = new System.Drawing.Point(2139, 1019);
+            this.btnKeyDelete.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.btnKeyDelete.Name = "btnKeyDelete";
-            this.btnKeyDelete.Size = new System.Drawing.Size(126, 45);
+            this.btnKeyDelete.Size = new System.Drawing.Size(151, 65);
             this.btnKeyDelete.TabIndex = 12;
             this.btnKeyDelete.Text = "Eliminar";
             this.btnKeyDelete.UseVisualStyleBackColor = true;
@@ -506,10 +506,10 @@ namespace KsIndexerNET
             // btnKeyAdd
             // 
             this.btnKeyAdd.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnKeyAdd.Location = new System.Drawing.Point(1644, 703);
-            this.btnKeyAdd.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.btnKeyAdd.Location = new System.Drawing.Point(1973, 1019);
+            this.btnKeyAdd.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.btnKeyAdd.Name = "btnKeyAdd";
-            this.btnKeyAdd.Size = new System.Drawing.Size(126, 45);
+            this.btnKeyAdd.Size = new System.Drawing.Size(151, 65);
             this.btnKeyAdd.TabIndex = 11;
             this.btnKeyAdd.Text = "Agregar";
             this.btnKeyAdd.UseVisualStyleBackColor = true;
@@ -519,10 +519,10 @@ namespace KsIndexerNET
             // 
             this.btnKeyEdit.Enabled = false;
             this.btnKeyEdit.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnKeyEdit.Location = new System.Drawing.Point(1916, 703);
-            this.btnKeyEdit.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.btnKeyEdit.Location = new System.Drawing.Point(2299, 1019);
+            this.btnKeyEdit.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.btnKeyEdit.Name = "btnKeyEdit";
-            this.btnKeyEdit.Size = new System.Drawing.Size(126, 45);
+            this.btnKeyEdit.Size = new System.Drawing.Size(151, 65);
             this.btnKeyEdit.TabIndex = 13;
             this.btnKeyEdit.Text = "Modificar";
             this.btnKeyEdit.UseVisualStyleBackColor = true;
@@ -532,10 +532,10 @@ namespace KsIndexerNET
             // 
             this.btnAttEdit.Enabled = false;
             this.btnAttEdit.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAttEdit.Location = new System.Drawing.Point(1916, 446);
-            this.btnAttEdit.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.btnAttEdit.Location = new System.Drawing.Point(2299, 647);
+            this.btnAttEdit.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.btnAttEdit.Name = "btnAttEdit";
-            this.btnAttEdit.Size = new System.Drawing.Size(126, 45);
+            this.btnAttEdit.Size = new System.Drawing.Size(151, 65);
             this.btnAttEdit.TabIndex = 9;
             this.btnAttEdit.Text = "Modificar";
             this.btnAttEdit.UseVisualStyleBackColor = true;
@@ -556,9 +556,10 @@ namespace KsIndexerNET
             this.toolBtnSearchComplex,
             this.toolBtnExportHtml,
             this.toolBtnPrint});
-            this.toolStripMain.Location = new System.Drawing.Point(0, 38);
+            this.toolStripMain.Location = new System.Drawing.Point(0, 40);
             this.toolStripMain.Name = "toolStripMain";
-            this.toolStripMain.Size = new System.Drawing.Size(2066, 33);
+            this.toolStripMain.Padding = new System.Windows.Forms.Padding(0, 0, 3, 0);
+            this.toolStripMain.Size = new System.Drawing.Size(2479, 38);
             this.toolStripMain.TabIndex = 14;
             this.toolStripMain.Text = "toolStrip1";
             // 
@@ -568,7 +569,7 @@ namespace KsIndexerNET
             this.toolBtnNew.Image = ((System.Drawing.Image)(resources.GetObject("toolBtnNew.Image")));
             this.toolBtnNew.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolBtnNew.Name = "toolBtnNew";
-            this.toolBtnNew.Size = new System.Drawing.Size(34, 28);
+            this.toolBtnNew.Size = new System.Drawing.Size(34, 33);
             this.toolBtnNew.Text = "Nuevo";
             this.toolBtnNew.Click += new System.EventHandler(this.MenuNew_Click);
             // 
@@ -578,7 +579,7 @@ namespace KsIndexerNET
             this.toolBtnImport.Image = ((System.Drawing.Image)(resources.GetObject("toolBtnImport.Image")));
             this.toolBtnImport.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolBtnImport.Name = "toolBtnImport";
-            this.toolBtnImport.Size = new System.Drawing.Size(34, 28);
+            this.toolBtnImport.Size = new System.Drawing.Size(34, 33);
             this.toolBtnImport.Text = "Importar";
             this.toolBtnImport.Click += new System.EventHandler(this.MenuImport_Click);
             // 
@@ -588,7 +589,7 @@ namespace KsIndexerNET
             this.toolBtnRegenMetadata.Image = ((System.Drawing.Image)(resources.GetObject("toolBtnRegenMetadata.Image")));
             this.toolBtnRegenMetadata.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolBtnRegenMetadata.Name = "toolBtnRegenMetadata";
-            this.toolBtnRegenMetadata.Size = new System.Drawing.Size(34, 28);
+            this.toolBtnRegenMetadata.Size = new System.Drawing.Size(34, 33);
             this.toolBtnRegenMetadata.Text = "Regenerar metadatos";
             this.toolBtnRegenMetadata.Click += new System.EventHandler(this.MenuRegenMetadata_Click);
             // 
@@ -598,7 +599,7 @@ namespace KsIndexerNET
             this.toolBtnUpdatePdf.Image = ((System.Drawing.Image)(resources.GetObject("toolBtnUpdatePdf.Image")));
             this.toolBtnUpdatePdf.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolBtnUpdatePdf.Name = "toolBtnUpdatePdf";
-            this.toolBtnUpdatePdf.Size = new System.Drawing.Size(34, 28);
+            this.toolBtnUpdatePdf.Size = new System.Drawing.Size(34, 33);
             this.toolBtnUpdatePdf.Text = "Actualizar Pdf";
             this.toolBtnUpdatePdf.Click += new System.EventHandler(this.btnUpdatePdf_Click);
             // 
@@ -608,7 +609,7 @@ namespace KsIndexerNET
             this.toolBtnSave.Image = ((System.Drawing.Image)(resources.GetObject("toolBtnSave.Image")));
             this.toolBtnSave.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolBtnSave.Name = "toolBtnSave";
-            this.toolBtnSave.Size = new System.Drawing.Size(34, 28);
+            this.toolBtnSave.Size = new System.Drawing.Size(34, 33);
             this.toolBtnSave.Text = "Guardar";
             this.toolBtnSave.Click += new System.EventHandler(this.MenuSave_Click);
             // 
@@ -618,7 +619,7 @@ namespace KsIndexerNET
             this.toolBtnDelete.Image = ((System.Drawing.Image)(resources.GetObject("toolBtnDelete.Image")));
             this.toolBtnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolBtnDelete.Name = "toolBtnDelete";
-            this.toolBtnDelete.Size = new System.Drawing.Size(34, 28);
+            this.toolBtnDelete.Size = new System.Drawing.Size(34, 33);
             this.toolBtnDelete.Text = "Eliminar";
             this.toolBtnDelete.Click += new System.EventHandler(this.MenuDelete_Click);
             // 
@@ -628,7 +629,7 @@ namespace KsIndexerNET
             this.toolBtnSearchId.Image = ((System.Drawing.Image)(resources.GetObject("toolBtnSearchId.Image")));
             this.toolBtnSearchId.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolBtnSearchId.Name = "toolBtnSearchId";
-            this.toolBtnSearchId.Size = new System.Drawing.Size(34, 28);
+            this.toolBtnSearchId.Size = new System.Drawing.Size(34, 33);
             this.toolBtnSearchId.Text = "Buscar por Id";
             this.toolBtnSearchId.Click += new System.EventHandler(this.MenuSearchById_Click);
             // 
@@ -638,7 +639,7 @@ namespace KsIndexerNET
             this.toolBtnSearchDate.Image = ((System.Drawing.Image)(resources.GetObject("toolBtnSearchDate.Image")));
             this.toolBtnSearchDate.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolBtnSearchDate.Name = "toolBtnSearchDate";
-            this.toolBtnSearchDate.Size = new System.Drawing.Size(34, 28);
+            this.toolBtnSearchDate.Size = new System.Drawing.Size(34, 33);
             this.toolBtnSearchDate.Text = "Buscar por fecha";
             this.toolBtnSearchDate.Click += new System.EventHandler(this.MenuSearchByDate_Click);
             // 
@@ -648,7 +649,7 @@ namespace KsIndexerNET
             this.toolBtnSearchComplex.Image = ((System.Drawing.Image)(resources.GetObject("toolBtnSearchComplex.Image")));
             this.toolBtnSearchComplex.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolBtnSearchComplex.Name = "toolBtnSearchComplex";
-            this.toolBtnSearchComplex.Size = new System.Drawing.Size(34, 28);
+            this.toolBtnSearchComplex.Size = new System.Drawing.Size(34, 33);
             this.toolBtnSearchComplex.Text = "Búsqueda compleja";
             this.toolBtnSearchComplex.Click += new System.EventHandler(this.MenuSearchComplex_Click);
             // 
@@ -658,7 +659,7 @@ namespace KsIndexerNET
             this.toolBtnExportHtml.Image = ((System.Drawing.Image)(resources.GetObject("toolBtnExportHtml.Image")));
             this.toolBtnExportHtml.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolBtnExportHtml.Name = "toolBtnExportHtml";
-            this.toolBtnExportHtml.Size = new System.Drawing.Size(34, 28);
+            this.toolBtnExportHtml.Size = new System.Drawing.Size(34, 33);
             this.toolBtnExportHtml.Text = "Exportar como HTML";
             this.toolBtnExportHtml.Click += new System.EventHandler(this.menuExportHtml_Click);
             // 
@@ -668,7 +669,7 @@ namespace KsIndexerNET
             this.toolBtnPrint.Image = ((System.Drawing.Image)(resources.GetObject("toolBtnPrint.Image")));
             this.toolBtnPrint.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolBtnPrint.Name = "toolBtnPrint";
-            this.toolBtnPrint.Size = new System.Drawing.Size(34, 28);
+            this.toolBtnPrint.Size = new System.Drawing.Size(34, 33);
             this.toolBtnPrint.Text = "Imprimir";
             this.toolBtnPrint.Click += new System.EventHandler(this.btnPrint_Click);
             // 
@@ -676,10 +677,10 @@ namespace KsIndexerNET
             // 
             this.btnAnxView.Enabled = false;
             this.btnAnxView.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAnxView.Location = new System.Drawing.Point(1930, 965);
-            this.btnAnxView.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.btnAnxView.Location = new System.Drawing.Point(2316, 1399);
+            this.btnAnxView.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.btnAnxView.Name = "btnAnxView";
-            this.btnAnxView.Size = new System.Drawing.Size(126, 45);
+            this.btnAnxView.Size = new System.Drawing.Size(151, 65);
             this.btnAnxView.TabIndex = 17;
             this.btnAnxView.Text = "Abrir..";
             this.btnAnxView.UseVisualStyleBackColor = true;
@@ -689,10 +690,10 @@ namespace KsIndexerNET
             // 
             this.btnAnxDelete.Enabled = false;
             this.btnAnxDelete.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAnxDelete.Location = new System.Drawing.Point(1792, 965);
-            this.btnAnxDelete.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.btnAnxDelete.Location = new System.Drawing.Point(2151, 1399);
+            this.btnAnxDelete.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.btnAnxDelete.Name = "btnAnxDelete";
-            this.btnAnxDelete.Size = new System.Drawing.Size(126, 45);
+            this.btnAnxDelete.Size = new System.Drawing.Size(151, 65);
             this.btnAnxDelete.TabIndex = 16;
             this.btnAnxDelete.Text = "Eliminar";
             this.btnAnxDelete.UseVisualStyleBackColor = true;
@@ -701,10 +702,10 @@ namespace KsIndexerNET
             // btnAnxAdd
             // 
             this.btnAnxAdd.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAnxAdd.Location = new System.Drawing.Point(1659, 965);
-            this.btnAnxAdd.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.btnAnxAdd.Location = new System.Drawing.Point(1991, 1399);
+            this.btnAnxAdd.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.btnAnxAdd.Name = "btnAnxAdd";
-            this.btnAnxAdd.Size = new System.Drawing.Size(126, 45);
+            this.btnAnxAdd.Size = new System.Drawing.Size(151, 65);
             this.btnAnxAdd.TabIndex = 15;
             this.btnAnxAdd.Text = "Agregar";
             this.btnAnxAdd.UseVisualStyleBackColor = true;
@@ -717,17 +718,17 @@ namespace KsIndexerNET
             this.Annexes.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.AnxFileName,
             this.AnxSize});
-            this.Annexes.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Annexes.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Annexes.FullRowSelect = true;
             this.Annexes.GridLines = true;
             this.Annexes.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.Annexes.HideSelection = false;
             this.Annexes.HoverSelection = true;
-            this.Annexes.Location = new System.Drawing.Point(1271, 785);
-            this.Annexes.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.Annexes.Location = new System.Drawing.Point(1525, 1138);
+            this.Annexes.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.Annexes.MultiSelect = false;
             this.Annexes.Name = "Annexes";
-            this.Annexes.Size = new System.Drawing.Size(770, 174);
+            this.Annexes.Size = new System.Drawing.Size(923, 251);
             this.Annexes.TabIndex = 14;
             this.Annexes.UseCompatibleStateImageBehavior = false;
             this.Annexes.View = System.Windows.Forms.View.Details;
@@ -750,8 +751,8 @@ namespace KsIndexerNET
             // 
             this.lblAnnexes.AutoSize = true;
             this.lblAnnexes.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAnnexes.Location = new System.Drawing.Point(1271, 758);
-            this.lblAnnexes.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblAnnexes.Location = new System.Drawing.Point(1525, 1099);
+            this.lblAnnexes.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.lblAnnexes.Name = "lblAnnexes";
             this.lblAnnexes.Size = new System.Drawing.Size(177, 28);
             this.lblAnnexes.TabIndex = 18;
@@ -761,8 +762,8 @@ namespace KsIndexerNET
             // 
             this.splitLeftPane.BackColor = System.Drawing.Color.LightGray;
             this.splitLeftPane.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.splitLeftPane.Location = new System.Drawing.Point(0, 69);
-            this.splitLeftPane.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.splitLeftPane.Location = new System.Drawing.Point(0, 100);
+            this.splitLeftPane.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.splitLeftPane.Name = "splitLeftPane";
             this.splitLeftPane.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -773,19 +774,19 @@ namespace KsIndexerNET
             // splitLeftPane.Panel2
             // 
             this.splitLeftPane.Panel2.Controls.Add(this.pdfView);
-            this.splitLeftPane.Size = new System.Drawing.Size(668, 1020);
-            this.splitLeftPane.SplitterDistance = 322;
-            this.splitLeftPane.SplitterWidth = 5;
+            this.splitLeftPane.Size = new System.Drawing.Size(801, 1479);
+            this.splitLeftPane.SplitterDistance = 466;
+            this.splitLeftPane.SplitterWidth = 7;
             this.splitLeftPane.TabIndex = 0;
             this.splitLeftPane.TabStop = false;
             // 
             // btnDateNow
             // 
             this.btnDateNow.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDateNow.Location = new System.Drawing.Point(1552, 160);
-            this.btnDateNow.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.btnDateNow.Location = new System.Drawing.Point(1863, 232);
+            this.btnDateNow.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.btnDateNow.Name = "btnDateNow";
-            this.btnDateNow.Size = new System.Drawing.Size(116, 35);
+            this.btnDateNow.Size = new System.Drawing.Size(139, 51);
             this.btnDateNow.TabIndex = 5;
             this.btnDateNow.Text = "Ahora";
             this.btnDateNow.UseVisualStyleBackColor = true;
@@ -793,9 +794,9 @@ namespace KsIndexerNET
             // 
             // Main
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 29F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(2066, 1121);
+            this.ClientSize = new System.Drawing.Size(2479, 1570);
             this.Controls.Add(this.btnDateNow);
             this.Controls.Add(this.splitLeftPane);
             this.Controls.Add(this.btnAnxView);
@@ -820,10 +821,10 @@ namespace KsIndexerNET
             this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
-            this.Font = new System.Drawing.Font("MS Reference Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.Name = "Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "KsIndexer";

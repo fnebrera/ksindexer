@@ -46,5 +46,17 @@ namespace KsIndexerNET.Properties {
                 this["DateFormat"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("50")]
+        public int MaxAnnexSize {
+            get {
+                return ((int)(this["MaxAnnexSize"]));
+            }
+            set {
+                this["MaxAnnexSize"] = value;
+            }
+        }
     }
 }

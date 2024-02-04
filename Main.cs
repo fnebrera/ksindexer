@@ -26,8 +26,8 @@
  *                        Se implementan settings para el idioma y el formato de fechas.
  */
 
-using ksindexer;
-using ksindexer.Db;
+using KsIndexerNET;
+using KsIndexerNET.Db;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -38,6 +38,7 @@ using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Security.Claims;
 using System.Text;
 using System.Threading;
@@ -51,14 +52,21 @@ namespace KsIndexerNET
     {
         // Constantes
         public const string appVersion = "1.1.5";
-        public const int maxAnnexSize = 50 * 1024 * 1024; // 50 Mb
 
-        // Formatos de fecha, de acuerdo a los deseos del usuario
-        // Formato para formatear fecha, p.e. dd/MM/yyyy
+        //
+        // Preferencias de usuario, que leemos de settings
+        //
+
+        // Formato para parsear y formatear fechas, p.e. dd/MM/yyyy
         public static string CurrentDateFormat { get; set; }
-        // Formato minimo para input, p.e. d/M/yy
         // Formato para formatear fecha y hora, p.e. dd/MM/yyyy HH:mm
         public static string CurrentDateTimeFormat { get; set; }
+        // Tamaño maximo de los anexos, en bytes
+        public static int MaxAnnexSize { get; set; }
+
+        //
+        // Variables estáticas de uso común
+        //
 
         private static Document CurrentDoc = new Document();
         private static bool DocChanged = false;
@@ -67,14 +75,53 @@ namespace KsIndexerNET
         public Main()
         {
             InitializeComponent();
-            // Open and test the database connection. If it fails, it will show an error message and exit
+            //
+            // Database es una clase singleton, por lo que la instanciamos al principio, con lo que verificamos
+            // que la base de datos esté disponible y actualizada.
+            //
             _ = Database.GetInstance();
-            // Cargar setting actuales
-            // CultureInfo nos sirve para traducir los textos de los controles y los mensajes
+            //
+            // Cargar setting actuales. Se actualizan mediante el evento MenuSettings_Click
+            //
+            // CultureInfo nos sirve para traducir los textos de los controles y los mensajes.
             Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(Properties.Settings.Default.Culture);
-            // De manera separada, cargamos los formatos de fecha, que no necesariamente son iguales que el CultureInfo
+            // TODO: Ver si es necesario cambiar el CurrentCulture (por separador de decimales, etc.). De momento no.
+            // De manera separada, cargamos los formatos de fecha, que no necesariamente son iguales que el CultureInfo.
+            // Por ejemplo, el usuario puede querer la interfaz en español pero las fechas en ANSI (yyyy-MM-dd).
             CurrentDateFormat = Properties.Settings.Default.DateFormat;
             CurrentDateTimeFormat = CurrentDateFormat + " HH:mm";
+            // Tamaño maximo de los anexos
+            MaxAnnexSize = Properties.Settings.Default.MaxAnnexSize;
+
+            //
+            // NOTA: Cómo se maneja el multi-idioma:
+            // 1. Existe un archivo Texts.resx y su paralelo Texts.es-US.resx con textos generales de la aplicación,
+            //    como puedan ser mensajes de error, confirmaciones, etc. Visual Studio genera una clase Texts (en Texts.designer.cs)
+            //    que nos permite acceder a los textos como propiedades de esta clase, que son extraidos automáticamente
+            //    del archivo con la cultura actual. Si no existe la cultura, se hace fallback a la de defecto, en este
+            //    caso a Español.
+            // 2. Los textos de los controles (botones, labels, etc.), así como mensajes u otros textos específicos de un
+            //    Form se manejan mediante los archivo de recursos .resx asociados a cada Form. Hay un archivo xxx.resx
+            //    para la cultura por defecto (Español) y otro para cada cultura alternativa (p.e. xxx.en-Us.resx). En la
+            //    clase LangUtils hay métodos estáticos para traducir de una vez todos los controles de un Form y para
+            //    traducir un texto específico.
+            // 3. Tambien en la clase LangUtils hay métodos estáticos para parsear y formatear fechas y horas, en base, en este caso,
+            //    a los formatos de fecha y hora que se leen de settings (NO a la cultura).
+            // 
+            // VisualStudio compila los archivos .resx en forma de DLLs, que se deben incluir a la hora de generar el setup,
+            // agregando al ApplicationFolder lo que VisualStudio llama 'Recursos adaptados'.
+            //
+
+            // PRUEBAS para ver que leñes hace el .NET con los recursos. Es un tema peliaguo.
+            /*
+            string[] resxnames = Assembly.GetExecutingAssembly().GetManifestResourceNames();
+            StringBuilder sb = new StringBuilder();
+            foreach (string resxname in resxnames)
+            {
+                sb.Append(resxname + "\t" + "\n");
+            }
+            MessageBox.Show(sb.ToString());
+            */
         }
 
         //
@@ -189,6 +236,12 @@ namespace KsIndexerNET
             // Si es muy pequeña, ni caso
             if (freeWidth < 500 || freeHeight < 300 )
                 return;
+            // Ancho de los controles (.NET hace lo que le da la gana)
+            Title.Width = Attendants.Width = Keywords.Width = Annexes.Width = 450;
+            DocDate.Width = 150;
+            btnDateNow.Width = btnAttAdd.Width = btnAttDelete.Width = btnAttEdit.Width = 
+                btnKeyAdd.Width = btnKeyDelete.Width = btnKeyEdit.Width = 
+                btnAnxAdd.Width = btnAnxDelete.Width = btnAnxView.Width = 80;
             // Controles de la derecha ajustados a la derecha
             int titleLeft = freeWidth - Title.Width - 10;
             int btn3Left = freeWidth - btnKeyDelete.Width - 10;
@@ -206,10 +259,10 @@ namespace KsIndexerNET
             // Boton Ahora
             btnDateNow.Left = DocDate.Right + 10;
             btnDateNow.Height = DocDate.Height;
-            // Todos los botones, de 35 pixeles de alto
+            // Todos los botones, de 30 pixeles de alto
             btnAttAdd.Height = btnAttEdit.Height = btnAttDelete.Height = 
                 btnKeyAdd.Height = btnKeyEdit.Height = btnKeyDelete.Height = 
-                btnAnxAdd.Height = btnAnxView.Height = btnAnxDelete.Height = 35;
+                btnAnxAdd.Height = btnAnxView.Height = btnAnxDelete.Height = 30;
             // Botones de asistentes, keywords y anexos
             btnAttAdd.Left = btnKeyAdd.Left = btnAnxAdd.Left = btn1Left;
             btnAttDelete.Left = btnKeyDelete.Left = btnAnxDelete.Left = btn2Left;
@@ -301,12 +354,18 @@ namespace KsIndexerNET
 
         private void MenuReadme_Click(object sender, EventArgs e)
         {
-            // TODO: Escribir un help completo
-            Process notepad = new Process();
-            notepad.StartInfo.FileName = "notepad.exe";
-            notepad.StartInfo.Arguments = ".\\Leeme.txt";
-            notepad.Start();
-            notepad.WaitForExit();
+            // Mostrar el help
+            string hlpfile = @".\help\KsIndexer.chm";
+            if (!File.Exists(hlpfile))
+            {
+                Process notepad = new Process();
+                notepad.StartInfo.FileName = "notepad.exe";
+                notepad.StartInfo.Arguments = @".\Leeme.txt";
+                notepad.Start();
+                notepad.WaitForExit();
+                return;
+            }
+            Process.Start(hlpfile);
         }
 
         private void MenuExportTxt_Click(object sender, EventArgs e)

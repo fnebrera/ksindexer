@@ -260,6 +260,9 @@
   <data name="NO_DOC_SELECTED" xml:space="preserve">
     <value>No hay nungún documento seleccionado</value>
   </data>
+  <data name="NO_SEARCH_CRITERIA" xml:space="preserve">
+    <value>Debe introducir al menos un criterio de búsqueda</value>
+  </data>
   <data name="NO_TEXT_TO_PROCESS" xml:space="preserve">
     <value>No hay texto importado para procesar</value>
   </data>

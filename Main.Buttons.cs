@@ -1,5 +1,5 @@
-﻿using ksindexer.Db;
-using ksindexer;
+﻿using KsIndexerNET.Db;
+using KsIndexerNET;
 using System;
 using System.Collections.Generic;
 using System.Linq;

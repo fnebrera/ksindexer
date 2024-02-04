@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ksindexer.Db
+namespace KsIndexerNET.Db
 {
     public class Document
     {

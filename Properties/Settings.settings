@@ -8,5 +8,8 @@
     <Setting Name="DateFormat" Type="System.String" Scope="User">
       <Value Profile="(Default)">dd/MM/yyyy</Value>
     </Setting>
+    <Setting Name="MaxAnnexSize" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">50</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -1,0 +1,279 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Annexes0" xml:space="preserve">
+    <value>Nombre</value>
+  </data>
+  <data name="Annexes1" xml:space="preserve">
+    <value>Tamaño</value>
+  </data>
+  <data name="Attendants0" xml:space="preserve">
+    <value>Nombre</value>
+  </data>
+  <data name="Attendants1" xml:space="preserve">
+    <value>Empresa</value>
+  </data>
+  <data name="btnAnxAdd" xml:space="preserve">
+    <value>Agregar</value>
+  </data>
+  <data name="btnAnxDelete" xml:space="preserve">
+    <value>Eliminar</value>
+  </data>
+  <data name="btnAnxView" xml:space="preserve">
+    <value>Ver</value>
+  </data>
+  <data name="btnAttAdd" xml:space="preserve">
+    <value>Agregar</value>
+  </data>
+  <data name="btnAttDelete" xml:space="preserve">
+    <value>Eliminar</value>
+  </data>
+  <data name="btnAttEdit" xml:space="preserve">
+    <value>Modificar</value>
+  </data>
+  <data name="btnDateNow" xml:space="preserve">
+    <value>Ahora</value>
+  </data>
+  <data name="btnKeyAdd" xml:space="preserve">
+    <value>Agregar</value>
+  </data>
+  <data name="btnKeyDelete" xml:space="preserve">
+    <value>Eliminar</value>
+  </data>
+  <data name="btnKeyEdit" xml:space="preserve">
+    <value>Modificar</value>
+  </data>
+  <data name="lblAnnexes" xml:space="preserve">
+    <value>Ficheros Adjuntos</value>
+  </data>
+  <data name="lblAttendants" xml:space="preserve">
+    <value>Asistentes</value>
+  </data>
+  <data name="lblDate" xml:space="preserve">
+    <value>Fecha y hora</value>
+  </data>
+  <data name="lblKeywords" xml:space="preserve">
+    <value>Etiquetas</value>
+  </data>
+  <data name="lblTitle" xml:space="preserve">
+    <value>Título del documento</value>
+  </data>
+  <data name="Main" xml:space="preserve">
+    <value>KsIndexer</value>
+  </data>
+  <data name="MenuAbout" xml:space="preserve">
+    <value>&amp;Acerca de KsIndexer</value>
+  </data>
+  <data name="MenuDelete" xml:space="preserve">
+    <value>&amp;Eliminar</value>
+  </data>
+  <data name="MenuExit" xml:space="preserve">
+    <value>&amp;Salir</value>
+  </data>
+  <data name="MenuExport" xml:space="preserve">
+    <value>E&amp;xportar</value>
+  </data>
+  <data name="menuExportHtml" xml:space="preserve">
+    <value>como &amp;HTML..</value>
+  </data>
+  <data name="menuExportTxt" xml:space="preserve">
+    <value>como &amp;TXT..</value>
+  </data>
+  <data name="menuFile" xml:space="preserve">
+    <value>&amp;Archivo</value>
+  </data>
+  <data name="menuHelp" xml:space="preserve">
+    <value>A&amp;yuda</value>
+  </data>
+  <data name="MenuHelpCompactDb" xml:space="preserve">
+    <value>&amp;Compactar la base de datos</value>
+  </data>
+  <data name="MenuHelpDbInfo" xml:space="preserve">
+    <value>Información de la &amp;base de datos</value>
+  </data>
+  <data name="MenuHelpUsage" xml:space="preserve">
+    <value>&amp;Uso de KsIndexer</value>
+  </data>
+  <data name="MenuImport" xml:space="preserve">
+    <value>&amp;Importar..</value>
+  </data>
+  <data name="MenuNew" xml:space="preserve">
+    <value>&amp;Nuevo</value>
+  </data>
+  <data name="MenuPrint" xml:space="preserve">
+    <value>Im&amp;primir</value>
+  </data>
+  <data name="MenuRegenMetadata" xml:space="preserve">
+    <value>&amp;Regenerar metadatos</value>
+  </data>
+  <data name="MenuSave" xml:space="preserve">
+    <value>&amp;Guardar</value>
+  </data>
+  <data name="menuSearch" xml:space="preserve">
+    <value>&amp;Buscar</value>
+  </data>
+  <data name="MenuSearchByDate" xml:space="preserve">
+    <value>Por &amp;Fecha..</value>
+  </data>
+  <data name="MenuSearchById" xml:space="preserve">
+    <value>Por &amp;Id..</value>
+  </data>
+  <data name="MenuSearchComplex" xml:space="preserve">
+    <value>&amp;Búsqueda compleja..</value>
+  </data>
+  <data name="menuSettings" xml:space="preserve">
+    <value>Configuracion de usuario..</value>
+  </data>
+  <data name="MenuUpdatePdf" xml:space="preserve">
+    <value>&amp;Actualizar Pdf..</value>
+  </data>
+  <data name="toolBtnDelete" xml:space="preserve">
+    <value>Eliminar</value>
+  </data>
+  <data name="toolBtnExportHtml" xml:space="preserve">
+    <value>Exportar como HTML</value>
+  </data>
+  <data name="toolBtnImport" xml:space="preserve">
+    <value>Importar</value>
+  </data>
+  <data name="toolBtnNew" xml:space="preserve">
+    <value>Nuevo</value>
+  </data>
+  <data name="toolBtnPrint" xml:space="preserve">
+    <value>Imprimir</value>
+  </data>
+  <data name="toolBtnRegenMetadata" xml:space="preserve">
+    <value>Regenerar metadatos</value>
+  </data>
+  <data name="toolBtnSave" xml:space="preserve">
+    <value>Guardar</value>
+  </data>
+  <data name="toolBtnSearchComplex" xml:space="preserve">
+    <value>Búsqueda compleja</value>
+  </data>
+  <data name="toolBtnSearchDate" xml:space="preserve">
+    <value>Buscar por fecha</value>
+  </data>
+  <data name="toolBtnSearchId" xml:space="preserve">
+    <value>Buscar por Id</value>
+  </data>
+  <data name="toolBtnUpdatePdf" xml:space="preserve">
+    <value>Actualizar PDF</value>
+  </data>
+</root>

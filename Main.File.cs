@@ -1,5 +1,5 @@
-﻿using ksindexer;
-using ksindexer.Db;
+﻿using KsIndexerNET;
+using KsIndexerNET.Db;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -185,6 +185,7 @@ namespace KsIndexerNET
             DlgSettings dlg = new DlgSettings();
             dlg.SetCulture(Thread.CurrentThread.CurrentUICulture.Name);
             dlg.SetDateFormat(CurrentDateFormat);
+            dlg.SetMaxSize(MaxAnnexSize);
             if (dlg.ShowDialog() == DialogResult.Cancel)
                 return;
             bool save = false;
@@ -198,6 +199,7 @@ namespace KsIndexerNET
             }
             string dateformat = dlg.GetDateFormat();
             string datetimeformat = dateformat + " HH:mm";
+            int maxSize = dlg.GetMaxSize();
             if (dateformat != CurrentDateFormat)
             {
                 save = true;
@@ -205,12 +207,21 @@ namespace KsIndexerNET
                 CurrentDateFormat = dateformat;
                 CurrentDateTimeFormat = datetimeformat;
             }
+            if (maxSize != MaxAnnexSize)
+            {
+                // Cuidado, establecemos un limite glbal maximo de 5 GB
+                if (maxSize > 5120)
+                    maxSize = 5120;
+                save = true;
+                MaxAnnexSize = maxSize;
+            }
             if (save)
             {
                 Properties.Settings.Default.Culture = culture;
                 Properties.Settings.Default.DateFormat = dateformat;
                 Properties.Settings.Default.Save();
             }
+            dlg.Dispose();
         }
     }
 }

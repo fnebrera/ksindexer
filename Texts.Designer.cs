@@ -484,6 +484,15 @@ namespace KsIndexerNET {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Debe introducir al menos un criterio de búsqueda.
+        /// </summary>
+        internal static string NO_SEARCH_CRITERIA {
+            get {
+                return ResourceManager.GetString("NO_SEARCH_CRITERIA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a No hay texto importado para procesar.
         /// </summary>
         internal static string NO_TEXT_TO_PROCESS {

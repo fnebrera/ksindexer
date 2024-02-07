@@ -11,5 +11,14 @@
     <Setting Name="MaxAnnexSize" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">50</Value>
     </Setting>
+    <Setting Name="DateStartChar" Type="System.String" Scope="User">
+      <Value Profile="(Default)">@</Value>
+    </Setting>
+    <Setting Name="AttStartChar" Type="System.String" Scope="User">
+      <Value Profile="(Default)">&gt;</Value>
+    </Setting>
+    <Setting Name="TagStartChar" Type="System.String" Scope="User">
+      <Value Profile="(Default)">#</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

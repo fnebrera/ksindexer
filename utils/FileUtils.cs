@@ -58,11 +58,17 @@ namespace KsIndexerNET
         public static string GetDocTitle(string content)
         {
             string[] lines = content.Split('\n');
-            // El titulo debe ser la primera linea no vacia, exceptuando las que empiecen por "Página..." y la fecha
+            // El titulo debe ser la primera linea no vacia, exceptuando las que empiecen por "Página..." y los metadatos
             for (int i = 0; i < lines.Length; i++)
             {
                 string linea = lines[i].Trim();
-                if (linea.Length > 0 && linea[0] != '@' && !linea.StartsWith("Pág"))
+                // V1.1.6 Los caracteres especiales estan en configuracion
+                if (linea.Length > 0 &&
+                    !linea.StartsWith(Main.DateStartChar) &&
+                    !linea.StartsWith(Main.TagStartChar) &&
+                    !linea.StartsWith(Main.AttendantStartChar) &&
+                    !linea.StartsWith("Pág") && 
+                    !linea.StartsWith("Pag"))
                 {
                     return linea;
                 }
@@ -77,10 +83,15 @@ namespace KsIndexerNET
             for (int i = 0; i < lines.Length; i++)
             {
                 string linea = lines[i].Trim();
-                if (linea.Length > 0 && linea[0] == '@')
+                // V 1.1.6 Se toma de configuracion
+                //if (linea.Length > 0 && linea[0] == '@')
+                if (linea.Length > 0 && linea.StartsWith(Main.DateStartChar))
                 {
-                    // A veces se escapan puntos al escribir. Los quitamos, y tambien los blancos antes y despues
-                    string sfecha = linea.Substring(1).Replace('.', ' ').Trim();
+                    // A veces se escapan puntos o comas al escribir. Los quitamos, y tambien los blancos antes y despues
+                    string sfecha = linea.Substring(Main.DateStartChar.Length)
+                        .Replace('.', ' ')
+                        .Replace(',', ' ')
+                        .Trim();
                     DateTime fecha = LangUtils.ParseDateTime(sfecha);
                     if (fecha == DateTime.MinValue)
                         return "";
@@ -99,13 +110,20 @@ namespace KsIndexerNET
             {
                 string linea = lines[i].Trim();
                 // No tratar lineas de significado especial, salvo las keywords
-                if (linea.Length == 0 || linea.StartsWith("@") || linea.StartsWith(">") || linea.StartsWith("Pág"))
+                // V 1.1.6 Los caracteres especiales estan en configuracion
+                if (linea.Length == 0 ||
+                    linea.StartsWith(Main.DateStartChar) ||
+                    linea.StartsWith(Main.AttendantStartChar) ||
+                    linea.StartsWith("Pág"))
                     continue;
                 // Lineas que empiezan por # consisten sólamente en palabras clave
-                if (linea[0] == '#')
+                if (linea.StartsWith(Main.TagStartChar))
                 {
-                    // A veces se escapan puntos al escribir.
-                    string kws = linea.Substring(1).Replace('.', ' ').Trim();
+                    // A veces se escapan puntos al escribir. Tampoco quiero las comas
+                    string kws = linea.Substring(Main.TagStartChar.Length)
+                        .Replace('.', ' ')
+                        .Replace(',', ' ')
+                        .Trim();
                     string[] akeyword = kws.Split(' ');
                     for (int j = 0; j < akeyword.Length; j++)
                     {
@@ -121,18 +139,24 @@ namespace KsIndexerNET
                     // Lineas normales, que pueden contener keywords
                     while (true)
                     {
-                        int pos = linea.IndexOf('#');
+                        // V 1.1.6 Los caracteres especiales estan en configuracion
+                        int pos = linea.IndexOf(Main.TagStartChar);
                         if (pos < 0)
                             break;
+                        // Saltar caracteres de inicio del tag menos el primero
+                        pos += Main.TagStartChar.Length;
                         // Saltamos posibles blancos para encontrar la primera palabra
-                        while (pos + 1 < linea.Length && linea[pos + 1] == ' ')
+                        while (pos < linea.Length && linea[pos] == ' ')
                             pos++;
-                        linea = linea.Substring(pos + 1);
+                        linea = linea.Substring(pos);
                         // Sólo nos interesa la primera palabra después del #
                         int pos2 = linea.IndexOf(' ');
                         if (pos2 < 0)
                             pos2 = linea.Length;
-                        string keyword = NormalizeString(linea.Substring(0, pos2));
+                        string keyword = NormalizeString(
+                            linea.Substring(0, pos2)
+                            .Replace('.', ' ')
+                            .Replace(',', ' '));
                         if (keyword.Length > 0 && !keywords.Contains(keyword))
                         {
                             keywords.Add(keyword);
@@ -146,31 +170,57 @@ namespace KsIndexerNET
         public static string[][] GetDocAttendants(string content)
         {
             string[] lines = content.Split('\n');
+            // V 1.1.6 Se establece en configuracion
             // Los asistentes deben ser las lineas que empiecen por >
             List<string[]> attendants = new List<string[]>();
             for (int i = 0; i < lines.Length; i++)
             {
                 string linea = lines[i].Trim();
-                if (linea.Length > 0 && linea[0] == '>')
+                if (linea.Length > 0 && linea.StartsWith(Main.AttendantStartChar))
                 {
-                    // A veces se escapan puntos al escribir.
-                    string asistente = linea.Substring(1).Replace('.', ' ').Trim();
-                    int pos1 = asistente.IndexOf('(');
-                    int pos2 = asistente.Substring(pos1+1).IndexOf(')');
-                    if (pos1 > 0 && pos2 > 0)
+                    // A veces se escapan puntos al escribir. Lo quitamos en NormalizeString()
+                    //string asistente = linea.Substring(1).Replace('.', ' ').Trim();
+                    // V 1.1.6 Permitir mas de un asistente, separados por comas
+                    string[] aasistentes = linea.Substring(Main.AttendantStartChar.Length).Split(',');
+                    foreach (string ast in aasistentes)
                     {
-                        string nombre = asistente.Substring(0,pos1).Trim();
-                        string emp = asistente.Substring(pos1+1, pos2).Trim();
-                        attendants.Add(new string[] { NormalizeString(nombre), NormalizeString(emp) });
-                    }
-                    else
-                    {
-                        attendants.Add(new string[] { NormalizeString(asistente), "" });
+                        string asistente = ast.Trim();
+                        if (asistente.Length == 0)
+                            continue;
+                        int pos1 = asistente.IndexOf('(');
+                        int pos2 = asistente.Substring(pos1 + 1).IndexOf(')');
+                        string[] newAtt;
+                        if (pos1 > 0 && pos2 > 0)
+                        {
+                            string nombre = NormalizeString(asistente.Substring(0, pos1));
+                            if (nombre.Length == 0)
+                                continue;
+                            string emp = NormalizeString(asistente.Substring(pos1 + 1, pos2));
+                            newAtt = new string[] { nombre, emp };
+                        }
+                        else
+                        {
+                            newAtt = new string[] { NormalizeString(asistente), "" };
+                        }
+                        // Agregar solo sin no existe ya
+                        if (!ContainsAttendant(attendants, newAtt))
+                            attendants.Add(newAtt);
                     }
                 }
             }
             return attendants.ToArray();
         }
+
+        // Comporbar si existe un asistente, incluyendo nombre y empresa
+        private static bool ContainsAttendant(List<string[]> attendants, string[] newAtt)
+        {
+            foreach (string[] attendant in attendants)
+            {
+                if (attendant[0] == newAtt[0] && attendant[1] == newAtt[1])
+                    return true;
+            }
+            return false;
+        }   
 
         public static string GetTextCleared(string content)
         {
@@ -181,10 +231,15 @@ namespace KsIndexerNET
             for (int i = 0; i < lines.Length; i++)
             {
                 string linea = lines[i].Trim();
-                if (linea.StartsWith("@") || linea.StartsWith("#") || linea.StartsWith(">") || linea.StartsWith("Pág"))
+                // V 1.1.6 Los caracteres especiales estan en configuracion
+                if (linea.StartsWith(Main.DateStartChar) ||
+                    linea.StartsWith(Main.TagStartChar) || 
+                    linea.StartsWith(Main.AttendantStartChar) || 
+                    linea.StartsWith("Pág") ||
+                    linea.StartsWith("Pag"))
                     continue;
                 // La agregamos, a menos que sea la primera linea (titulo)
-                if (primera && linea.Length > 0 && !linea.StartsWith("Pág"))
+                if (primera && linea.Length > 0 && !linea.StartsWith("Pág") && !linea.StartsWith("Pag"))
                 {
                     primera = false;
                     continue;
@@ -194,9 +249,15 @@ namespace KsIndexerNET
             return sb.ToString();
         }
 
+        // Poner una cadena en minusculas sustituyendo letras acentuadas por no acentuadas
         public static string NormalizeString(string orig)
         {
-            return orig.Trim().ToLower().Replace('á', 'a').Replace('é', 'e').Replace('í', 'i').Replace('ó', 'o').Replace('ú', 'u').Replace(".","");
+            return orig.Trim().ToLower()
+                .Replace('á', 'a')
+                .Replace('é', 'e')
+                .Replace('í', 'i')
+                .Replace('ó', 'o')
+                .Replace('ú', 'u');
         }
     }
 }

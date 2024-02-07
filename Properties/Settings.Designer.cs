@@ -58,5 +58,41 @@ namespace KsIndexerNET.Properties {
                 this["MaxAnnexSize"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("@")]
+        public string DateStartChar {
+            get {
+                return ((string)(this["DateStartChar"]));
+            }
+            set {
+                this["DateStartChar"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(">")]
+        public string AttStartChar {
+            get {
+                return ((string)(this["AttStartChar"]));
+            }
+            set {
+                this["AttStartChar"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#")]
+        public string TagStartChar {
+            get {
+                return ((string)(this["TagStartChar"]));
+            }
+            set {
+                this["TagStartChar"] = value;
+            }
+        }
     }
 }

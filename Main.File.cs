@@ -186,6 +186,9 @@ namespace KsIndexerNET
             dlg.SetCulture(Thread.CurrentThread.CurrentUICulture.Name);
             dlg.SetDateFormat(CurrentDateFormat);
             dlg.SetMaxSize(MaxAnnexSize);
+            dlg.SetStartDate(DateStartChar);
+            dlg.SetStartAttendant(AttendantStartChar);
+            dlg.SetStartTag(TagStartChar);
             if (dlg.ShowDialog() == DialogResult.Cancel)
                 return;
             bool save = false;
@@ -200,6 +203,9 @@ namespace KsIndexerNET
             string dateformat = dlg.GetDateFormat();
             string datetimeformat = dateformat + " HH:mm";
             int maxSize = dlg.GetMaxSize();
+            string dateStartChar = dlg.GetStartDate().Trim();
+            string attendantStartChar = dlg.GetStartAttendant().Trim();
+            string tagStartChar = dlg.GetStartTag().Trim();
             if (dateformat != CurrentDateFormat)
             {
                 save = true;
@@ -215,10 +221,30 @@ namespace KsIndexerNET
                 save = true;
                 MaxAnnexSize = maxSize;
             }
+            // V 1.1.6
+            if (dateStartChar.Length != 0 && dateStartChar != DateStartChar)
+            {
+                save = true;
+                DateStartChar = dateStartChar;
+            }
+            if (attendantStartChar.Length != 0 && attendantStartChar != AttendantStartChar)
+            {
+                save = true;
+                AttendantStartChar = attendantStartChar;
+            }
+            if (tagStartChar.Length != 0 && tagStartChar != TagStartChar)
+            {
+                save = true;
+                TagStartChar = tagStartChar;
+            }
             if (save)
             {
                 Properties.Settings.Default.Culture = culture;
                 Properties.Settings.Default.DateFormat = dateformat;
+                Properties.Settings.Default.MaxAnnexSize = maxSize;
+                Properties.Settings.Default.DateStartChar = dateStartChar;
+                Properties.Settings.Default.AttStartChar = attendantStartChar;
+                Properties.Settings.Default.TagStartChar = tagStartChar;
                 Properties.Settings.Default.Save();
             }
             dlg.Dispose();

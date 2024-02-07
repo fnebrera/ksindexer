@@ -24,6 +24,9 @@
  * 1.1.5   2024-02-01 FNG Se convierte en multidioma, empleando archivos .resx. En esta version se soporta
  *                        español e inglés.
  *                        Se implementan settings para el idioma y el formato de fechas.
+ * 1.1.6   2024-02-06 FNG Se admiten varios asistentes en una sóla línea.
+ *                        Se eliminan las posibles comas al final de las palabras clave.
+ *                        Se permite al usuario establecer los símbolos que marcan fecha, asistentes y palabras clave.
  */
 
 using KsIndexerNET;
@@ -51,7 +54,7 @@ namespace KsIndexerNET
     public partial class Main : Form
     {
         // Constantes
-        public const string appVersion = "1.1.5";
+        public const string appVersion = "1.1.6";
 
         //
         // Preferencias de usuario, que leemos de settings
@@ -63,6 +66,10 @@ namespace KsIndexerNET
         public static string CurrentDateTimeFormat { get; set; }
         // Tamaño maximo de los anexos, en bytes
         public static int MaxAnnexSize { get; set; }
+        // V 1.1.6 - Símbolos para marcar fecha, asistentes y palabras clave
+        public static string DateStartChar { get; set; }
+        public static string AttendantStartChar { get; set; }
+        public static string TagStartChar { get; set; }
 
         //
         // Variables estáticas de uso común
@@ -92,6 +99,18 @@ namespace KsIndexerNET
             CurrentDateTimeFormat = CurrentDateFormat + " HH:mm";
             // Tamaño maximo de los anexos
             MaxAnnexSize = Properties.Settings.Default.MaxAnnexSize;
+            if (MaxAnnexSize == 0)
+                MaxAnnexSize = 50;
+            // Símbolos para marcar fecha, asistentes y palabras clave
+            DateStartChar = Properties.Settings.Default.DateStartChar;
+            if (DateStartChar.Length == 0)
+                DateStartChar = "@";
+            AttendantStartChar = Properties.Settings.Default.AttStartChar;
+            if (AttendantStartChar.Length == 0)
+                AttendantStartChar = ">";
+            TagStartChar = Properties.Settings.Default.TagStartChar;
+            if (TagStartChar.Length == 0)
+                TagStartChar = "#";
 
             //
             // NOTA: Cómo se maneja el multi-idioma:

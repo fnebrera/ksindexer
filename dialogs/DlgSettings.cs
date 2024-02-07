@@ -58,6 +58,36 @@ namespace KsIndexerNET
             txtMaxSize.Text = maxSize.ToString();
         }
 
+        public string GetStartDate()
+        {
+            return txtStartDate.Text;
+        }
+
+        public void SetStartDate(string val)
+        {
+            txtStartDate.Text = val;
+        }
+
+        public string GetStartAttendant()
+        {
+            return txtStartAttendant.Text;
+        }
+
+        public void SetStartAttendant(string val)
+        {
+            txtStartAttendant.Text = val;
+        }
+
+        public string GetStartTag()
+        {
+            return txtStartTag.Text;
+        }
+
+        public void SetStartTag(string val)
+        {
+            txtStartTag.Text = val;
+        }
+
         private void btnOK_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.OK;
@@ -74,9 +104,5 @@ namespace KsIndexerNET
             LangUtils.TranslateForm(this);
         }
 
-        private void label6_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

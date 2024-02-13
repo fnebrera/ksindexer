@@ -60,6 +60,7 @@ namespace KsIndexerNET
             Annexes.Items.Clear();
             pdfView.Navigate(new Uri("about:blank"));
             this.statusId.Text = "vacío";
+            this.statusDocPath.Text = "";
             DocChanged = false;
             DocEmpty = true;
             EnableControls();
@@ -153,6 +154,8 @@ namespace KsIndexerNET
             {
                 Annexes.Items.Add(new ListViewItem(new string[] { anexo.FileName, anexo.Size.ToString("N0") }));
             }
+            // V 1.2.0 Guardamos el Inode actual, para posibles imports posteriores 
+            LastInode = CurrentDoc.INodeId.ToString();
         }
 
         private void FillDocFromControls()

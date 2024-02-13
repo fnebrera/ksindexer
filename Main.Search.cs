@@ -7,6 +7,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using KsIndexerNET.dialogs;
 
 namespace KsIndexerNET
 {
@@ -31,7 +32,7 @@ namespace KsIndexerNET
                 return;
             string fecha = dlg.GetText1();
             dlg.Dispose();
-            DateTime dfecha = LangUtils.ParseDateOnly(fecha);
+            DateTime dfecha = LangUtils.ParseDate(fecha);
             if (fecha.Trim().Length == 0 || dfecha == DateTime.MinValue)
             {
                 Messages.ShowError(Texts.WRONG_DATE_FORMAT);
@@ -48,19 +49,7 @@ namespace KsIndexerNET
             int selectedId = ShowDocList(docs);
             if (selectedId == 0)
                 return;
-            // Cargar documento seleccionado
-            ClearAll();
-            Document doc = Document.Load(selectedId);
-            if (doc == null)
-            {
-                Messages.ShowError(Texts.ERROR_RETRIEVING_DOC_WITH_ID + ": " + selectedId);
-                return;
-            }
-            CurrentDoc = doc;
-            FillControlsFromDoc();
-            DocChanged = false;
-            DocEmpty = false;
-            EnableControls();
+            LoadDocument(selectedId);
         }
 
         private void SearchById()
@@ -80,18 +69,7 @@ namespace KsIndexerNET
                 Messages.ShowError(Texts.WRONG_ID_ENTERED);
                 return;
             }
-            ClearAll();
-            Document doc = Document.Load(nid);
-            if (doc == null)
-            {
-                Messages.ShowError(Texts.DOC_ID_NOT_FOUND + ": " + nid);
-                return;
-            }
-            CurrentDoc = doc;
-            FillControlsFromDoc();
-            DocChanged = false;
-            DocEmpty = false;
-            EnableControls();
+            LoadDocument(nid);
         }
 
         private void SearchComplex()
@@ -227,15 +205,21 @@ namespace KsIndexerNET
             if (selectedId == 0)
                 return;
             // Cargar documento seleccionado
+            LoadDocument(selectedId);
+        }
+
+        private void LoadDocument(int id)
+        {
             ClearAll();
-            Document doc = Document.Load(selectedId);
+            Document doc = Document.Load(id);
             if (doc == null)
             {
-                Messages.ShowError(Texts.ERROR_RETRIEVING_DOC_WITH_ID + ": " + selectedId);
+                Messages.ShowError(Texts.ERROR_RETRIEVING_DOC_WITH_ID + ": " + id);
                 return;
             }
             CurrentDoc = doc;
             FillControlsFromDoc();
+            this.statusDocPath.Text = Inode.GetPath(doc.INodeId);
             DocChanged = false;
             DocEmpty = false;
             EnableControls();

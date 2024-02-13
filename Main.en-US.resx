@@ -193,7 +193,7 @@
     <value>as &amp;HTML..</value>
   </data>
   <data name="menuExportTxt" xml:space="preserve">
-    <value>as &amp;TXT..</value>
+    <value>as &amp;TXT + PDF..</value>
   </data>
   <data name="menuFile" xml:space="preserve">
     <value>&amp;File</value>
@@ -215,6 +215,9 @@
   </data>
   <data name="MenuNew" xml:space="preserve">
     <value>&amp;New</value>
+  </data>
+  <data name="MenuOpen" xml:space="preserve">
+    <value>&amp;Open</value>
   </data>
   <data name="MenuPrint" xml:space="preserve">
     <value>&amp;Print</value>
@@ -254,6 +257,9 @@
   </data>
   <data name="toolBtnNew" xml:space="preserve">
     <value>New</value>
+  </data>
+  <data name="toolBtnOpen" xml:space="preserve">
+    <value>Open</value>
   </data>
   <data name="toolBtnPrint" xml:space="preserve">
     <value>Print</value>

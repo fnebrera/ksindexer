@@ -60,6 +60,7 @@
     <Compile Include="Db\Database.cs" />
     <Compile Include="Db\Database.Maintenance.cs" />
     <Compile Include="Db\Document.cs" />
+    <Compile Include="Db\Inode.cs" />
     <Compile Include="Db\Keyword.cs" />
     <Compile Include="dialogs\DlgImport.cs">
       <SubType>Form</SubType>
@@ -91,11 +92,23 @@
     <Compile Include="dialogs\DlgSelectDoc.Designer.cs">
       <DependentUpon>DlgSelectDoc.cs</DependentUpon>
     </Compile>
+    <Compile Include="dialogs\DlgOpen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dialogs\DlgOpen.Designer.cs">
+      <DependentUpon>DlgOpen.cs</DependentUpon>
+    </Compile>
     <Compile Include="dialogs\DlgSettings.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dialogs\DlgSettings.Designer.cs">
       <DependentUpon>DlgSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="dialogs\InodeUtils.cs" />
+    <Compile Include="Texts.en-US.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Texts.en-US.resx</DependentUpon>
     </Compile>
     <Compile Include="utils\FileUtils.cs" />
     <Compile Include="utils\LangUtils.cs" />
@@ -154,6 +167,9 @@
     <EmbeddedResource Include="dialogs\DlgInput1.resx">
       <DependentUpon>DlgInput1.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dialogs\DlgOpen.en-US.resx">
+      <DependentUpon>DlgOpen.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dialogs\DlgSearchComplex.en-US.resx">
       <DependentUpon>DlgSearchComplex.cs</DependentUpon>
     </EmbeddedResource>
@@ -166,6 +182,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dialogs\DlgSelectDoc.resx">
       <DependentUpon>DlgSelectDoc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dialogs\DlgOpen.resx">
+      <DependentUpon>DlgOpen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dialogs\DlgSettings.resx">
       <DependentUpon>DlgSettings.cs</DependentUpon>
@@ -188,7 +207,10 @@
     <Content Include="KsIndexer.db3">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <EmbeddedResource Include="Texts.en-US.resx" />
+    <EmbeddedResource Include="Texts.en-US.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Texts.en-US.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Texts.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Texts.Designer.cs</LastGenOutput>

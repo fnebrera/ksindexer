@@ -266,6 +266,12 @@
   <data name="PROCEED_WITHOUT_SAVE" xml:space="preserve">
     <value>¿Continuar sin guardar?</value>
   </data>
+  <data name="SELECT_DOCUMENT" xml:space="preserve">
+    <value>Seleccionar documento</value>
+  </data>
+  <data name="SELECT_FOLDER" xml:space="preserve">
+    <value>Seleccionar carpeta</value>
+  </data>
   <data name="SIMILAR_DOC_EXISTS" xml:space="preserve">
     <value>Ya existe un documento con el mismo titulo y fecha/hora</value>
   </data>

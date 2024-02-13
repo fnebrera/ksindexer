@@ -502,6 +502,24 @@ namespace KsIndexerNET {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Seleccionar documento.
+        /// </summary>
+        internal static string SELECT_DOCUMENT {
+            get {
+                return ResourceManager.GetString("SELECT_DOCUMENT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Seleccionar carpeta.
+        /// </summary>
+        internal static string SELECT_FOLDER {
+            get {
+                return ResourceManager.GetString("SELECT_FOLDER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Ya existe un documento con el mismo titulo y fecha/hora.
         /// </summary>
         internal static string SIMILAR_DOC_EXISTS {

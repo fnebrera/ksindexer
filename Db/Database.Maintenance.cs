@@ -116,6 +116,48 @@ namespace KsIndexerNET.Db
             }
         }
 
+        private static void UpgradeDatabase_13_14()
+        {
+            string sql;
+            SQLiteCommand cmd;
+            try
+            {
+                //
+                // Se agrega la tabla INodes
+                //
+                if (!TableExists("INodes"))
+                {
+                    // Crear la tabla
+                    sql = "CREATE TABLE INodes (Id INTEGER PRIMARY KEY AUTOINCREMENT, Parent INTEGER, Name TEXT)";
+                    cmd = new SQLiteCommand(sql, dbConn);
+                    cmd.ExecuteNonQuery();
+                    // Crear el nodo raiz
+                    sql = "INSERT INTO INodes (Parent, Name) VALUES (0, 'root')";
+                    cmd = new SQLiteCommand(sql, dbConn);
+                    cmd.ExecuteNonQuery();
+                }
+                //
+                // Se agrega el campo InodeId en la tabla de documentos
+                //
+                if (!ColumnExists("Documents", "INodeId"))
+                {
+                    // Crear columna
+                    sql = "ALTER TABLE Documents ADD \"INodeId\" INTEGER";
+                    cmd = new SQLiteCommand(sql, dbConn);
+                    cmd.ExecuteNonQuery();
+                    // Poner como padre el nodo 1 a todos los documentos
+                    sql = "UPDATE Documents SET INodeId = 1";
+                    cmd = new SQLiteCommand(sql, dbConn);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                Messages.ShowError(Texts.ERROR_UPDATE_DB + ":\n" + ex.Message);
+                Environment.Exit(1);
+            }
+        }
+
         private static bool TableExists(string tableName)
         {
             bool exists = false;

@@ -32,13 +32,16 @@ namespace KsIndexerNET.Db
      *            indice 'Doc_Annexes_PK' para la clave primaria.
      * 1.3        Se crea el indice 'Doc_Keywords_ByKey' para el campo 'Keyword' de la tabla 'Doc_Keywords',
      *            para agilizar las búsquedas por clave.
+     * 1.4        Se crea la tabla INodes para almacenar las carpetas y subcarpetas en las que archivamos los documentos.
+     *            Se agrega el campo 'INodeId' a la tabla 'Documentos' para indicar en qué carpeta está el documento.
      */
     public partial class Database
     {
+        public const string SQL_GET_LAST_ID = "SELECT last_insert_rowid()";
         // Se ha creado una tabla DbVersion con un solo campo, version, que se actualiza en cada upgrade. Al iniciar la
         // aplicación se lee la versión de la BD y se compara con la versión actual. Si es menor, se ejecutan los scripts
         // de upgrade necesarios.
-        private const string dbVersion = "1.3";
+        private const string dbVersion = "1.4";
         // Formato del connString en SQLite: "Data Source=.\\KsIndexer.db3;Version=3;";
         // En desarrollo usamos la BD local
         private const string dbDevelop = ".\\KsIndexer.db3";
@@ -108,6 +111,9 @@ namespace KsIndexerNET.Db
                             break;
                         case "1.2":
                             UpgradeDatabase_12_13();
+                            break;
+                        case "1.3":
+                            UpgradeDatabase_13_14();
                             break;
                         default:
                             Messages.ShowError("Internal error. No sccript to update from DB version " +

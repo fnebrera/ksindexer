@@ -13,13 +13,21 @@ namespace KsIndexerNET.Db
     {
         // Queries standard
         public const string SQL_DOC_EXISTS = "SELECT count(*) FROM Documents WHERE id = @id";
-        public const string SQL_DOC_EXISTS_SIMILAR = "SELECT count(*) FROM Documents WHERE title = @title AND date = @date";
-        public const string SQL_DOC_INSERT = "INSERT INTO Documents (title, date, text, pdf, titlenorm) VALUES (@title, @date, @text, @pdf, @titlenorm)";
-        public const string SQL_DOC_UPDATE = "UPDATE Documents SET title = @title, date = @date, text = @text, pdf = @pdf, titlenorm = @titlenorm WHERE id = @id";
+        // V 1.2.0 FNG 2024-02-10 : Por titulo normalizado
+        public const string SQL_DOC_EXISTS_SIMILAR = "SELECT count(*) FROM Documents WHERE titlenorm = @titlenorm AND date = @date";
+        // V 1.2.0 FNG 2024-02-09 : Se agrega el campo INodeId a la tabla Documents
+        //public const string SQL_DOC_INSERT = "INSERT INTO Documents (title, date, text, pdf, titlenorm) VALUES (@title, @date, @text, @pdf, @titlenorm)";
+        public const string SQL_DOC_INSERT = "INSERT INTO Documents (title, date, text, pdf, titlenorm, inodeid) " +
+            "VALUES (@title, @date, @text, @pdf, @titlenorm, @inodeid)";
+        //public const string SQL_DOC_UPDATE = "UPDATE Documents SET title = @title, date = @date, text = @text, pdf = @pdf, titlenorm = @titlenorm WHERE id = @id";
+        public const string SQL_DOC_UPDATE = "UPDATE Documents SET title = @title, date = @date, " + 
+            "text = @text, pdf = @pdf, titlenorm = @titlenorm, inodeid = @inodeid WHERE id = @id";
+        public const string SQL_DOC_UPDATE_INODE = "UPDATE Documents SET inodeid = @inodeid WHERE id = @id";
         public const string SQL_DOC_DELETE = "DELETE FROM Documents WHERE id = @id";
-        public const string SQL_DOC_SELECT = "SELECT title, date, text, pdf FROM Documents WHERE id = @id";
-        public const string SQL_GET_LAST_ID = "SELECT last_insert_rowid()";
+        //public const string SQL_DOC_SELECT = "SELECT title, date, text, pdf, titlenorm FROM Documents WHERE id = @id";
+        public const string SQL_DOC_SELECT = "SELECT title, date, text, pdf, titlenorm, inodeid FROM Documents WHERE id = @id";
         public const string SQL_DOC_SELECT_BY_DATE = "SELECT id, date, title FROM Documents WHERE date(date) = @sdate ORDER BY date";
+        public const string SQL_DOC_SELECT_BY_INODE = "SELECT id, date, title FROM Documents WHERE inodeid = @inodeid ORDER BY date";
 
         public int Id { get; set; } = 0;
         public string Title { get; set; } = "";
@@ -30,32 +38,15 @@ namespace KsIndexerNET.Db
         public List<Keyword> Keywords { get; set; } = new List<Keyword>();
         public List<Attendant> Attendants { get; set; } = new List<Attendant>();
         public List<Annex> Annexes { get; set; } = new List<Annex>();
+        // V 1.2.0 FNG 2024-02-11 : Se agrega el campo INodeId. Por defecto es 1 (carpeta raiz)
+        public int INodeId { get; set; } = 1;
 
         // Constructor vacío
         public Document()
         {
         }
 
-        // Constructor en base a datos existentes
-        public Document(int id,
-            string title,
-            DateTime docdate,
-            string text,
-            byte[] pdf, 
-            List<Keyword> keywords,
-            List<Attendant> attendants,
-            List<Annex> annexes)
-        {
-            Id = id;
-            Title = title;
-            DocDate = docdate;
-            DocText = text;
-            Pdf = pdf;
-            Keywords = keywords;
-            Attendants = attendants;
-            Annexes = annexes;
-        }
-
+        // Limpiar el documento actual
         public void Clear()
         {
             Id = 0;
@@ -67,8 +58,10 @@ namespace KsIndexerNET.Db
             Keywords = new List<Keyword>();
             Attendants = new List<Attendant>();
             Annexes = new List<Annex>();
+            INodeId = 1;
         }
 
+        // Eliminar una palabra clave
         public void DeleteKeyword(string clave)
         {
             for (int i = 0; i < Keywords.Count; i++)
@@ -81,6 +74,7 @@ namespace KsIndexerNET.Db
             }
         }
 
+        // Eliminar un asistente
         public void DeleteAttendant(string attendant)
         {
             for (int i = 0; i < Attendants.Count; i++)
@@ -93,6 +87,7 @@ namespace KsIndexerNET.Db
             }
         }
 
+        // Eliminar un anexo
         public void DeleteAnnex(string filename)
         {
             for (int i = 0; i < Annexes.Count; i++)
@@ -111,6 +106,8 @@ namespace KsIndexerNET.Db
             }
         }
 
+        // Comprueba si existe un documento con el id indicado.
+        // Por ahora no se usa.
         public static bool ExistsById(int id)
         {
             Database db = Database.GetInstance();
@@ -122,18 +119,24 @@ namespace KsIndexerNET.Db
             return (rdr.GetInt32(0) > 0);
         }
 
+        // Comprueba si existe un documento con el mismo título y fecha.
+        // V 1.2.0 FNG 2024-02-10 : Se comprueba por titulo normalizado
         public static bool ExistsSimilar(string title, DateTime dat)
         {
             Database db = Database.GetInstance();
-            Dictionary<string, object> prms = new Dictionary<string, object>();
-            prms.Add("@title", title);
-            prms.Add("@date", dat);
+            string titlenorm = FileUtils.NormalizeString(title);
+            Dictionary<string, object> prms = new Dictionary<string, object>
+            {
+                { "@titlenorm", titlenorm },
+                { "@date", dat }
+            };
             SQLiteDataReader rdr = db.ExecuteQuery(SQL_DOC_EXISTS_SIMILAR, prms);
             if (!rdr.Read())
                 return false;
             return (rdr.GetInt32(0) > 0);
         }   
 
+        // Guardar el documento actual, diferenciando insert o update según que el Id sea o no cero
         public bool Save()
         {
             Database db = Database.GetInstance();
@@ -149,7 +152,8 @@ namespace KsIndexerNET.Db
                     { "@date", DocDate },
                     { "@text", DocText },
                     { "@pdf", Pdf },
-                    { "@titlenorm", titleNorm }
+                    { "@titlenorm", titleNorm },
+                    { "@inodeid", INodeId }
                 };
                 if (db.ExecuteNonQuery(SQL_DOC_UPDATE, prms) != 1)
                 {
@@ -165,14 +169,15 @@ namespace KsIndexerNET.Db
                     { "@date", DocDate },
                     { "@text", DocText },
                     { "@pdf", Pdf },
-                    { "@titlenorm", titleNorm }
+                    { "@titlenorm", titleNorm },
+                    { "@inodeid", INodeId }
                 };
                 if (db.ExecuteNonQuery(SQL_DOC_INSERT, prms) != 1)
                 {
                     return false;
                 }
                 // Obtener el id del documento insertado
-                SQLiteDataReader rdr = db.ExecuteQuery(SQL_GET_LAST_ID);
+                SQLiteDataReader rdr = db.ExecuteQuery(Database.SQL_GET_LAST_ID);
                 rdr.Read();
                 Id = rdr.GetInt32(0);
                 if (Id < 1)
@@ -209,6 +214,19 @@ namespace KsIndexerNET.Db
             return true;
         }
 
+        // Actualizar el campo INodeId, cuando movemos un documento a otra carpeta
+        public static bool UpdateInode(int docId, int nodeId)
+        {
+            Database db = Database.GetInstance();
+            Dictionary<string, object> prms = new Dictionary<string, object>
+            {
+                { "@id", docId },
+                { "@inodeid", nodeId }
+            };
+            return db.ExecuteNonQuery(SQL_DOC_UPDATE_INODE, prms) == 1;
+        }
+
+        // Cargar un documento por id
         public static Document Load(int id)
         {
             Database db = Database.GetInstance();
@@ -228,8 +246,11 @@ namespace KsIndexerNET.Db
                 Pdf = (byte[])rdr.GetValue(3),
                 Keywords = Keyword.GetByDocId(id),
                 Attendants = Attendant.GetByDocId(id),
-                Annexes = Annex.GetByDocId(id)
+                Annexes = Annex.GetByDocId(id),
+                // Saltamos el campo 4 (titlenorm) que no forma parte del objeto (no es necesario)
+                INodeId = rdr.GetInt32(5)
             };
+            rdr.Close();
             return doc;
         }
 
@@ -246,13 +267,14 @@ namespace KsIndexerNET.Db
             SQLiteDataReader rdr = db.ExecuteQuery(SQL_DOC_SELECT_BY_DATE, prms);
             while (rdr.Read())
             {
-                //docs.Add(new string[] { rdr.GetInt32(0).ToString(), rdr.GetDateTime(1).ToString("dd/MM/yyy HH:mm"), rdr.GetString(2) });
                 docs.Add(new string[] { rdr.GetInt32(0).ToString(), LangUtils.FormatDateTime(rdr.GetDateTime(1)), rdr.GetString(2) });
             }
+            rdr.Close();
             return docs;
         }
 
-        // Devuelve una lista de documentos en base a un SQL predefinido
+        // Devuelve una lista de documentos en base a un SQL predefinido.
+        // Se usa para busquedas complejas.
         public static List<string[]> GetBySql(string sql)
         {
             List<string[]> docs = new List<string[]>();
@@ -263,6 +285,28 @@ namespace KsIndexerNET.Db
                 //docs.Add(new string[] { rdr.GetInt32(0).ToString(), rdr.GetDateTime(1).ToString("dd/MM/yyy HH:mm"), rdr.GetString(2) });
                 docs.Add(new string[] { rdr.GetInt32(0).ToString(), LangUtils.FormatDateTime(rdr.GetDateTime(1)), rdr.GetString(2) });
             }
+            rdr.Close();
+            return docs;
+        }
+
+        // Obtener documentos por carpeta.
+        // Se usa en la vista de carpetas, para mostrar los documentos que contiene la
+        // carpeta seleccionada.
+        // TODO: Establecer a priori el orden de los documentos.
+        public static List<string[]> GetByInode(int inodeid)
+        {
+            List<string[]> docs = new List<string[]>();
+            Database db = Database.GetInstance();
+            Dictionary<string, object> prms = new Dictionary<string, object>()
+            {
+                { "@inodeid", inodeid }
+            };
+            SQLiteDataReader rdr = db.ExecuteQuery(SQL_DOC_SELECT_BY_INODE, prms);
+            while (rdr.Read())
+            {
+                docs.Add(new string[] { rdr.GetInt32(0).ToString(), LangUtils.FormatDateTime(rdr.GetDateTime(1)), rdr.GetString(2) });
+            }
+            rdr.Close();
             return docs;
         }
 
@@ -285,7 +329,7 @@ namespace KsIndexerNET.Db
             return true;
         }
 
-        // Obtener el anexo solicitado por nombre
+        // Obtener el contenido del anexo solicitado como un byte array
         public byte[] GetAnnexContent(string filename)
         {
             Annex anexo = null;
@@ -303,13 +347,13 @@ namespace KsIndexerNET.Db
                 Messages.ShowError(Texts.ERROR_READ_FILE + " " + filename);
                 return null;
             }
-            // Si ya tiene contenido, lo devolvemos
+            // Si ya tiene contenido, lo devolvemos, si no,
+            // lo leemos de la Base de Datos.
             if (anexo.Content.Length == 0)
             {
                 if (!anexo.FillContent())
                     return null;
             }
-            // Devolvemos el contenido
             return anexo.Content;
         }
     }

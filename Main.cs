@@ -27,6 +27,10 @@
  * 1.1.6   2024-02-06 FNG Se admiten varios asistentes en una sóla línea.
  *                        Se eliminan las posibles comas al final de las palabras clave.
  *                        Se permite al usuario establecer los símbolos que marcan fecha, asistentes y palabras clave.
+ * 1.2.0   2024-02-11 FNG Se agrega la estructura de carpetas para almacenar los documentos.
+ *                        Al salvar un documento nuevo, se muestra el dialogo de seleccion de carpeta.
+ *                        Nuevo menu "Abrir" que muestra el diálogo de seleccion de carpeta y documento.
+ *                        Se incluyen funciones para eliminar, agregar, cambiar nombre, mover, etc. carpetas y documentos.
  */
 
 using KsIndexerNET;
@@ -54,7 +58,7 @@ namespace KsIndexerNET
     public partial class Main : Form
     {
         // Constantes
-        public const string appVersion = "1.1.6";
+        public const string appVersion = "1.2.0";
 
         //
         // Preferencias de usuario, que leemos de settings
@@ -78,6 +82,8 @@ namespace KsIndexerNET
         private static Document CurrentDoc = new Document();
         private static bool DocChanged = false;
         private static bool DocEmpty = true;
+        // V 1.2.0 - Inode donde se ha guardado el ultimo documento
+        private static string LastInode = "1";
 
         public Main()
         {
@@ -141,6 +147,18 @@ namespace KsIndexerNET
             }
             MessageBox.Show(sb.ToString());
             */
+        }
+
+        /// <summary>
+        /// Establecer el path del documento, si es el mismo que estamos visualizando.
+        /// Se llama desde otras ventanas, si cambia el path o es un documento nuevo.
+        /// </summary>
+        /// <param name="docId"></param>
+        /// <param name="path"></param>
+        public void SetDocumentPath(int docId, string path)
+        {
+            if (CurrentDoc.Id == docId)
+                this.statusDocPath.Text = path;
         }
 
         //
@@ -497,6 +515,11 @@ namespace KsIndexerNET
         private void menuSettings_Click(object sender, EventArgs e)
         {
             DoMenuSettings();
+        }
+
+        private void MenuOpen_Click(object sender, EventArgs e)
+        {
+            DoMenuOpen();
         }
     }
 }

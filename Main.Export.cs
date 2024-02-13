@@ -57,27 +57,27 @@ namespace KsIndexerNET
             if (filename.Trim().Length == 0)
                 return;
             // Preparamos el documento de salida
-            StringBuilder html = new StringBuilder();
-            html.AppendLine(CurrentDoc.Title);
+            StringBuilder text = new StringBuilder();
+            text.AppendLine(CurrentDoc.Title);
             // Fecha
             string fecha = LangUtils.FormatDateTime(CurrentDoc.DocDate);
-            html.AppendLine("@ " + fecha);
+            text.AppendLine("@ " + fecha);
             // Palabras clave
             if (CurrentDoc.Keywords.Count > 0)
             {
-                html.Append("#");
+                text.Append("#");
                 foreach (Keyword p in CurrentDoc.Keywords)
-                    html.Append(" " + p.Key);
-                html.Append(Environment.NewLine);
+                    text.Append(" " + p.Key);
+                text.Append(Environment.NewLine);
             }
             if (CurrentDoc.Attendants.Count > 0)
             {
                 foreach (Attendant a in CurrentDoc.Attendants)
                 {
-                    html.Append("> " + a.Name);
+                    text.Append("> " + a.Name);
                     if (a.Company.Length > 0)
-                        html.Append(" (" + a.Company + ")");
-                    html.Append(Environment.NewLine);
+                        text.Append(" (" + a.Company + ")");
+                    text.Append(Environment.NewLine);
                 }
             }
             // Texto
@@ -85,13 +85,20 @@ namespace KsIndexerNET
             {
                 foreach (string linea in CurrentDoc.DocText.Split('\n'))
                 {
-                    html.AppendLine(linea.Replace("\r",""));
+                    text.AppendLine(linea.Replace("\r",""));
                 }
             }
-            // Guardamos el documento
+            //
+            // Guardamos el documento (TXT)
+            //
             try
             {
-                System.IO.File.WriteAllText(filename, html.ToString());
+                System.IO.File.WriteAllText(filename, text.ToString());
+                if (CurrentDoc.Pdf.Length > 0)
+                {
+                    string pdffilename = filename.Replace(".txt", ".pdf");
+                    System.IO.File.WriteAllBytes(pdffilename, CurrentDoc.Pdf);
+                }
             }
             catch (Exception ex)
             {

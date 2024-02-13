@@ -117,22 +117,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="btnCancel" xml:space="preserve">
-    <value>Cancelar</value>
-  </data>
-  <data name="btnSelect" xml:space="preserve">
-    <value>Seleccionar</value>
-  </data>
-  <data name="DlgSelectDoc" xml:space="preserve">
-    <value>Seleccione documento</value>
-  </data>
-  <data name="DocList0" xml:space="preserve">
-    <value>Id</value>
-  </data>
-  <data name="DocList1" xml:space="preserve">
-    <value>Fecha</value>
-  </data>
-  <data name="DocList2" xml:space="preserve">
-    <value>Titulo</value>
-  </data>
 </root>

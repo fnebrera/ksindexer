@@ -15,90 +15,6 @@ namespace KsIndexerNET
 {
     internal class LangUtils
     {
-        /*
-        public static void TranslateFormOld(Form form, string subdir = null)
-        {
-            // Buscamos el archivo de recursos del formulario, si existe
-            string fullpath = form.Name;
-            if (subdir != null)
-                fullpath = subdir + @"\" + fullpath;
-            //string resxFile = @".\" + fullpath + "." + Thread.CurrentThread.CurrentUICulture + ".resx";
-            string resxFile = fullpath + "." + Thread.CurrentThread.CurrentUICulture + ".resx";
-            try
-            {
-                ResXResourceSet resxSet = new ResXResourceSet(resxFile);
-                if (resxSet != null)
-                {
-                    //
-                    // Texto en el formulario
-                    //
-                    string maintext = resxSet.GetString(form.Name);
-                    if (maintext != null)
-                    {
-                        // Si existe, lo asignamos al control
-                        form.Text = maintext;
-                    }
-                    //
-                    // Recorremos todos los controles del formulario
-                    //
-                    foreach (Control control in form.Controls)
-                    {
-                        switch (control.GetType().Name)
-                        {
-                            case "ToolStrip":
-                                // Barra de herramientas
-                                foreach (ToolStripButton item in ((ToolStrip)control).Items)
-                                {
-                                    string ctext = resxSet.GetString(item.Name);
-                                    if (ctext != null)
-                                        item.ToolTipText = ctext;
-                                }
-                                break;
-                            case "MenuStrip":
-                                // Menu principal
-                                foreach (ToolStripItem item in ((MenuStrip)control).Items)
-                                    TranslateMenuItem(item, resxSet);
-                                break;
-                            case "ListView":
-                                // Traducimos las cabeceras de las columnas.
-                                // El dato Name no se conserva en la coleccion, por lo que usamos
-                                // el nombre del ListView mas el indice de la columna
-                                foreach (ColumnHeader col in ((ListView)control).Columns)
-                                {
-                                    string ctext = resxSet.GetString(control.Name + col.Index);
-                                    if (ctext != null)
-                                        col.Text = ctext;
-                                }
-                                break;
-                            case "ComboBox":
-                                // Las entradas del combobox son simplemente strings
-                                ComboBox cb = (ComboBox)control;
-                                for (int i = 0; i < cb.Items.Count; i++)
-                                {
-                                    string ctext = resxSet.GetString(control.Name + i);
-                                    if (ctext != null)
-                                        cb.Items[i] = ctext;
-                                }
-                                break;
-                            default:
-                                // El resto de controles tienen un texto asociado
-                                string text = resxSet.GetString(control.Name);
-                                if (text != null)
-                                    control.Text = text;
-                                break;
-                        }
-                    }
-                }
-            }
-            catch (Exception)
-            {
-                Messages.ShowError("Error al cargar los recursos del formulario " + resxFile);
-                // No existe el archivo de recursos, no hacemos nada
-                // y el formulario queda con los textos de diseño
-            }
-        }
-        */
-
         public static void TranslateForm(Form form)
         {
             // Buscamos el archivo incrustado de recursos del formulario, si existe. Debe llamarse igual que el formulario,
@@ -121,6 +37,8 @@ namespace KsIndexerNET
                     //
                     // Recorremos todos los controles del formulario
                     //
+                    TranslateCollection(form.Controls, resxSet);
+                    /*
                     foreach (Control control in form.Controls)
                     {
                         switch (control.GetType().Name)
@@ -137,6 +55,11 @@ namespace KsIndexerNET
                             case "MenuStrip":
                                 // Menu principal
                                 foreach (ToolStripItem item in ((MenuStrip)control).Items)
+                                    TranslateMenuItem(item, resxSet);
+                                break;
+                            case "ContextMenuStrip":
+                                // Menu contextual
+                                foreach (ToolStripMenuItem item in ((ContextMenuStrip)control).Items)
                                     TranslateMenuItem(item, resxSet);
                                 break;
                             case "ListView":
@@ -161,6 +84,9 @@ namespace KsIndexerNET
                                         cb.Items[i] = ctext;
                                 }
                                 break;
+                            case "SpliContainer":
+                                SplitContainer sc = (SplitContainer)control;
+                                break;
                             default:
                                 // El resto de controles que usamos en este momento tienen un texto asociado
                                 string text = resxSet.GetString(control.Name);
@@ -169,6 +95,7 @@ namespace KsIndexerNET
                                 break;
                         }
                     }
+                    */
                 }
             }
             catch (Exception)
@@ -176,6 +103,80 @@ namespace KsIndexerNET
                 // Messages.ShowError("Error al cargar los recursos del formulario " + resxFile);
                 // No existe el archivo de recursos, no hacemos nada
                 // y el formulario queda con los textos de diseño
+            }
+        }
+
+        private static void TranslateCollection(Control.ControlCollection controlCol, ResourceManager resxSet)
+        {
+            foreach (Control control in controlCol)
+            {
+                switch (control.GetType().Name)
+                {
+                    case "TreeView":
+                        TreeView tv = (TreeView)control;
+                        if (tv.ContextMenuStrip == null)
+                            break;
+                        foreach (ToolStripItem item in tv.ContextMenuStrip.Items)
+                        {
+                            string ctext = resxSet.GetString(item.Name);
+                            if (ctext != null)
+                                item.Text = ctext;
+                        }
+                        break;
+                    case "SplitContainer":
+                        // Divisor de paneles
+                        SplitContainer sc = (SplitContainer)control;
+                        TranslateCollection(sc.Panel1.Controls, resxSet);
+                        TranslateCollection(sc.Panel2.Controls, resxSet);
+                        break;
+                    case "ToolStrip":
+                        // Barra de herramientas
+                        foreach (ToolStripButton item in ((ToolStrip)control).Items)
+                        {
+                            string ctext = resxSet.GetString(item.Name);
+                            if (ctext != null)
+                                item.ToolTipText = ctext;
+                        }
+                        break;
+                    case "MenuStrip":
+                        // Menu principal
+                        foreach (ToolStripItem item in ((MenuStrip)control).Items)
+                            TranslateMenuItem(item, resxSet);
+                        break;
+                    case "ContextMenuStrip":
+                        // Menu contextual
+                        foreach (ToolStripMenuItem item in ((ContextMenuStrip)control).Items)
+                            TranslateMenuItem(item, resxSet);
+                        break;
+                    case "ListView":
+                        // Traducimos las cabeceras de las columnas.
+                        // El dato Name no se conserva en la coleccion, por lo que usamos
+                        // el nombre del ListView mas el indice de la columna
+                        foreach (ColumnHeader col in ((ListView)control).Columns)
+                        {
+                            string ctext = resxSet.GetString(control.Name + col.Index);
+                            if (ctext != null)
+                                col.Text = ctext;
+                        }
+                        break;
+                    case "ComboBox":
+                        // Las entradas del combobox son simplemente strings. En resuctos usamos
+                        // el nombre del combobox mas el indice de la entrada
+                        ComboBox cb = (ComboBox)control;
+                        for (int i = 0; i < cb.Items.Count; i++)
+                        {
+                            string ctext = resxSet.GetString(control.Name + i);
+                            if (ctext != null)
+                                cb.Items[i] = ctext;
+                        }
+                        break;
+                    default:
+                        // El resto de controles que usamos en este momento tienen un texto asociado
+                        string text = resxSet.GetString(control.Name);
+                        if (text != null)
+                            control.Text = text;
+                        break;
+                }
             }
         }
 
@@ -199,34 +200,6 @@ namespace KsIndexerNET
             }
         }
 
-        /*
-        public static string TranslateTxt(Form form, string key)
-        {
-            return TranslateTxt(form.GetType().FullName, key);
-        }
-
-        public static string TranslateTxt(string resfile, string key)
-        {
-            // Texto por defecto si no se encuentra
-            string ret = "!!resource not found!!";
-            try
-            {
-                ResourceManager resxSet = new ResourceManager(resfile, Assembly.GetExecutingAssembly());
-                if (resxSet == null)
-                    return ret;
-                // Texto solicitado
-                string text = resxSet.GetString(key);
-                if (text != null)
-                    return text;
-            }
-            catch (Exception)
-            {
-                // No existe el archivo de recursos, hay que devolver una cadena de error
-            }
-            return ret;
-        }
-        */
-
         //
         // Formato de fechas en base a los settings del usuario
         // No empleamos el formateo por defecto de DateTime, porque no nos permite
@@ -245,7 +218,7 @@ namespace KsIndexerNET
         }
 
         // Usar cuando solo queremos parsear fecha, es decir NO queremos en entren hora
-        public static DateTime ParseDateOnly(string indate)
+        public static DateTime ParseDate(string indate)
         {
             // Parsear la fecha en el formato actual, con numeros parciales, si es necesario,
             // pero sin horas ni minutos.

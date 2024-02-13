@@ -46,10 +46,11 @@
             this.DocList.FullRowSelect = true;
             this.DocList.GridLines = true;
             this.DocList.HideSelection = false;
-            this.DocList.Location = new System.Drawing.Point(13, 13);
+            this.DocList.Location = new System.Drawing.Point(9, 8);
+            this.DocList.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.DocList.MultiSelect = false;
             this.DocList.Name = "DocList";
-            this.DocList.Size = new System.Drawing.Size(936, 217);
+            this.DocList.Size = new System.Drawing.Size(625, 142);
             this.DocList.TabIndex = 1;
             this.DocList.UseCompatibleStateImageBehavior = false;
             this.DocList.SelectedIndexChanged += new System.EventHandler(this.DocList_SelectedIndexChanged);
@@ -57,6 +58,7 @@
             // colId
             // 
             this.colId.Text = "Id";
+            this.colId.Width = 0;
             // 
             // colFecha
             // 
@@ -72,9 +74,10 @@
             // 
             this.btnSelect.Enabled = false;
             this.btnSelect.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSelect.Location = new System.Drawing.Point(672, 248);
+            this.btnSelect.Location = new System.Drawing.Point(448, 161);
+            this.btnSelect.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnSelect.Name = "btnSelect";
-            this.btnSelect.Size = new System.Drawing.Size(136, 42);
+            this.btnSelect.Size = new System.Drawing.Size(91, 27);
             this.btnSelect.TabIndex = 2;
             this.btnSelect.Text = "Seleccionar";
             this.btnSelect.UseVisualStyleBackColor = true;
@@ -84,9 +87,10 @@
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancel.Location = new System.Drawing.Point(815, 248);
+            this.btnCancel.Location = new System.Drawing.Point(543, 161);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(136, 42);
+            this.btnCancel.Size = new System.Drawing.Size(91, 27);
             this.btnCancel.TabIndex = 3;
             this.btnCancel.Text = "Cancelar";
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -95,13 +99,14 @@
             // DlgSelectDoc
             // 
             this.AcceptButton = this.btnSelect;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(970, 302);
+            this.ClientSize = new System.Drawing.Size(647, 196);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSelect);
             this.Controls.Add(this.DocList);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "DlgSelectDoc";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Seleccionar documento";

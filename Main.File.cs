@@ -1,5 +1,6 @@
 ﻿using KsIndexerNET;
 using KsIndexerNET.Db;
+using KsIndexerNET.dialogs;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -14,6 +15,34 @@ namespace KsIndexerNET
 {
     partial class Main
     {
+        private void DoMenuOpen()
+        {
+            // Verificar si hay cambios sin guardar
+            if (DocChanged && !Messages.AskDocChanged())
+                return;
+            DlgOpen dlg = new DlgOpen(this, LastInode, DlgOpen.SelectMode.Document);
+            if (dlg.ShowDialog() == DialogResult.Cancel)
+                return;
+            int nid = dlg.GetSelectedDocId();
+            string inodePath = dlg.GetSelectedInodePath();
+            dlg.Dispose();
+            if (nid == 0)
+                return;
+            ClearAll();
+            Document doc = Document.Load(nid);
+            if (doc == null)
+            {
+                Messages.ShowError(Texts.DOC_ID_NOT_FOUND + ": " + nid);
+                return;
+            }
+            CurrentDoc = doc;
+            FillControlsFromDoc();
+            this.statusDocPath.Text = inodePath;
+            DocChanged = false;
+            DocEmpty = false;
+            EnableControls();
+        }
+
         private void DoMenuImport()
         {
             // Verificar si hay cambios sin guardar
@@ -90,6 +119,21 @@ namespace KsIndexerNET
                 if (!Messages.Confirm(Texts.SIMILAR_DOC_EXISTS + "\n" + Texts.OK_TO_PROCEED))
                     return;
             }
+            //
+            // V 1.2.0 Si es nuevo, pedir la carpeta donde guardarlo
+            //
+            if (isNew)
+            {
+                DlgOpen dlg = new DlgOpen(this, LastInode, DlgOpen.SelectMode.Folder);
+                if (dlg.ShowDialog() == DialogResult.Cancel)
+                    return;
+                string inodeId = dlg.GetSelectedInodeId();
+                string inodePath = dlg.GetSelectedInodePath();
+                dlg.Dispose();
+                LastInode = inodeId;
+                CurrentDoc.INodeId = Int32.Parse(inodeId);
+                this.statusDocPath.Text = inodePath;
+            }
             // Actualizar el documento con los valores de los controles
             FillDocFromControls();
             // Guardar documento actual en la BD
@@ -100,8 +144,8 @@ namespace KsIndexerNET
             }
             // Mostrar id en el status bar
             statusId.Text = CurrentDoc.Id.ToString();
-            if(isNew)
-                Messages.ShowInfo(Texts.DOC_SAVED_WITH_ID + ": " + CurrentDoc.Id);
+            //if(isNew)
+            //    Messages.ShowInfo(Texts.DOC_SAVED_WITH_ID + ": " + CurrentDoc.Id);
             DocChanged = false;
             EnableControls();
         }

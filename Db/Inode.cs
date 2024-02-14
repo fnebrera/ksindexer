@@ -125,7 +125,8 @@ namespace KsIndexerNET.Db
                 // Saltar las dos barras del root, si nos las pasan
                 //if (nodes[i].Length == 0)
                 //    continue;
-                SQLiteDataReader rdr = db.ExecuteQuery("SELECT id FROM inodes WHERE name = '" + nodes[i] + "' AND parent = " + inodeId);
+                //SQLiteDataReader rdr = db.ExecuteQuery("SELECT id FROM inodes WHERE name = '" + nodes[i] + "' AND parent = " + inodeId);
+                SQLiteDataReader rdr = db.ExecuteQuery("SELECT id FROM inodes WHERE name LIKE '%" + nodes[i] + "%' AND parent = " + inodeId);
                 if (!rdr.Read())
                 {
                     rdr.Close();

@@ -82,7 +82,7 @@ namespace KsIndexerNET.Db
             return db.ExecuteNonQuery(SQL_IN_UPDATE, prms) == 1;
         }
 
-        public static string GetPath(int inodeId)
+        public static string GetPathFromId(int inodeId)
         {
             Database db = Database.GetInstance();
             List<string> nodes = new List<string>();
@@ -107,6 +107,34 @@ namespace KsIndexerNET.Db
                 path += @"\" + nodes[i];
             }
             return path;
+        }
+
+        public static int GetIdFromPath(string path)
+        {
+            // Quitamos posibles barras al principio y al final
+            path = path.Trim('\\');
+            // Si solo contiene barras, es el root
+            if (path.Length == 0)
+                return 1;
+            string[] nodes = path.Split('\\');
+            Database db = Database.GetInstance();
+            // Empezamos con el root
+            int inodeId = 1;
+            for (int i = 0; i < nodes.Length; i++)
+            {
+                // Saltar las dos barras del root, si nos las pasan
+                //if (nodes[i].Length == 0)
+                //    continue;
+                SQLiteDataReader rdr = db.ExecuteQuery("SELECT id FROM inodes WHERE name = '" + nodes[i] + "' AND parent = " + inodeId);
+                if (!rdr.Read())
+                {
+                    rdr.Close();
+                    return 0;
+                }
+                inodeId = rdr.GetInt32(0);
+                rdr.Close();
+            }
+            return inodeId;
         }
     }
 }

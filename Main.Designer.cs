@@ -48,6 +48,7 @@ namespace KsIndexerNET
             this.MenuExit = new System.Windows.Forms.ToolStripMenuItem();
             this.menuSearch = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuSearchById = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuSearchByFolder = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuSearchByDate = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuSearchComplex = new System.Windows.Forms.ToolStripMenuItem();
             this.menuHelp = new System.Windows.Forms.ToolStripMenuItem();
@@ -58,6 +59,7 @@ namespace KsIndexerNET
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.statusLabelId = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusId = new System.Windows.Forms.ToolStripStatusLabel();
+            this.statusDocPath = new System.Windows.Forms.ToolStripStatusLabel();
             this.TextInDb = new System.Windows.Forms.TextBox();
             this.pdfView = new System.Windows.Forms.WebBrowser();
             this.lblTitle = new System.Windows.Forms.Label();
@@ -78,6 +80,7 @@ namespace KsIndexerNET
             this.btnAttEdit = new System.Windows.Forms.Button();
             this.toolStripMain = new System.Windows.Forms.ToolStrip();
             this.toolBtnNew = new System.Windows.Forms.ToolStripButton();
+            this.toolBtnOpen = new System.Windows.Forms.ToolStripButton();
             this.toolBtnImport = new System.Windows.Forms.ToolStripButton();
             this.toolBtnRegenMetadata = new System.Windows.Forms.ToolStripButton();
             this.toolBtnUpdatePdf = new System.Windows.Forms.ToolStripButton();
@@ -87,6 +90,7 @@ namespace KsIndexerNET
             this.toolBtnSearchDate = new System.Windows.Forms.ToolStripButton();
             this.toolBtnSearchComplex = new System.Windows.Forms.ToolStripButton();
             this.toolBtnExportHtml = new System.Windows.Forms.ToolStripButton();
+            this.toolBtnExportTxt = new System.Windows.Forms.ToolStripButton();
             this.toolBtnPrint = new System.Windows.Forms.ToolStripButton();
             this.btnAnxView = new System.Windows.Forms.Button();
             this.btnAnxDelete = new System.Windows.Forms.Button();
@@ -97,8 +101,6 @@ namespace KsIndexerNET
             this.lblAnnexes = new System.Windows.Forms.Label();
             this.splitLeftPane = new System.Windows.Forms.SplitContainer();
             this.btnDateNow = new System.Windows.Forms.Button();
-            this.toolBtnOpen = new System.Windows.Forms.ToolStripButton();
-            this.statusDocPath = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.toolStripMain.SuspendLayout();
@@ -199,14 +201,14 @@ namespace KsIndexerNET
             // menuExportHtml
             // 
             this.menuExportHtml.Name = "menuExportHtml";
-            this.menuExportHtml.Size = new System.Drawing.Size(149, 22);
+            this.menuExportHtml.Size = new System.Drawing.Size(174, 22);
             this.menuExportHtml.Text = "Como &HTML";
             this.menuExportHtml.Click += new System.EventHandler(this.menuExportHtml_Click);
             // 
             // menuExportTxt
             // 
             this.menuExportTxt.Name = "menuExportTxt";
-            this.menuExportTxt.Size = new System.Drawing.Size(180, 22);
+            this.menuExportTxt.Size = new System.Drawing.Size(174, 22);
             this.menuExportTxt.Text = "Como &TXT + PDF";
             this.menuExportTxt.Click += new System.EventHandler(this.MenuExportTxt_Click);
             // 
@@ -242,6 +244,7 @@ namespace KsIndexerNET
             // 
             this.menuSearch.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.MenuSearchById,
+            this.MenuSearchByFolder,
             this.MenuSearchByDate,
             this.MenuSearchComplex});
             this.menuSearch.Name = "menuSearch";
@@ -254,6 +257,13 @@ namespace KsIndexerNET
             this.MenuSearchById.Size = new System.Drawing.Size(242, 22);
             this.MenuSearchById.Text = "Por &ID";
             this.MenuSearchById.Click += new System.EventHandler(this.MenuSearchById_Click);
+            // 
+            // MenuSearchByFolder
+            // 
+            this.MenuSearchByFolder.Name = "MenuSearchByFolder";
+            this.MenuSearchByFolder.Size = new System.Drawing.Size(242, 22);
+            this.MenuSearchByFolder.Text = "Por &carpeta..";
+            this.MenuSearchByFolder.Click += new System.EventHandler(this.MenuSearchByFolder_Click);
             // 
             // MenuSearchByDate
             // 
@@ -336,6 +346,12 @@ namespace KsIndexerNET
             this.statusId.Name = "statusId";
             this.statusId.Size = new System.Drawing.Size(35, 17);
             this.statusId.Text = "vacío";
+            // 
+            // statusDocPath
+            // 
+            this.statusDocPath.Margin = new System.Windows.Forms.Padding(3, 3, 0, 2);
+            this.statusDocPath.Name = "statusDocPath";
+            this.statusDocPath.Size = new System.Drawing.Size(0, 17);
             // 
             // TextInDb
             // 
@@ -568,6 +584,7 @@ namespace KsIndexerNET
             this.toolBtnSearchDate,
             this.toolBtnSearchComplex,
             this.toolBtnExportHtml,
+            this.toolBtnExportTxt,
             this.toolBtnPrint});
             this.toolStripMain.Location = new System.Drawing.Point(0, 30);
             this.toolStripMain.Name = "toolStripMain";
@@ -585,6 +602,17 @@ namespace KsIndexerNET
             this.toolBtnNew.Size = new System.Drawing.Size(28, 28);
             this.toolBtnNew.Text = "Nuevo";
             this.toolBtnNew.Click += new System.EventHandler(this.MenuNew_Click);
+            // 
+            // toolBtnOpen
+            // 
+            this.toolBtnOpen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolBtnOpen.Image = ((System.Drawing.Image)(resources.GetObject("toolBtnOpen.Image")));
+            this.toolBtnOpen.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolBtnOpen.Name = "toolBtnOpen";
+            this.toolBtnOpen.Size = new System.Drawing.Size(28, 28);
+            this.toolBtnOpen.Text = "toolStripButton2";
+            this.toolBtnOpen.ToolTipText = "Abrir";
+            this.toolBtnOpen.Click += new System.EventHandler(this.MenuOpen_Click);
             // 
             // toolBtnImport
             // 
@@ -675,6 +703,17 @@ namespace KsIndexerNET
             this.toolBtnExportHtml.Size = new System.Drawing.Size(28, 28);
             this.toolBtnExportHtml.Text = "Exportar como HTML";
             this.toolBtnExportHtml.Click += new System.EventHandler(this.menuExportHtml_Click);
+            // 
+            // toolBtnExportTxt
+            // 
+            this.toolBtnExportTxt.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolBtnExportTxt.Image = ((System.Drawing.Image)(resources.GetObject("toolBtnExportTxt.Image")));
+            this.toolBtnExportTxt.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolBtnExportTxt.Name = "toolBtnExportTxt";
+            this.toolBtnExportTxt.Size = new System.Drawing.Size(28, 28);
+            this.toolBtnExportTxt.Text = "toolStripButton1";
+            this.toolBtnExportTxt.ToolTipText = "Exportar a TXT + PDF";
+            this.toolBtnExportTxt.Click += new System.EventHandler(this.MenuExportTxt_Click);
             // 
             // toolBtnPrint
             // 
@@ -805,23 +844,6 @@ namespace KsIndexerNET
             this.btnDateNow.UseVisualStyleBackColor = true;
             this.btnDateNow.Click += new System.EventHandler(this.btnDateNow_Click);
             // 
-            // toolBtnOpen
-            // 
-            this.toolBtnOpen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolBtnOpen.Image = ((System.Drawing.Image)(resources.GetObject("toolBtnOpen.Image")));
-            this.toolBtnOpen.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolBtnOpen.Name = "toolBtnOpen";
-            this.toolBtnOpen.Size = new System.Drawing.Size(28, 28);
-            this.toolBtnOpen.Text = "toolStripButton2";
-            this.toolBtnOpen.ToolTipText = "Abrir";
-            this.toolBtnOpen.Click += new System.EventHandler(this.MenuOpen_Click);
-            // 
-            // statusDocPath
-            // 
-            this.statusDocPath.Margin = new System.Windows.Forms.Padding(3, 3, 0, 2);
-            this.statusDocPath.Name = "statusDocPath";
-            this.statusDocPath.Size = new System.Drawing.Size(0, 17);
-            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 19F);
@@ -948,6 +970,8 @@ namespace KsIndexerNET
         private ToolStripMenuItem MenuOpen;
         private ToolStripButton toolBtnOpen;
         private ToolStripStatusLabel statusDocPath;
+        private ToolStripButton toolBtnExportTxt;
+        private ToolStripMenuItem MenuSearchByFolder;
     }
 }
 

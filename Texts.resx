@@ -194,6 +194,9 @@
   <data name="ENTER_DATE" xml:space="preserve">
     <value>Introduzca la fecha</value>
   </data>
+  <data name="ENTER_FOLDER_TO_SEARCH" xml:space="preserve">
+    <value>Ruta de la carpeta a buscar</value>
+  </data>
   <data name="ENTER_ID_TO_SEARCH" xml:space="preserve">
     <value>Entre el Id del documento a buscar</value>
   </data>
@@ -211,6 +214,9 @@
   </data>
   <data name="ERROR_DELETE_DOC" xml:space="preserve">
     <value>Se ha prodcido un error al eliminar el documento</value>
+  </data>
+  <data name="ERROR_FOLDER_NOT_FOUND" xml:space="preserve">
+    <value>No se ha encontrado la carpeta con esa ruta</value>
   </data>
   <data name="ERROR_LOADING_ANNEX" xml:space="preserve">
     <value>No se ha podido cargar el archivo anexo</value>

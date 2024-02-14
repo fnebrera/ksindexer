@@ -145,6 +145,8 @@ namespace KsIndexerNET.dialogs
             e.Node.Text = e.Label;
             // Actualizar el flag para ordenar los hijos del nodo padre
             sortPending = true;
+            // Actualizar el path del documento en el label de abajo
+            lblPath.Text = e.Node.FullPath;
         }
 
         private void tvNodes_AfterSelect(object sender, TreeViewEventArgs e)
@@ -154,6 +156,7 @@ namespace KsIndexerNET.dialogs
             if (node == null)
             {
                 ctxMenuDelete.Enabled = ctxMenuNew.Enabled = false;
+                lblPath.Text = "";
             }
             else
             {
@@ -164,6 +167,7 @@ namespace KsIndexerNET.dialogs
                 lvDocs.SelectedItems.Clear();
                 // El root no se puede borrar, ni tampoco si tiene hijos
                 ctxMenuDelete.Enabled = parent != null && node.Nodes.Count == 0 && lvDocs.Items.Count == 0;
+                lblPath.Text = node.FullPath;
             }
             EnableControls();
         }

@@ -192,6 +192,9 @@
   <data name="ENTER_DATE" xml:space="preserve">
     <value>Enter date</value>
   </data>
+  <data name="ENTER_FOLDER_TO_SEARCH" xml:space="preserve">
+    <value>Path of folder to search for</value>
+  </data>
   <data name="ENTER_ID_TO_SEARCH" xml:space="preserve">
     <value>Enter Id of document to search</value>
   </data>
@@ -209,6 +212,9 @@
   </data>
   <data name="ERROR_DELETE_DOC" xml:space="preserve">
     <value>An error has ocurred while deleting document</value>
+  </data>
+  <data name="ERROR_FOLDER_NOT_FOUND" xml:space="preserve">
+    <value>Folder not found</value>
   </data>
   <data name="ERROR_LOADING_ANNEX" xml:space="preserve">
     <value>Error loading attached file</value>

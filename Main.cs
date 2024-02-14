@@ -521,5 +521,10 @@ namespace KsIndexerNET
         {
             DoMenuOpen();
         }
+
+        private void MenuSearchByFolder_Click(object sender, EventArgs e)
+        {
+            SearchByFolder();
+        }
     }
 }

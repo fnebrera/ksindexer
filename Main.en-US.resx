@@ -234,6 +234,9 @@
   <data name="MenuSearchByDate" xml:space="preserve">
     <value>By &amp;Date..</value>
   </data>
+  <data name="MenuSearchByFolder" xml:space="preserve">
+    <value>By &amp;Folder..</value>
+  </data>
   <data name="MenuSearchById" xml:space="preserve">
     <value>By &amp;Id..</value>
   </data>
@@ -251,6 +254,9 @@
   </data>
   <data name="toolBtnExportHtml" xml:space="preserve">
     <value>Export to HTML</value>
+  </data>
+  <data name="toolBtnExportTxt" xml:space="preserve">
+    <value>Export to TXT + PDF</value>
   </data>
   <data name="toolBtnImport" xml:space="preserve">
     <value>Import</value>

@@ -20,7 +20,7 @@ namespace KsIndexerNET
             {
                 MenuSave.Enabled = toolBtnSave.Enabled = false;
                 MenuRegenMetadata.Enabled = toolBtnRegenMetadata.Enabled = false;
-                MenuExport.Enabled = toolBtnExportHtml.Enabled = false;
+                MenuExport.Enabled = toolBtnExportHtml.Enabled = toolBtnExportTxt.Enabled = false;
                 MenuPrint.Enabled = toolBtnPrint.Enabled = false;
                 MenuDelete.Enabled = toolBtnDelete.Enabled = false;
                 MenuUpdatePdf.Enabled = toolBtnUpdatePdf.Enabled = false;
@@ -30,7 +30,7 @@ namespace KsIndexerNET
             {
                 MenuSave.Enabled = toolBtnSave.Enabled = DocChanged;
                 MenuRegenMetadata.Enabled = toolBtnRegenMetadata.Enabled = CurrentDoc.ImportedText.Length > 0;
-                MenuExport.Enabled = toolBtnExportHtml.Enabled = true;
+                MenuExport.Enabled = toolBtnExportHtml.Enabled = toolBtnExportTxt.Enabled = true;
                 MenuPrint.Enabled = toolBtnPrint.Enabled = true;
                 MenuDelete.Enabled = toolBtnDelete.Enabled = CurrentDoc.Id > 0;
                 MenuUpdatePdf.Enabled = toolBtnUpdatePdf.Enabled = true;

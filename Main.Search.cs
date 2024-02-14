@@ -72,6 +72,31 @@ namespace KsIndexerNET
             LoadDocument(nid);
         }
 
+        private void SearchByFolder()
+        {
+            // Verificar si hay cambios sin guardar
+            if (DocChanged && !Messages.AskDocChanged())
+                return;
+            // Pedir el path a buscar
+            DlgInput1 dlg = new DlgInput1(Texts.ENTER_FOLDER_TO_SEARCH);
+            if (dlg.ShowDialog() == DialogResult.Cancel)
+                return;
+            string path = dlg.GetText1();
+            dlg.Dispose();
+            if (path.Length == 0)
+                return;
+            int id = Inode.GetIdFromPath(path);
+            if (id == 0)
+            {
+                Messages.ShowError(Texts.ERROR_FOLDER_NOT_FOUND);
+                return;
+            }
+            // Establecer el NodeId como el actual
+            LastInode = id.ToString();
+            // Abrir el dialogo de carpeta con ese id inicial
+            DoMenuOpen();
+        }
+
         private void SearchComplex()
         {
             // Pedir los datos de busqueda
@@ -219,7 +244,7 @@ namespace KsIndexerNET
             }
             CurrentDoc = doc;
             FillControlsFromDoc();
-            this.statusDocPath.Text = Inode.GetPath(doc.INodeId);
+            this.statusDocPath.Text = Inode.GetPathFromId(doc.INodeId);
             DocChanged = false;
             DocEmpty = false;
             EnableControls();

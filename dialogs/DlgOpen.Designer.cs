@@ -42,6 +42,7 @@
             this.colId = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colDate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colTitle = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lblPath = new System.Windows.Forms.Label();
             this.ctxMenuNodes.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -178,11 +179,22 @@
             this.colTitle.Text = "Titulo";
             this.colTitle.Width = 400;
             // 
+            // lblPath
+            // 
+            this.lblPath.AutoSize = true;
+            this.lblPath.BackColor = System.Drawing.SystemColors.Control;
+            this.lblPath.Location = new System.Drawing.Point(12, 487);
+            this.lblPath.Name = "lblPath";
+            this.lblPath.Size = new System.Drawing.Size(14, 18);
+            this.lblPath.TabIndex = 6;
+            this.lblPath.Text = "\\";
+            // 
             // DlgOpen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(861, 524);
+            this.Controls.Add(this.lblPath);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOk);
@@ -198,6 +210,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -214,5 +227,6 @@
         private System.Windows.Forms.ColumnHeader colId;
         private System.Windows.Forms.ColumnHeader colDate;
         private System.Windows.Forms.ColumnHeader colTitle;
+        private System.Windows.Forms.Label lblPath;
     }
 }

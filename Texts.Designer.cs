@@ -286,6 +286,15 @@ namespace KsIndexerNET {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Ruta de la carpeta a buscar.
+        /// </summary>
+        internal static string ENTER_FOLDER_TO_SEARCH {
+            get {
+                return ResourceManager.GetString("ENTER_FOLDER_TO_SEARCH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Entre el Id del documento a buscar.
         /// </summary>
         internal static string ENTER_ID_TO_SEARCH {
@@ -336,6 +345,15 @@ namespace KsIndexerNET {
         internal static string ERROR_DELETE_DOC {
             get {
                 return ResourceManager.GetString("ERROR_DELETE_DOC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a No se ha encontrado la carpeta con esa ruta.
+        /// </summary>
+        internal static string ERROR_FOLDER_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("ERROR_FOLDER_NOT_FOUND", resourceCulture);
             }
         }
         

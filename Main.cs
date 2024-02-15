@@ -31,6 +31,8 @@
  *                        Al salvar un documento nuevo, se muestra el dialogo de seleccion de carpeta.
  *                        Nuevo menu "Abrir" que muestra el diálogo de seleccion de carpeta y documento.
  *                        Se incluyen funciones para eliminar, agregar, cambiar nombre, mover, etc. carpetas y documentos.
+ * 1.2.1   2024-02-15 FNG Se agrega la opcion de buscar por carpeta.
+ *                        Se actualiza el proyecto de setup para que elimine la version anterior, si existe.
  */
 
 using KsIndexerNET;
@@ -58,7 +60,7 @@ namespace KsIndexerNET
     public partial class Main : Form
     {
         // Constantes
-        public const string appVersion = "1.2.0";
+        public const string appVersion = "1.2.1";
 
         //
         // Preferencias de usuario, que leemos de settings

@@ -60,7 +60,7 @@ namespace KsIndexerNET
     public partial class Main : Form
     {
         // Constantes
-        public const string appVersion = "1.2.1";
+        public const string appVersion = "1.2.2";
 
         //
         // Preferencias de usuario, que leemos de settings

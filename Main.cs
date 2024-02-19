@@ -33,6 +33,7 @@
  *                        Se incluyen funciones para eliminar, agregar, cambiar nombre, mover, etc. carpetas y documentos.
  * 1.2.1   2024-02-15 FNG Se agrega la opcion de buscar por carpeta.
  *                        Se actualiza el proyecto de setup para que elimine la version anterior, si existe.
+ * 1.2.2   2024-02-16 FNG Se actualiza el Help con todas las novedades.
  */
 
 using KsIndexerNET;
